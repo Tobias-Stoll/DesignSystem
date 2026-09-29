@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Design System · Tokens to Code</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Generated from Figma via Token Bridge + GitHub Action -->
+  <link rel="stylesheet" href="dist/tokens.css">
+  <link rel="stylesheet" href="dist/typography.css">
+  <!-- Components (use tokens only) -->
+  <link rel="stylesheet" href="components/button.css">
+
+  <style>
+    /* Page layout. Also built from tokens only. */
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--color-bg-subtle);
+      color: var(--color-fg-default);
+      font-family: var(--font-family-sans);
+    }
+    .wrap { max-width: 960px; margin: 0 auto; padding: var(--space-48) var(--space-inset-md); }
+    .eyebrow { color: var(--color-fg-muted); text-transform: uppercase; letter-spacing: .08em; margin: 0 0 var(--space-8); }
+    h1, h2 { margin: 0; }
+    .lead { color: var(--color-fg-muted); max-width: 60ch; margin: var(--space-16) 0 var(--space-24); }
+    .links { display: flex; flex-wrap: wrap; gap: var(--space-gap-sm); }
+    .links a { text-decoration: none; }
+
+    .card {
+      background: var(--color-bg-default);
+      border: var(--border-width-default) solid var(--color-border-default);
+      border-radius: var(--radius-container);
+      padding: var(--space-inset-lg);
+      margin-top: var(--space-32);
+    }
+    .card h2 { margin-bottom: var(--space-4); }
+    .card > p { color: var(--color-fg-muted); margin: 0 0 var(--space-24); }
+    .label { color: var(--color-fg-muted); margin: 0 0 var(--space-12); }
+
+    .row { display: flex; flex-wrap: wrap; gap: var(--space-gap-md); margin-bottom: var(--space-32); }
+
+    .matrix-scroll { overflow-x: auto; }
+    table.matrix { border-collapse: collapse; min-width: 640px; width: 100%; }
+    .matrix th {
+      text-align: left; font-weight: var(--font-weight-medium); color: var(--color-fg-muted);
+      padding: 0 var(--space-12) var(--space-12) 0;
+    }
+    .matrix td { padding: var(--space-12) var(--space-12) var(--space-12) 0; border-top: var(--border-width-default) solid var(--color-border-default); }
+    .matrix td:first-child { color: var(--color-fg-muted); width: 110px; }
+
+    pre {
+      margin: 0; overflow-x: auto;
+      background: var(--color-bg-inverse); color: var(--color-fg-inverse);
+      border-radius: var(--radius-control); padding: var(--space-inset-md);
+      font: 13px/1.6 ui-monospace, SFMono-Regular, Menlo, monospace;
+    }
+    .dim { opacity: .55; }
+    footer { color: var(--color-fg-subtle); margin-top: var(--space-48); }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <p class="eyebrow text-label">Design System</p>
+    <h1 class="text-display">Tokens to Code</h1>
+    <p class="lead text-body-l">
+      Figma is the single source of truth. Variables are exported as design tokens,
+      built to CSS by a GitHub Action, and every component here uses those tokens only.
+    </p>
+    <div class="links">
+      <a class="btn btn--primary" href="https://github.com/Tobias-Stoll/DesignSystem">View repository</a>
+      <a class="btn btn--ghost" href="dist/tokens.css">tokens.css</a>
+    </div>
+
+    <section class="card" aria-labelledby="button-title">
+      <h2 id="button-title" class="text-heading-m">Button</h2>
+      <p class="text-body-s">3 variants × 5 states. One Figma component set, one CSS class.</p>
+
+      <p class="label text-caption">Try it: hover, click, tab to focus</p>
+      <div class="row">
+        <button class="btn btn--primary">Primary</button>
+        <button class="btn btn--secondary">Secondary</button>
+        <button class="btn btn--ghost">Ghost</button>
+        <button class="btn btn--primary" disabled>Disabled</button>
+      </div>
+
+      <p class="label text-caption">All states, as in Figma</p>
+      <div class="matrix-scroll">
+        <table class="matrix text-body-s">
+          <thead>
+            <tr><th></th><th>Default</th><th>Hover</th><th>Pressed</th><th>Focus</th><th>Disabled</th></tr>
+          </thead>
+          <tbody id="matrix"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="card" aria-labelledby="chain-title">
+      <h2 id="chain-title" class="text-heading-m">One token, three layers</h2>
+      <p class="text-body-s">Aliases survive the whole way from Figma into CSS.</p>
+<pre><span class="dim">/* Component */</span>
+--button-primary-bg-default: var(--color-action-primary-bg-default);
+<span class="dim">/* Semantic */</span>
+--color-action-primary-bg-default: var(--color-purple-600);
+<span class="dim">/* Primitive */</span>
+--color-purple-600: <span id="purple-600"></span>;</pre>
+    </section>
+
+    <footer class="text-caption">Built with Figma Variables · Token Bridge · Style Dictionary · GitHub Actions</footer>
+  </main>
+
+  <script>
+    // Build the state matrix (same markup as the live buttons, state forced via .is-* classes)
+    const variants = ['primary', 'secondary', 'ghost'];
+    const states = [['', ''], ['is-hover', ''], ['is-pressed', ''], ['is-focus', ''], ['', 'disabled']];
+    document.getElementById('matrix').innerHTML = variants.map((v) =>
+      `<tr><td>${v[0].toUpperCase() + v.slice(1)}</td>` +
+      states.map(([cls, attr]) =>
+        `<td><button class="btn btn--${v} ${cls}" ${attr} tabindex="-1">Button</button></td>`).join('') +
+      '</tr>').join('');
+
+    // Show the live primitive value, straight from tokens.css
+    document.getElementById('purple-600').textContent =
+      getComputedStyle(document.documentElement).getPropertyValue('--color-purple-600').trim();
+  </script>
+</body>
+</html>

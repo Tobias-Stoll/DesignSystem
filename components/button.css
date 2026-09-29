@@ -1,0 +1,70 @@
+/**
+ * Button
+ * Figma: Component Set "Button" · Variant × State
+ * Uses component tokens only (button/…), never primitives.
+ */
+
+.btn {
+  /* Variant hooks, set by the modifiers below */
+  --_bg: var(--button-primary-bg-default);
+  --_bg-hover: var(--button-primary-bg-hover);
+  --_bg-pressed: var(--button-primary-bg-pressed);
+  --_bg-disabled: var(--button-primary-bg-disabled);
+  --_fg: var(--button-primary-fg);
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--button-padding-y) var(--button-padding-x);
+  border: 0;
+  border-radius: var(--button-radius);
+  background: var(--_bg);
+  color: var(--_fg);
+
+  /* Text style: Label */
+  font-family: var(--font-family-sans);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-200);
+  line-height: var(--font-line-height-200);
+
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 120ms ease;
+}
+
+/* Variants */
+.btn--primary { }
+.btn--secondary {
+  --_bg: var(--button-secondary-bg-default);
+  --_bg-hover: var(--button-secondary-bg-hover);
+  --_bg-pressed: var(--button-secondary-bg-pressed);
+  --_bg-disabled: var(--button-secondary-bg-disabled);
+  --_fg: var(--button-secondary-fg);
+}
+.btn--ghost {
+  --_bg: var(--button-ghost-bg-default);
+  --_bg-hover: var(--button-ghost-bg-hover);
+  --_bg-pressed: var(--button-ghost-bg-pressed);
+  --_bg-disabled: var(--button-ghost-bg-disabled);
+  --_fg: var(--button-ghost-fg);
+}
+
+/* States (real interaction + .is-* classes to show a state statically) */
+.btn:hover:not(:disabled),
+.btn.is-hover { background: var(--_bg-hover); }
+
+.btn:active:not(:disabled),
+.btn.is-pressed { background: var(--_bg-pressed); }
+
+.btn:focus-visible,
+.btn.is-focus {
+  outline: var(--button-focus-ring-width) solid var(--button-focus-ring-color);
+  outline-offset: 0;
+}
+
+.btn:disabled,
+.btn.is-disabled {
+  background: var(--_bg-disabled);
+  color: var(--button-disabled-fg);
+  cursor: not-allowed;
+}
