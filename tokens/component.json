@@ -1,0 +1,104 @@
+{
+  "button": {
+    "primary": {
+      "bg": {
+        "default": {
+          "$type": "color",
+          "$value": "{color.action.primary.bg.default}"
+        },
+        "hover": {
+          "$type": "color",
+          "$value": "{color.action.primary.bg.hover}"
+        },
+        "pressed": {
+          "$type": "color",
+          "$value": "{color.action.primary.bg.pressed}"
+        },
+        "disabled": {
+          "$type": "color",
+          "$value": "{color.action.primary.bg.disabled}"
+        }
+      },
+      "fg": {
+        "$type": "color",
+        "$value": "{color.action.primary.fg}"
+      }
+    },
+    "secondary": {
+      "bg": {
+        "default": {
+          "$type": "color",
+          "$value": "{color.action.secondary.bg.default}"
+        },
+        "hover": {
+          "$type": "color",
+          "$value": "{color.action.secondary.bg.hover}"
+        },
+        "pressed": {
+          "$type": "color",
+          "$value": "{color.action.secondary.bg.pressed}"
+        },
+        "disabled": {
+          "$type": "color",
+          "$value": "{color.action.secondary.bg.disabled}"
+        }
+      },
+      "fg": {
+        "$type": "color",
+        "$value": "{color.action.secondary.fg}"
+      }
+    },
+    "ghost": {
+      "bg": {
+        "hover": {
+          "$type": "color",
+          "$value": "{color.action.ghost.bg.hover}"
+        },
+        "pressed": {
+          "$type": "color",
+          "$value": "{color.action.ghost.bg.pressed}"
+        },
+        "default": {
+          "$type": "color",
+          "$value": "{color.action.ghost.bg.default}"
+        },
+        "disabled": {
+          "$type": "color",
+          "$value": "{color.action.ghost.bg.default}"
+        }
+      },
+      "fg": {
+        "$type": "color",
+        "$value": "{color.action.ghost.fg}"
+      }
+    },
+    "disabled": {
+      "fg": {
+        "$type": "color",
+        "$value": "{color.action.disabled.fg}"
+      }
+    },
+    "padding-x": {
+      "$type": "dimension",
+      "$value": "{space.inset.md}"
+    },
+    "padding-y": {
+      "$type": "dimension",
+      "$value": "{space.inset.sm}"
+    },
+    "radius": {
+      "$type": "dimension",
+      "$value": "{radius.control}"
+    },
+    "focus-ring": {
+      "color": {
+        "$type": "color",
+        "$value": "{color.border.focus}"
+      },
+      "width": {
+        "$type": "dimension",
+        "$value": "{border-width.focus}"
+      }
+    }
+  }
+}
