@@ -1,0 +1,89 @@
+{
+  "typography": {
+    "display": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "{font.family.display}",
+        "fontWeight": "{font.weight.bold}",
+        "fontSize": "{font.size.800}",
+        "lineHeight": "{font.line-height.800}"
+      }
+    },
+    "label": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "{font.family.sans}",
+        "fontWeight": "{font.weight.medium}",
+        "fontSize": "{font.size.200}",
+        "lineHeight": "{font.line-height.200}"
+      }
+    },
+    "caption": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "{font.family.sans}",
+        "fontWeight": "{font.weight.regular}",
+        "fontSize": "{font.size.100}",
+        "lineHeight": "{font.line-height.100}"
+      }
+    },
+    "body": {
+      "l": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{font.family.sans}",
+          "fontWeight": "{font.weight.regular}",
+          "fontSize": "{font.size.400}",
+          "lineHeight": "{font.line-height.400}"
+        }
+      },
+      "m": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{font.family.sans}",
+          "fontWeight": "{font.weight.regular}",
+          "fontSize": "{font.size.300}",
+          "lineHeight": "{font.line-height.300}"
+        }
+      },
+      "s": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{font.family.sans}",
+          "fontWeight": "{font.weight.regular}",
+          "fontSize": "{font.size.200}",
+          "lineHeight": "{font.line-height.200}"
+        }
+      }
+    },
+    "heading": {
+      "l": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{font.family.display}",
+          "fontWeight": "{font.weight.medium}",
+          "fontSize": "{font.size.700}",
+          "lineHeight": "{font.line-height.700}"
+        }
+      },
+      "m": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{font.family.display}",
+          "fontWeight": "{font.weight.medium}",
+          "fontSize": "{font.size.600}",
+          "lineHeight": "{font.line-height.600}"
+        }
+      },
+      "s": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{font.family.display}",
+          "fontWeight": "{font.weight.medium}",
+          "fontSize": "{font.size.500}",
+          "lineHeight": "{font.line-height.500}"
+        }
+      }
+    }
+  }
+}
