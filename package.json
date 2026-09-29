@@ -1,0 +1,13 @@
+{
+  "name": "design-system-tokens",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Design tokens exported from Figma (source of truth) and built to CSS.",
+  "scripts": {
+    "build": "node build-tokens.js"
+  },
+  "devDependencies": {
+    "style-dictionary": "^5.5.5"
+  }
+}

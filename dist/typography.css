@@ -1,0 +1,66 @@
+/**
+ * Do not edit directly. Generated from Figma via Token Bridge.
+ */
+
+.text-display {
+  font-family: var(--font-family-display);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-800);
+  line-height: var(--font-line-height-800);
+}
+
+.text-label {
+  font-family: var(--font-family-sans);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-200);
+  line-height: var(--font-line-height-200);
+}
+
+.text-caption {
+  font-family: var(--font-family-sans);
+  font-weight: var(--font-weight-regular);
+  font-size: var(--font-size-100);
+  line-height: var(--font-line-height-100);
+}
+
+.text-body-l {
+  font-family: var(--font-family-sans);
+  font-weight: var(--font-weight-regular);
+  font-size: var(--font-size-400);
+  line-height: var(--font-line-height-400);
+}
+
+.text-body-m {
+  font-family: var(--font-family-sans);
+  font-weight: var(--font-weight-regular);
+  font-size: var(--font-size-300);
+  line-height: var(--font-line-height-300);
+}
+
+.text-body-s {
+  font-family: var(--font-family-sans);
+  font-weight: var(--font-weight-regular);
+  font-size: var(--font-size-200);
+  line-height: var(--font-line-height-200);
+}
+
+.text-heading-l {
+  font-family: var(--font-family-display);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-700);
+  line-height: var(--font-line-height-700);
+}
+
+.text-heading-m {
+  font-family: var(--font-family-display);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-600);
+  line-height: var(--font-line-height-600);
+}
+
+.text-heading-s {
+  font-family: var(--font-family-display);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-500);
+  line-height: var(--font-line-height-500);
+}

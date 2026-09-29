@@ -1,0 +1,43 @@
+# Runs whenever Token Bridge pushes new tokens from Figma.
+# Builds dist/tokens.css + dist/typography.css and commits them back.
+name: Build tokens
+
+on:
+  push:
+    branches: [main]
+    paths: ['tokens/**']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: build-tokens
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - run: npm run build
+
+      - name: Commit generated CSS
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add dist
+          if git diff --cached --quiet; then
+            echo "CSS unchanged"
+          else
+            git commit -m "build: generate CSS from tokens"
+            git push
+          fi
