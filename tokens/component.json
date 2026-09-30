@@ -164,7 +164,7 @@
     },
     "radius": {
       "$type": "dimension",
-      "$value": "{radius.control}"
+      "$value": "{radius.input}"
     }
   }
 }

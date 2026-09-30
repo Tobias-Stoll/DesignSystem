@@ -243,6 +243,10 @@
     "indicator": {
       "$type": "dimension",
       "$value": "{radius.sm}"
+    },
+    "input": {
+      "$type": "dimension",
+      "$value": "{radius.sm}"
     }
   },
   "border-width": {
