@@ -100,5 +100,71 @@
         "$value": "{border-width.focus}"
       }
     }
+  },
+  "input": {
+    "bg": {
+      "default": {
+        "$type": "color",
+        "$value": "{color.bg.default}"
+      },
+      "disabled": {
+        "$type": "color",
+        "$value": "{color.bg.muted}"
+      }
+    },
+    "border": {
+      "default": {
+        "$type": "color",
+        "$value": "{color.border.default}"
+      },
+      "hover": {
+        "$type": "color",
+        "$value": "{color.border.strong}"
+      },
+      "focus": {
+        "$type": "color",
+        "$value": "{color.border.focus}"
+      },
+      "error": {
+        "$type": "color",
+        "$value": "{color.feedback.danger.fg}"
+      }
+    },
+    "fg": {
+      "default": {
+        "$type": "color",
+        "$value": "{color.fg.default}"
+      },
+      "placeholder": {
+        "$type": "color",
+        "$value": "{color.fg.muted}"
+      },
+      "disabled": {
+        "$type": "color",
+        "$value": "{color.fg.subtle}"
+      }
+    },
+    "border-width": {
+      "default": {
+        "$type": "dimension",
+        "$value": "{border-width.default}"
+      },
+      "focus": {
+        "$type": "dimension",
+        "$value": "{border-width.focus}"
+      }
+    },
+    "padding-x": {
+      "$type": "dimension",
+      "$value": "{space.inset.md}"
+    },
+    "padding-y": {
+      "$type": "dimension",
+      "$value": "{space.inset.sm}"
+    },
+    "radius": {
+      "$type": "dimension",
+      "$value": "{radius.control}"
+    }
   }
 }

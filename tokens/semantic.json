@@ -235,6 +235,14 @@
     "pill": {
       "$type": "dimension",
       "$value": "{radius.full}"
+    },
+    "Input": {
+      "$type": "dimension",
+      "$value": "{radius.sm}"
+    },
+    "indicator": {
+      "$type": "dimension",
+      "$value": "{radius.sm}"
     }
   },
   "border-width": {
