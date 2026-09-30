@@ -1,0 +1,117 @@
+/**
+ * Checkbox
+ * Figma: Component "Checkbox" · State = Default | Hover | Focus | Error | Checked | Disabled
+ *        Boolean "Show description"
+ * Uses semantic tokens directly (no component tokens, by design).
+ *
+ * Markup:
+ * <label class="checkbox">
+ *   <input type="checkbox" class="checkbox__box">
+ *   <span class="checkbox__text">
+ *     <span class="checkbox__label">Label</span>
+ *     <span class="checkbox__description">Description</span>   (optional)
+ *   </span>
+ * </label>
+ */
+
+.checkbox {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: var(--space-gap-sm);
+  cursor: pointer;
+  font-family: var(--font-family-sans);
+}
+
+.checkbox__box {
+  --_bg: var(--color-bg-default);
+  --_border: var(--color-border-strong);
+  --_check: var(--color-action-primary-fg);
+
+  appearance: none;
+  flex: none;
+  position: relative;
+  width: 16px;
+  height: 16px;
+  /* center the box on the first text line: (20px line height - 16px) / 2 */
+  margin: 2px 0 0;
+  border-radius: var(--radius-indicator);
+  background: var(--_bg);
+  box-shadow: inset 0 0 0 var(--border-width-default) var(--_border);
+  cursor: inherit;
+  transition: background-color 120ms ease, box-shadow 120ms ease;
+}
+
+/* Check mark, only visible when checked */
+.checkbox__box::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--_check);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3.5 8.5l3 3 6-7' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 100% no-repeat;
+          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3.5 8.5l3 3 6-7' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 100% no-repeat;
+  opacity: 0;
+}
+
+.checkbox__text { display: flex; flex-direction: column; }
+
+.checkbox__label {
+  color: var(--color-fg-default);
+  font-weight: var(--font-weight-regular);
+  font-size: var(--font-size-200);        /* Body S */
+  line-height: var(--font-line-height-200);
+}
+
+.checkbox__description {
+  color: var(--color-fg-muted);
+  font-weight: var(--font-weight-regular);
+  font-size: var(--font-size-100);        /* Caption */
+  line-height: var(--font-line-height-100);
+}
+
+/* ---------- States from Figma ---------- */
+
+/* Hover */
+.checkbox:hover .checkbox__box:not(:checked):not(:disabled),
+.checkbox__box.is-hover { --_border: var(--color-fg-muted); }
+
+/* Focus */
+.checkbox__box:focus-visible,
+.checkbox__box.is-focus {
+  outline: var(--border-width-focus) solid var(--color-border-focus);
+  outline-offset: 0;
+}
+
+/* Error (required but not checked) */
+.checkbox__box[aria-invalid="true"]:not(:checked),
+.checkbox__box.is-error { --_border: var(--color-feedback-danger-fg); }
+
+/* Checked */
+.checkbox__box:checked,
+.checkbox__box.is-checked {
+  --_bg: var(--color-action-primary-bg-default);
+  --_border: transparent;
+}
+.checkbox__box:checked::before,
+.checkbox__box.is-checked::before { opacity: 1; }
+
+/* Disabled (checked, as in Figma) */
+.checkbox__box:disabled,
+.checkbox__box.is-disabled {
+  --_bg: var(--color-action-primary-bg-disabled);
+  --_border: transparent;
+  --_check: var(--color-action-disabled-fg);
+}
+.checkbox:has(.checkbox__box:disabled) { cursor: not-allowed; }
+.checkbox:has(.checkbox__box:disabled) .checkbox__label,
+.checkbox:has(.checkbox__box:disabled) .checkbox__description { color: var(--color-fg-subtle); }
+
+/* ---------- Not drawn in Figma, follows the system rules ---------- */
+
+/* Checked + hover: one step darker, like the button */
+.checkbox:hover .checkbox__box:checked:not(:disabled) { --_bg: var(--color-action-primary-bg-hover); }
+
+/* Unchecked + disabled */
+.checkbox__box:disabled:not(:checked) {
+  --_bg: var(--color-bg-muted);
+  --_border: var(--color-border-default);
+}

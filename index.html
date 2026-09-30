@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Design System · Tokens to Code</title>
+  <title>Design System Test · Tobias Stoll</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
@@ -13,9 +13,11 @@
   <link rel="stylesheet" href="dist/typography.css">
   <!-- Components (use tokens only) -->
   <link rel="stylesheet" href="components/button.css">
+  <link rel="stylesheet" href="components/input.css">
+  <link rel="stylesheet" href="components/checkbox.css">
 
   <style>
-    /* Page layout. Also built from tokens only. */
+    /* Page shell. Built from tokens only, no hard-coded colors. */
     * { box-sizing: border-box; }
     body {
       margin: 0;
@@ -23,11 +25,43 @@
       color: var(--color-fg-default);
       font-family: var(--font-family-sans);
     }
-    .wrap { max-width: 960px; margin: 0 auto; padding: var(--space-48) var(--space-inset-md); }
+    .shell {
+      display: grid; grid-template-columns: 248px minmax(0, 1fr); min-height: 100vh;
+      /* sidebar surface runs the full page height */
+      background: linear-gradient(to right, var(--color-bg-default) 247px, var(--color-border-default) 247px 248px, transparent 248px);
+    }
+
+    /* Sidebar */
+    .sidebar {
+      position: sticky; top: 0; height: 100vh; overflow-y: auto;
+      padding: var(--space-32) var(--space-16);
+    }
+    .brand { padding: 0 var(--space-12) var(--space-24); }
+    .brand__name { margin: 0; }
+    .brand__sub { margin: var(--space-4) 0 0; color: var(--color-fg-muted); }
+    .nav__group { margin: var(--space-16) var(--space-12) var(--space-8); color: var(--color-fg-subtle); text-transform: uppercase; letter-spacing: .08em; }
+    .nav { list-style: none; margin: 0; padding: 0; }
+    .nav a {
+      display: block;
+      padding: var(--space-8) var(--space-12);
+      border-radius: var(--radius-control);
+      color: var(--color-fg-muted);
+      text-decoration: none;
+    }
+    .nav a:hover { background: var(--color-bg-subtle); color: var(--color-fg-default); }
+    .nav a[aria-current="page"] {
+      background: var(--color-action-ghost-bg-hover);
+      color: var(--color-action-ghost-fg);
+    }
+    .nav a:focus-visible { outline: var(--border-width-focus) solid var(--color-border-focus); outline-offset: 0; }
+
+    /* Content */
+    .content { padding: var(--space-48) var(--space-40); max-width: 1040px; width: 100%; }
+    .view[hidden] { display: none; }
     .eyebrow { color: var(--color-fg-muted); text-transform: uppercase; letter-spacing: .08em; margin: 0 0 var(--space-8); }
-    h1, h2 { margin: 0; }
-    .lead { color: var(--color-fg-muted); max-width: 60ch; margin: var(--space-16) 0 var(--space-24); }
-    .links { display: flex; flex-wrap: wrap; gap: var(--space-gap-sm); }
+    h1, h2, h3 { margin: 0; }
+    .lead { color: var(--color-fg-muted); max-width: 62ch; margin: var(--space-12) 0 0; }
+    .links { display: flex; flex-wrap: wrap; gap: var(--space-gap-sm); margin-top: var(--space-24); }
     .links a { text-decoration: none; }
 
     .card {
@@ -35,23 +69,39 @@
       border: var(--border-width-default) solid var(--color-border-default);
       border-radius: var(--radius-container);
       padding: var(--space-inset-lg);
-      margin-top: var(--space-32);
+      margin-top: var(--space-24);
     }
-    .card h2 { margin-bottom: var(--space-4); }
+    .card > h2 { margin-bottom: var(--space-4); }
     .card > p { color: var(--color-fg-muted); margin: 0 0 var(--space-24); }
     .label { color: var(--color-fg-muted); margin: 0 0 var(--space-12); }
 
-    .row { display: flex; flex-wrap: wrap; gap: var(--space-gap-md); margin-bottom: var(--space-32); }
+    .row { display: flex; flex-wrap: wrap; align-items: flex-start; gap: var(--space-gap-lg); }
+    .field { width: 280px; max-width: 100%; }
 
+    /* State matrix: static previews, not clickable */
     .matrix-scroll { overflow-x: auto; }
-    table.matrix { border-collapse: collapse; min-width: 640px; width: 100%; }
-    .matrix th {
-      text-align: left; font-weight: var(--font-weight-medium); color: var(--color-fg-muted);
-      padding: 0 var(--space-12) var(--space-12) 0;
-    }
-    .matrix td { padding: var(--space-12) var(--space-12) var(--space-12) 0; border-top: var(--border-width-default) solid var(--color-border-default); }
+    table.matrix { border-collapse: collapse; width: 100%; min-width: 640px; }
+    .matrix th { text-align: left; font-weight: var(--font-weight-medium); color: var(--color-fg-muted); padding: 0 var(--space-12) var(--space-12) 0; }
+    .matrix td { padding: var(--space-12) var(--space-12) var(--space-12) 0; border-top: var(--border-width-default) solid var(--color-border-default); vertical-align: middle; }
     .matrix td:first-child { color: var(--color-fg-muted); width: 110px; }
+    .matrix .preview { pointer-events: none; }
+    .states { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: var(--space-24) var(--space-gap-lg); pointer-events: none; }
+    .state__name { color: var(--color-fg-muted); margin: 0 0 var(--space-8); }
 
+    /* Token table */
+    table.tokens { border-collapse: collapse; width: 100%; }
+    .tokens-scroll { overflow-x: auto; }
+    .tokens th { text-align: left; font-weight: var(--font-weight-medium); color: var(--color-fg-muted); padding: 0 var(--space-12) var(--space-8) 0; white-space: nowrap; }
+    .tokens td { padding: var(--space-8) var(--space-12) var(--space-8) 0; border-top: var(--border-width-default) solid var(--color-border-default); white-space: nowrap; }
+    .tokens code { font: 12px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .tokens .alias { color: var(--color-fg-muted); }
+    .swatch {
+      display: inline-block; width: 16px; height: 16px; vertical-align: -3px; margin-right: var(--space-8);
+      border-radius: var(--radius-indicator);
+      box-shadow: inset 0 0 0 var(--border-width-default) var(--color-border-default);
+    }
+
+    /* Overview */
     pre {
       margin: 0; overflow-x: auto;
       background: var(--color-bg-inverse); color: var(--color-fg-inverse);
@@ -59,72 +109,253 @@
       font: 13px/1.6 ui-monospace, SFMono-Regular, Menlo, monospace;
     }
     .dim { opacity: .55; }
+    .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: var(--space-gap-md); margin: 0; padding: 0; list-style: none; counter-reset: step; }
+    .steps li { counter-increment: step; background: var(--color-bg-subtle); border-radius: var(--radius-control); padding: var(--space-inset-md); }
+    .steps li::before { content: counter(step); display: block; color: var(--color-action-primary-bg-default); margin-bottom: var(--space-4); }
+    .steps strong { display: block; font-weight: var(--font-weight-medium); }
+    .steps span { color: var(--color-fg-muted); }
     footer { color: var(--color-fg-subtle); margin-top: var(--space-48); }
+
+    @media (max-width: 760px) {
+      .shell { grid-template-columns: minmax(0, 1fr); background: none; }
+      .sidebar { position: static; height: auto; background: var(--color-bg-default); border-bottom: var(--border-width-default) solid var(--color-border-default); padding: var(--space-24) var(--space-16) var(--space-12); }
+      .brand { padding-bottom: var(--space-8); }
+      .nav { display: flex; flex-wrap: wrap; gap: var(--space-4); }
+      .nav__group { margin-top: var(--space-8); }
+      .content { padding: var(--space-32) var(--space-16); }
+    }
   </style>
 </head>
 <body>
-  <main class="wrap">
-    <p class="eyebrow text-label">Design System</p>
-    <h1 class="text-display">Tokens to Code</h1>
-    <p class="lead text-body-l">
-      Figma is the single source of truth. Variables are exported as design tokens,
-      built to CSS by a GitHub Action, and every component here uses those tokens only.
-    </p>
-    <div class="links">
-      <a class="btn btn--primary" href="https://github.com/Tobias-Stoll/DesignSystem">View repository</a>
-      <a class="btn btn--ghost" href="dist/tokens.css">tokens.css</a>
+<div class="shell">
+
+  <!-- Navigation -->
+  <aside class="sidebar">
+    <div class="brand">
+      <p class="brand__name text-heading-s">Tobias Stoll</p>
+      <p class="brand__sub text-body-s">Design System Test</p>
     </div>
+    <nav aria-label="Design system">
+      <ul class="nav text-body-s">
+        <li><a href="#overview">Overview</a></li>
+      </ul>
+      <p class="nav__group text-caption">Atoms</p>
+      <ul class="nav text-body-s">
+        <li><a href="#button">Button</a></li>
+        <li><a href="#input">Input</a></li>
+        <li><a href="#checkbox">Checkbox</a></li>
+      </ul>
+    </nav>
+  </aside>
 
-    <section class="card" aria-labelledby="button-title">
-      <h2 id="button-title" class="text-heading-m">Button</h2>
-      <p class="text-body-s">3 variants × 5 states. One Figma component set, one CSS class.</p>
+  <main class="content">
 
-      <p class="label text-caption">Try it: hover, click, tab to focus</p>
-      <div class="row">
-        <button class="btn btn--primary">Primary</button>
-        <button class="btn btn--secondary">Secondary</button>
-        <button class="btn btn--ghost">Ghost</button>
-        <button class="btn btn--primary" disabled>Disabled</button>
+    <!-- ============ Overview ============ -->
+    <section class="view" id="view-overview">
+      <p class="eyebrow text-label">Design System</p>
+      <h1 class="text-display">Tokens to Code</h1>
+      <p class="lead text-body-l">
+        Figma is the single source of truth. Variables are exported as design tokens,
+        built to CSS by a GitHub Action, and every component here uses those tokens only.
+      </p>
+      <div class="links">
+        <a class="btn btn--primary" href="https://github.com/Tobias-Stoll/DesignSystem">View repository</a>
+        <a class="btn btn--ghost" href="dist/tokens.css">tokens.css</a>
       </div>
 
-      <p class="label text-caption">All states, as in Figma</p>
-      <div class="matrix-scroll">
-        <table class="matrix text-body-s">
-          <thead>
-            <tr><th></th><th>Default</th><th>Hover</th><th>Pressed</th><th>Focus</th><th>Disabled</th></tr>
-          </thead>
-          <tbody id="matrix"></tbody>
-        </table>
-      </div>
-    </section>
+      <section class="card">
+        <h2 class="text-heading-m">Workflow</h2>
+        <p class="text-body-s">From a design decision in Figma to a live component, without touching code.</p>
+        <ol class="steps text-body-s">
+          <li><strong>Structure</strong><span>Claude defines token layers and naming</span></li>
+          <li><strong>Design</strong><span>Figma Variables are the source of truth</span></li>
+          <li><strong>Export</strong><span>Token Bridge commits tokens to GitHub</span></li>
+          <li><strong>Build</strong><span>A GitHub Action turns tokens into CSS</span></li>
+        </ol>
+      </section>
 
-    <section class="card" aria-labelledby="chain-title">
-      <h2 id="chain-title" class="text-heading-m">One token, three layers</h2>
-      <p class="text-body-s">Aliases survive the whole way from Figma into CSS.</p>
+      <section class="card">
+        <h2 class="text-heading-m">One token, three layers</h2>
+        <p class="text-body-s">Aliases survive the whole way from Figma into CSS.</p>
 <pre><span class="dim">/* Component */</span>
 --button-primary-bg-default: var(--color-action-primary-bg-default);
 <span class="dim">/* Semantic */</span>
 --color-action-primary-bg-default: var(--color-purple-600);
 <span class="dim">/* Primitive */</span>
---color-purple-600: <span id="purple-600"></span>;</pre>
+--color-purple-600: <span data-var="--color-purple-600"></span>;</pre>
+      </section>
+    </section>
+
+    <!-- ============ Button ============ -->
+    <section class="view" id="view-button" hidden>
+      <p class="eyebrow text-label">Atom</p>
+      <h1 class="text-heading-l">Button</h1>
+      <p class="lead text-body-m">3 variants × 5 states. One Figma component set, one CSS class. Uses component tokens (<code>button/…</code>).</p>
+
+      <section class="card">
+        <h2 class="text-heading-s">Try it</h2>
+        <p class="text-body-s">Hover, click, or press Tab to focus.</p>
+        <div class="row">
+          <button class="btn btn--primary">Primary</button>
+          <button class="btn btn--secondary">Secondary</button>
+          <button class="btn btn--ghost">Ghost</button>
+          <button class="btn btn--primary" disabled>Disabled</button>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2 class="text-heading-s">All states</h2>
+        <p class="text-body-s">As in the Figma component set.</p>
+        <div class="matrix-scroll">
+          <table class="matrix text-body-s">
+            <thead><tr><th></th><th>Default</th><th>Hover</th><th>Pressed</th><th>Focus</th><th>Disabled</th></tr></thead>
+            <tbody id="button-matrix"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2 class="text-heading-s">Tokens</h2>
+        <p class="text-body-s">Read live from <code>tokens.css</code>. Alias → resolved value.</p>
+        <div class="tokens-scroll" data-tokens="--button-"></div>
+      </section>
+    </section>
+
+    <!-- ============ Input ============ -->
+    <section class="view" id="view-input" hidden>
+      <p class="eyebrow text-label">Atom</p>
+      <h1 class="text-heading-l">Input</h1>
+      <p class="lead text-body-m">5 states, 36px high, text style Body S. Uses component tokens (<code>input/…</code>).</p>
+
+      <section class="card">
+        <h2 class="text-heading-s">Try it</h2>
+        <p class="text-body-s">Hover, click to focus, type.</p>
+        <div class="row">
+          <div class="field"><input class="input" type="email" placeholder="you@example.com" aria-label="Email"></div>
+          <div class="field"><input class="input" type="text" value="Invalid value" aria-invalid="true" aria-label="Error example"></div>
+          <div class="field"><input class="input" type="text" value="Disabled" disabled aria-label="Disabled example"></div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2 class="text-heading-s">All states</h2>
+        <p class="text-body-s">As in the Figma component.</p>
+        <div class="states text-body-s" id="input-states"></div>
+      </section>
+
+      <section class="card">
+        <h2 class="text-heading-s">Tokens</h2>
+        <p class="text-body-s">Read live from <code>tokens.css</code>. Alias → resolved value.</p>
+        <div class="tokens-scroll" data-tokens="--input-"></div>
+      </section>
+    </section>
+
+    <!-- ============ Checkbox ============ -->
+    <section class="view" id="view-checkbox" hidden>
+      <p class="eyebrow text-label">Atom</p>
+      <h1 class="text-heading-l">Checkbox</h1>
+      <p class="lead text-body-m">6 states, optional description. Uses semantic tokens directly: no component tokens needed.</p>
+
+      <section class="card">
+        <h2 class="text-heading-s">Try it</h2>
+        <p class="text-body-s">Click to check, or press Tab and Space.</p>
+        <div class="row">
+          <label class="checkbox">
+            <input type="checkbox" class="checkbox__box">
+            <span class="checkbox__text"><span class="checkbox__label">Subscribe to the newsletter</span></span>
+          </label>
+          <label class="checkbox">
+            <input type="checkbox" class="checkbox__box" checked>
+            <span class="checkbox__text">
+              <span class="checkbox__label">Label</span>
+              <span class="checkbox__description">Description</span>
+            </span>
+          </label>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2 class="text-heading-s">All states</h2>
+        <p class="text-body-s">As in the Figma component. Combinations like checked + hover follow the system rules in code.</p>
+        <div class="states" id="checkbox-states"></div>
+      </section>
+
+      <section class="card">
+        <h2 class="text-heading-s">Tokens</h2>
+        <p class="text-body-s">Semantic tokens used by the checkbox.</p>
+        <div class="tokens-scroll" data-tokens-list="--color-bg-default,--color-border-strong,--color-fg-muted,--color-border-focus,--color-feedback-danger-fg,--color-action-primary-bg-default,--color-action-primary-bg-hover,--color-action-primary-fg,--color-action-primary-bg-disabled,--color-action-disabled-fg,--radius-indicator"></div>
+      </section>
     </section>
 
     <footer class="text-caption">Built with Figma Variables · Token Bridge · Style Dictionary · GitHub Actions</footer>
   </main>
+</div>
 
-  <script>
-    // Build the state matrix (same markup as the live buttons, state forced via .is-* classes)
-    const variants = ['primary', 'secondary', 'ghost'];
-    const states = [['', ''], ['is-hover', ''], ['is-pressed', ''], ['is-focus', ''], ['', 'disabled']];
-    document.getElementById('matrix').innerHTML = variants.map((v) =>
-      `<tr><td>${v[0].toUpperCase() + v.slice(1)}</td>` +
-      states.map(([cls, attr]) =>
-        `<td><button class="btn btn--${v} ${cls}" ${attr} tabindex="-1">Button</button></td>`).join('') +
-      '</tr>').join('');
+<script>
+  /* ---------- Static state previews ---------- */
+  const cap = (s) => s[0].toUpperCase() + s.slice(1);
 
-    // Show the live primitive value, straight from tokens.css
-    document.getElementById('purple-600').textContent =
-      getComputedStyle(document.documentElement).getPropertyValue('--color-purple-600').trim();
-  </script>
+  // Button matrix
+  const btnStates = [['', ''], ['is-hover', ''], ['is-pressed', ''], ['is-focus', ''], ['', 'disabled']];
+  document.getElementById('button-matrix').innerHTML = ['primary', 'secondary', 'ghost'].map((v) =>
+    `<tr><td>${cap(v)}</td>` + btnStates.map(([cls, attr]) =>
+      `<td class="preview"><button class="btn btn--${v} ${cls}" ${attr} tabindex="-1">Button</button></td>`).join('') + '</tr>').join('');
+
+  // Input states
+  const inputStates = [['Default', ''], ['Hover', 'is-hover'], ['Focus', 'is-focus'], ['Error', 'is-error'], ['Disabled', 'disabled']];
+  document.getElementById('input-states').innerHTML = inputStates.map(([name, s]) =>
+    `<div><p class="state__name text-caption">${name}</p>` +
+    `<input class="input ${s === 'disabled' ? '' : s}" value="Value" tabindex="-1" aria-hidden="true" ${s === 'disabled' ? 'disabled' : 'readonly'}></div>`).join('');
+
+  // Checkbox states (one "State" property, as in Figma)
+  const cbStates = [['Default', ''], ['Hover', 'class="is-hover"'], ['Focus', 'class="is-focus"'], ['Error', 'class="is-error"'], ['Checked', 'checked'], ['Disabled', 'checked disabled']];
+  document.getElementById('checkbox-states').innerHTML = cbStates.map(([name, a]) => {
+    const cls = (a.match(/class="([^"]+)"/) || [])[1] || '';
+    const attrs = a.replace(/class="[^"]+"/, '');
+    return `<div><p class="state__name text-caption">${name}</p>` +
+      `<label class="checkbox"><input type="checkbox" class="checkbox__box ${cls}" ${attrs} tabindex="-1" aria-hidden="true">` +
+      `<span class="checkbox__text"><span class="checkbox__label">Label</span></span></label></div>`;
+  }).join('');
+
+  /* ---------- Live token tables (parsed from dist/tokens.css) ---------- */
+  const root = getComputedStyle(document.documentElement);
+  const resolved = (name) => root.getPropertyValue(name).trim();
+
+  document.querySelectorAll('[data-var]').forEach((el) => (el.textContent = resolved(el.dataset.var)));
+
+  fetch('dist/tokens.css').then((r) => r.text()).then((css) => {
+    const defs = {};
+    for (const m of css.matchAll(/(--[\w-]+):\s*([^;]+);/g)) defs[m[1]] = m[2].trim();
+
+    const row = (name) => {
+      const value = resolved(name);
+      const alias = defs[name] || '';
+      const isColor = /^(#|rgb)/.test(value);
+      return `<tr><td><code>${name}</code></td>` +
+        `<td><code class="alias">${alias.startsWith('var(') ? alias : '–'}</code></td>` +
+        `<td>${isColor ? `<span class="swatch" style="background:${value}"></span>` : ''}<code>${value}</code></td></tr>`;
+    };
+    const table = (names) => `<table class="tokens text-body-s"><thead><tr><th>Token</th><th>Alias</th><th>Value</th></tr></thead><tbody>${names.map(row).join('')}</tbody></table>`;
+
+    document.querySelectorAll('[data-tokens]').forEach((el) => {
+      el.innerHTML = table(Object.keys(defs).filter((n) => n.startsWith(el.dataset.tokens)));
+    });
+    document.querySelectorAll('[data-tokens-list]').forEach((el) => {
+      el.innerHTML = table(el.dataset.tokensList.split(','));
+    });
+  });
+
+  /* ---------- Hash navigation ---------- */
+  const views = ['overview', 'button', 'input', 'checkbox'];
+  function route() {
+    const id = views.includes(location.hash.slice(1)) ? location.hash.slice(1) : 'overview';
+    views.forEach((v) => (document.getElementById('view-' + v).hidden = v !== id));
+    document.querySelectorAll('.nav a').forEach((a) =>
+      a.getAttribute('href') === '#' + id ? a.setAttribute('aria-current', 'page') : a.removeAttribute('aria-current'));
+    window.scrollTo(0, 0);
+  }
+  addEventListener('hashchange', route);
+  route();
+</script>
 </body>
 </html>

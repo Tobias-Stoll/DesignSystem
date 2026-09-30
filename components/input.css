@@ -1,0 +1,56 @@
+/**
+ * Input
+ * Figma: Component "Input" · State = Default | Hover | Focus | Error | Disabled
+ * Uses component tokens only (input/…).
+ *
+ * The border is drawn as an inset box-shadow (like Figma's inside stroke),
+ * so the field stays exactly 36px high and focus doesn't shift the layout.
+ */
+
+.input {
+  --_border: var(--input-border-default);
+  --_border-width: var(--input-border-width-default);
+
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: var(--input-padding-y) var(--input-padding-x);
+  border: 0;
+  border-radius: var(--input-radius);
+  box-shadow: inset 0 0 0 var(--_border-width) var(--_border);
+  background: var(--input-bg-default);
+  color: var(--input-fg-default);
+  outline: none;
+
+  /* Text style: Body S */
+  font-family: var(--font-family-sans);
+  font-weight: var(--font-weight-regular);
+  font-size: var(--font-size-200);
+  line-height: var(--font-line-height-200);
+
+  transition: box-shadow 120ms ease;
+}
+
+.input::placeholder { color: var(--input-fg-placeholder); opacity: 1; }
+
+/* States (real interaction + .is-* classes to show a state statically) */
+.input:hover:not(:disabled),
+.input.is-hover { --_border: var(--input-border-hover); }
+
+.input:focus,
+.input.is-focus {
+  --_border: var(--input-border-focus);
+  --_border-width: var(--input-border-width-focus);
+}
+
+.input[aria-invalid="true"],
+.input.is-error { --_border: var(--input-border-error); }
+
+.input:disabled,
+.input.is-disabled {
+  --_border: var(--input-border-default);
+  background: var(--input-bg-disabled);
+  color: var(--input-fg-disabled);
+  cursor: not-allowed;
+}
+.input:disabled::placeholder { color: var(--input-fg-disabled); }
