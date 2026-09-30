@@ -166,6 +166,8 @@
   --radius-control: var(--radius-md);
   --radius-container: var(--radius-lg);
   --radius-pill: var(--radius-full);
+  --radius-input: var(--radius-sm);
+  --radius-indicator: var(--radius-sm);
   --border-width-default: var(--border-width-1);
   --border-width-focus: var(--border-width-2);
   --button-primary-bg-default: var(--color-action-primary-bg-default);
@@ -189,4 +191,18 @@
   --button-radius: var(--radius-control);
   --button-focus-ring-color: var(--color-border-focus);
   --button-focus-ring-width: var(--border-width-focus);
+  --input-bg-default: var(--color-bg-default);
+  --input-bg-disabled: var(--color-bg-muted);
+  --input-border-default: var(--color-border-default);
+  --input-border-hover: var(--color-border-strong);
+  --input-border-focus: var(--color-border-focus);
+  --input-border-error: var(--color-feedback-danger-fg);
+  --input-fg-default: var(--color-fg-default);
+  --input-fg-placeholder: var(--color-fg-muted);
+  --input-fg-disabled: var(--color-fg-subtle);
+  --input-border-width-default: var(--border-width-default);
+  --input-border-width-focus: var(--border-width-focus);
+  --input-padding-x: var(--space-inset-md);
+  --input-padding-y: var(--space-inset-sm);
+  --input-radius: var(--radius-control);
 }
