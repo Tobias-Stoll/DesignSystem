@@ -17,6 +17,7 @@
   <link rel="stylesheet" href="components/checkbox.css">
   <link rel="stylesheet" href="components/alert.css">
   <link rel="stylesheet" href="components/form-field.css">
+  <link rel="stylesheet" href="components/signup-card.css">
 
   <style>
     /* Page shell. Built from tokens only, no hard-coded colors. */
@@ -167,6 +168,12 @@
     .alert-live:empty { display: none; }
     .variants { display: grid; gap: var(--space-gap-lg); max-width: 480px; }
     .ff-states { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
+    .su-demo { display: flex; flex-wrap: wrap; gap: var(--space-32); align-items: flex-start; }
+    #su-live { flex: 1 1 380px; max-width: 440px; min-width: 0; }
+    .su-controls { display: flex; flex-direction: column; gap: var(--space-gap-lg); align-items: flex-start; flex: 0 1 220px; }
+    .su-alert-slot:empty { display: none; }
+    .su-states { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: var(--space-32) var(--space-24); align-items: start; }
+    .su-preview { pointer-events: none; min-width: 0; }
     .tokens td { white-space: normal; }
     .tokens td code { white-space: nowrap; }
 
@@ -203,6 +210,10 @@
       <p class="nav__group text-caption">Molecules</p>
       <ul class="nav text-body-s">
         <li><a href="#form-field">Form Field</a></li>
+      </ul>
+      <p class="nav__group text-caption">Organisms</p>
+      <ul class="nav text-body-s">
+        <li><a href="#signup-card">Sign-up Card</a></li>
       </ul>
     </nav>
   </aside>
@@ -262,13 +273,14 @@
 &lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Tobias-Stoll/DesignSystem@main/components/input.css"&gt;
 &lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Tobias-Stoll/DesignSystem@main/components/checkbox.css"&gt;
 &lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Tobias-Stoll/DesignSystem@main/components/alert.css"&gt;
-&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Tobias-Stoll/DesignSystem@main/components/form-field.css"&gt;</pre>
+&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Tobias-Stoll/DesignSystem@main/components/form-field.css"&gt;
+&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Tobias-Stoll/DesignSystem@main/components/signup-card.css"&gt;</pre>
             </div>
           </li>
 
           <li>
             <h3 class="text-heading-s">Use the components</h3>
-            <p class="text-body-s">Plain HTML with a class. All variants and states are on the component pages: <a href="#button">Button</a>, <a href="#input">Input</a>, <a href="#checkbox">Checkbox</a>, <a href="#alert">Alert</a>, <a href="#form-field">Form Field</a>.</p>
+            <p class="text-body-s">Plain HTML with a class. All variants and states are on the component pages: <a href="#button">Button</a>, <a href="#input">Input</a>, <a href="#checkbox">Checkbox</a>, <a href="#alert">Alert</a>, <a href="#form-field">Form Field</a>, <a href="#signup-card">Sign-up Card</a>.</p>
             <div class="code">
               <button class="copy text-caption" type="button">Copy</button>
 <pre>&lt;button class="btn btn--primary"&gt;Subscribe&lt;/button&gt;
@@ -514,6 +526,74 @@
       </section>
     </section>
 
+    <!-- ============ Sign-up Card ============ -->
+    <section class="view" id="view-signup-card" hidden>
+      <p class="eyebrow text-label">Organism</p>
+      <h1 class="text-heading-l">Sign-up Card</h1>
+      <p class="lead text-body-m">Everything comes together: three Form Fields, a Checkbox, an Alert and a Button. This one was translated straight from Figma via the Figma MCP.</p>
+
+      <section class="card">
+        <h2 class="text-heading-s">Try it</h2>
+        <p class="text-body-s">Submit empty to see the errors, fill everything in to subscribe. Turn on the switch to see the server error.</p>
+        <div class="su-demo">
+          <div id="su-live"></div>
+          <div class="su-controls">
+            <label class="checkbox">
+              <input type="checkbox" class="checkbox__box" id="su-simulate">
+              <span class="checkbox__text"><span class="checkbox__label">Simulate server error</span>
+              <span class="checkbox__description">Shows State = Danger on submit</span></span>
+            </label>
+            <button class="btn btn--ghost" type="button" id="su-reset">Reset demo</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2 class="text-heading-s">All states</h2>
+        <p class="text-body-s">As in the Figma component set (node 46:774).</p>
+        <div class="su-states" id="su-states"></div>
+      </section>
+
+      <section class="card">
+        <h2 class="text-heading-s">From Figma to code</h2>
+        <p class="text-body-s">One call to the Figma MCP (<code>get_design_context</code>) returned structure, variants and the variable bound to every layer.</p>
+        <div class="tokens-scroll">
+          <table class="tokens text-body-s">
+            <thead><tr><th>Figma</th><th>MCP output</th><th>In this project</th></tr></thead>
+            <tbody>
+              <tr><td>Component set, State</td><td>React prop <code>state</code></td><td>One card, states via classes and ARIA</td></tr>
+              <tr><td>Form Field instances</td><td>Raw markup per field</td><td>Reused <code>.form-field</code> + <code>.input</code></td></tr>
+              <tr><td>Checkbox, Alert, Button</td><td>Raw markup</td><td>Reused <code>.checkbox</code>, <code>.alert</code>, <code>.btn</code></td></tr>
+              <tr><td>Auto layout + variables</td><td>Tailwind with <code>var(--space/gap/lg)</code></td><td><code>var(--space-gap-lg)</code> from tokens.css</td></tr>
+              <tr><td>Min width 380</td><td><code>min-w-[380px]</code></td><td>Names stack on narrow screens instead</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2 class="text-heading-s">Design QA with the MCP</h2>
+        <p class="text-body-s">The MCP shows what is bound, not just how it looks. The first read found issues a screenshot would never show.</p>
+        <div class="tokens-scroll">
+          <table class="tokens text-body-s">
+            <thead><tr><th>Where</th><th>Read 1</th><th>Read 2</th></tr></thead>
+            <tbody>
+              <tr><td>Input + checkbox stroke</td><td><code>sds-size-stroke-border</code> (foreign library)</td><td><code>border-width/default</code> ✓</td></tr>
+              <tr><td>Checkbox error row gap</td><td><code>sds-size-space-300</code> (foreign library)</td><td><code>space/gap/md</code> ✓</td></tr>
+              <tr><td>Card border</td><td><code>input/border/default</code>, width unbound</td><td><code>color/border/default</code> + <code>border-width/default</code> ✓</td></tr>
+              <tr><td>Input padding</td><td><code>button/padding-x</code>, 8px hard-coded in error</td><td><code>input/padding-x</code> + <code>input/padding-y</code> ✓</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2 class="text-heading-s">Tokens</h2>
+        <p class="text-body-s">Tokens used by the card itself. The nested components bring their own.</p>
+        <div class="tokens-scroll" data-tokens-list="--color-bg-default,--color-border-default,--border-width-default,--radius-container,--space-inset-lg,--space-gap-lg,--space-gap-md,--space-gap-sm,--color-fg-default,--color-fg-muted,--color-feedback-danger-fg"></div>
+      </section>
+    </section>
+
     <footer class="text-caption">
       <p>© 2026 Tobias Stoll</p>
       <p>Built with Figma Variables · Token Bridge · Style Dictionary · GitHub Actions</p>
@@ -604,6 +684,88 @@
   ffInput.addEventListener('blur', () => setError(ffInput.value !== '' && !ffInput.checkValidity()));
   ffInput.addEventListener('input', () => { if (ffInput.checkValidity()) setError(false); });
 
+  /* ---------- Sign-up Card ---------- */
+  const SU = {
+    first: 'Please enter your first name',
+    last: 'Please enter your last name',
+    email: 'Please enter a valid email address',
+    consent: 'Please confirm to continue',
+  };
+  const esc = (t) => String(t).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+
+  function suField(p, id, label, type, ph, val, err, auto) {
+    const msgId = `${p}-${id}-msg`;
+    return `<div class="form-field ${err ? 'form-field--error' : ''}" data-field="${id}">` +
+      `<div class="form-field__header"><label class="form-field__label" for="${p}-${id}">${label}</label></div>` +
+      `<input class="input" id="${p}-${id}" name="${id}" type="${type}" placeholder="${esc(ph)}" ${val ? `value="${esc(val)}"` : ''} ` +
+      `autocomplete="${auto}" required ${err ? 'aria-invalid="true"' : ''} aria-describedby="${msgId}">` +
+      `<span class="form-field__message" id="${msgId}" ${err ? '' : 'hidden'}>${err ? SU[id] : ''}</span></div>`;
+  }
+
+  function suCard(p, state) {
+    const header = `<div class="signup-card__header"><h3 class="signup-card__title text-heading-m">Stay in the loop</h3>` +
+      `<p class="signup-card__description text-body-s">One email a month. No spam.</p></div>`;
+    if (state === 'Success') {
+      return `<div class="signup-card">${header}<div class="alert alert--success" role="status">You're subscribed! Check your inbox to confirm.</div></div>`;
+    }
+    const e = state === 'Error', d = state === 'Danger';
+    return `<form class="signup-card" id="${p}-form" novalidate>${header}` +
+      `<div class="signup-card__fields"><div class="signup-card__row">` +
+      suField(p, 'first', 'First name', 'text', 'e.g. John', d ? 'Tobias' : '', e, 'given-name') +
+      suField(p, 'last', 'Last name', 'text', 'e.g. Doe', d ? 'Stoll' : '', e, 'family-name') + `</div>` +
+      suField(p, 'email', 'Email', 'email', 'you@example.de', d ? 'Tobias@example.de' : '', e, 'email') + `</div>` +
+      `<div class="signup-card__consent"><label class="checkbox"><input type="checkbox" class="checkbox__box" id="${p}-consent" name="consent" ` +
+      `${d ? 'checked' : ''} ${e ? 'aria-invalid="true"' : ''} aria-describedby="${p}-consent-msg">` +
+      `<span class="checkbox__text"><span class="checkbox__label">I want to receive the newsletter</span></span></label>` +
+      `<span class="signup-card__consent-error" id="${p}-consent-msg" ${e ? '' : 'hidden'}>${e ? SU.consent : ''}</span></div>` +
+      `<div class="su-alert-slot">${d ? '<div class="alert alert--danger" role="alert">Something went wrong. Please try again.</div>' : ''}</div>` +
+      `<button class="btn btn--primary" type="submit">Subscribe to the newsletter</button></form>`;
+  }
+
+  // Static previews of all four states
+  document.getElementById('su-states').innerHTML = ['Default', 'Error', 'Danger', 'Success'].map((st, i) =>
+    `<div class="su-preview"><p class="state__name text-caption">${st}</p>${suCard('pv' + i, st)}</div>`).join('');
+  document.querySelectorAll('.su-preview input, .su-preview button').forEach((el) => { el.tabIndex = -1; el.setAttribute('aria-hidden', 'true'); });
+
+  // Live demo
+  function suMount() {
+    const live = document.getElementById('su-live');
+    live.innerHTML = suCard('su', 'Default');
+    const form = document.getElementById('su-form');
+    const setErr = (id, on) => {
+      const input = document.getElementById(`su-${id}`);
+      const msg = document.getElementById(`su-${id}-msg`);
+      if (id === 'consent') { input.toggleAttribute('aria-invalid', on); }
+      else { input.closest('.form-field').classList.toggle('form-field--error', on); input.toggleAttribute('aria-invalid', on); }
+      if (on) input.setAttribute('aria-invalid', 'true');
+      msg.hidden = !on; msg.textContent = on ? SU[id] : '';
+    };
+    const valid = {
+      first: () => document.getElementById('su-first').value.trim() !== '',
+      last: () => document.getElementById('su-last').value.trim() !== '',
+      email: () => { const i = document.getElementById('su-email'); return i.value.trim() !== '' && i.checkValidity(); },
+      consent: () => document.getElementById('su-consent').checked,
+    };
+    Object.keys(valid).forEach((id) => {
+      const el = document.getElementById(`su-${id}`);
+      el.addEventListener(id === 'consent' ? 'change' : 'input', () => { if (valid[id]()) setErr(id, false); });
+    });
+    form.addEventListener('submit', (ev) => {
+      ev.preventDefault();
+      form.querySelector('.su-alert-slot').innerHTML = '';
+      const bad = Object.keys(valid).filter((id) => !valid[id]());
+      Object.keys(valid).forEach((id) => setErr(id, bad.includes(id)));
+      if (bad.length) { document.getElementById(`su-${bad[0]}`).focus(); return; }
+      if (document.getElementById('su-simulate').checked) {
+        form.querySelector('.su-alert-slot').innerHTML = '<div class="alert alert--danger" role="alert">Something went wrong. Please try again.</div>';
+        return;
+      }
+      live.innerHTML = suCard('su', 'Success');
+    });
+  }
+  suMount();
+  document.getElementById('su-reset').addEventListener('click', suMount);
+
   /* ---------- Alert demo ---------- */
   const alertMessages = {
     success: "You're subscribed! Check your inbox to confirm.",
@@ -630,7 +792,7 @@
   });
 
   /* ---------- Hash navigation ---------- */
-  const views = ['overview', 'button', 'input', 'checkbox', 'alert', 'form-field'];
+  const views = ['overview', 'button', 'input', 'checkbox', 'alert', 'form-field', 'signup-card'];
   function route() {
     const id = views.includes(location.hash.slice(1)) ? location.hash.slice(1) : 'overview';
     views.forEach((v) => (document.getElementById('view-' + v).hidden = v !== id));

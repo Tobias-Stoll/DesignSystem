@@ -1,0 +1,49 @@
+/**
+ * Sign-up Card (Organism)
+ * Figma: Component "Sign-up Card" · node 46:774 · State = Default | Error | Danger | Success
+ * Translated from Figma via Figma MCP (get_design_context), then adapted to this
+ * project: existing components are reused, only the card layout is new.
+ *
+ * Composition: Form Field ×3 (Molecule) · Checkbox · Alert · Button (Atoms)
+ * All values are tokens that were bound in Figma.
+ */
+
+.signup-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-gap-lg);                 /* Figma: space/gap/lg */
+  width: 100%;
+  max-width: 440px;                         /* Figma: W 440 */
+  padding: var(--space-inset-lg);           /* Figma: space/inset/lg */
+  background: var(--color-bg-default);
+  border: var(--border-width-default) solid var(--color-border-default);
+  border-radius: var(--radius-container);
+  font-family: var(--font-family-sans);
+}
+
+/* Header: Heading M + Body S, gap space/gap/sm */
+.signup-card__header { display: flex; flex-direction: column; gap: var(--space-gap-sm); }
+.signup-card__title { margin: 0; color: var(--color-fg-default); }
+.signup-card__description { margin: 0; color: var(--color-fg-muted); }
+
+/* Fields: gap 16 between rows, 12 between first and last name */
+.signup-card__fields { display: flex; flex-direction: column; gap: var(--space-gap-lg); }
+.signup-card__row { display: flex; gap: var(--space-gap-md); }
+.signup-card__row > * { flex: 1 1 0; min-width: 0; }
+
+/* Checkbox error row: indented by box (16px) + Figma gap space/gap/md */
+.signup-card__consent { display: flex; flex-direction: column; }
+.signup-card__consent-error {
+  padding-left: calc(16px + var(--space-gap-md));
+  color: var(--color-feedback-danger-fg);
+  font-size: var(--font-size-100);          /* Caption */
+  line-height: var(--font-line-height-100);
+}
+.signup-card__consent-error[hidden] { display: none; }
+
+.signup-card .btn { width: 100%; }
+
+/* Figma sets a min width of 380px. On narrow phones the names stack instead. */
+@media (max-width: 420px) {
+  .signup-card__row { flex-direction: column; gap: var(--space-gap-lg); }
+}
