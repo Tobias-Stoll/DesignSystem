@@ -114,7 +114,53 @@
     .steps li::before { content: counter(step); display: block; color: var(--color-action-primary-bg-default); margin-bottom: var(--space-4); }
     .steps strong { display: block; font-weight: var(--font-weight-medium); }
     .steps span { color: var(--color-fg-muted); }
-    footer { color: var(--color-fg-subtle); margin-top: var(--space-48); }
+    footer {
+      color: var(--color-fg-muted);
+      margin-top: var(--space-48);
+      padding-top: var(--space-24);
+      border-top: var(--border-width-default) solid var(--color-border-default);
+    }
+    footer p { margin: 0 0 var(--space-4); }
+    footer p:first-child { color: var(--color-fg-default); }
+
+    /* "Use it in your project" */
+    .use { list-style: none; margin: 0; padding: 0; counter-reset: use; display: grid; gap: var(--space-32); }
+    .use > li { counter-increment: use; position: relative; padding-left: var(--space-40); min-width: 0; }
+    .use > li::before {
+      content: counter(use);
+      position: absolute; left: 0; top: 0;
+      width: 28px; height: 28px; border-radius: var(--radius-full);
+      display: grid; place-items: center;
+      background: var(--color-action-ghost-bg-hover); color: var(--color-action-ghost-fg);
+      font-weight: var(--font-weight-medium); font-size: var(--font-size-200);
+    }
+    .use h3 { margin: 0 0 var(--space-4); }
+    .use p { color: var(--color-fg-muted); margin: 0 0 var(--space-12); }
+    .use a { color: var(--color-action-ghost-fg); }
+    .code { position: relative; min-width: 0; }
+    .code pre { padding-top: var(--space-40); }
+    .copy {
+      position: absolute; top: var(--space-8); right: var(--space-8);
+      padding: var(--space-4) var(--space-12);
+      border: 0; border-radius: var(--radius-control); cursor: pointer;
+      background: transparent; color: var(--color-fg-inverse);
+      box-shadow: inset 0 0 0 var(--border-width-default) var(--color-fg-muted);
+      font-family: var(--font-family-sans);
+    }
+    .copy:hover { background: var(--color-fg-default); }
+    .copy:focus-visible { outline: var(--border-width-focus) solid var(--color-border-focus); outline-offset: 0; }
+    .rules {
+      margin-top: var(--space-32);
+      padding: var(--space-inset-md);
+      border-radius: var(--radius-control);
+      background: var(--color-feedback-info-bg);
+      box-shadow: inset 0 0 0 var(--border-width-default) var(--color-feedback-info-border);
+    }
+    .rules h3 { margin: 0 0 var(--space-8); color: var(--color-feedback-info-fg); }
+    .rules ul { margin: 0; padding-left: var(--space-20); display: grid; gap: var(--space-8); }
+    .rules strong { font-weight: var(--font-weight-medium); }
+    code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .92em; }
+    .note { color: var(--color-fg-muted); margin: var(--space-16) 0 0; }
 
     @media (max-width: 760px) {
       .shell { grid-template-columns: minmax(0, 1fr); background: none; }
@@ -183,6 +229,76 @@
 --color-action-primary-bg-default: var(--color-purple-600);
 <span class="dim">/* Primitive */</span>
 --color-purple-600: <span data-var="--color-purple-600"></span>;</pre>
+      </section>
+
+      <section class="card" aria-labelledby="use-title">
+        <h2 id="use-title" class="text-heading-m">Use it in your project</h2>
+        <p class="text-body-s">No install needed. The CSS is served straight from the public repository via jsDelivr.</p>
+
+        <ol class="use">
+          <li>
+            <h3 class="text-heading-s">Add the stylesheets</h3>
+            <p class="text-body-s">Tokens first, then the components you need. Plus the two web fonts.</p>
+            <div class="code">
+              <button class="copy text-caption" type="button">Copy</button>
+<pre>&lt;link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&amp;family=Roboto:wght@400;500&amp;display=swap"&gt;
+
+&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Tobias-Stoll/DesignSystem@main/dist/tokens.css"&gt;
+&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Tobias-Stoll/DesignSystem@main/dist/typography.css"&gt;
+&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Tobias-Stoll/DesignSystem@main/components/button.css"&gt;
+&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Tobias-Stoll/DesignSystem@main/components/input.css"&gt;
+&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Tobias-Stoll/DesignSystem@main/components/checkbox.css"&gt;</pre>
+            </div>
+          </li>
+
+          <li>
+            <h3 class="text-heading-s">Use the components</h3>
+            <p class="text-body-s">Plain HTML with a class. All variants and states are on the component pages: <a href="#button">Button</a>, <a href="#input">Input</a>, <a href="#checkbox">Checkbox</a>.</p>
+            <div class="code">
+              <button class="copy text-caption" type="button">Copy</button>
+<pre>&lt;button class="btn btn--primary"&gt;Subscribe&lt;/button&gt;
+
+&lt;input class="input" type="email" placeholder="you@example.com"&gt;
+
+&lt;label class="checkbox"&gt;
+  &lt;input type="checkbox" class="checkbox__box"&gt;
+  &lt;span class="checkbox__text"&gt;
+    &lt;span class="checkbox__label"&gt;Subscribe to the newsletter&lt;/span&gt;
+  &lt;/span&gt;
+&lt;/label&gt;
+
+&lt;h2 class="text-heading-m"&gt;Text styles work as classes too&lt;/h2&gt;</pre>
+            </div>
+          </li>
+
+          <li>
+            <h3 class="text-heading-s">Use tokens in your own CSS</h3>
+            <p class="text-body-s">Every Figma variable is a CSS custom property.</p>
+            <div class="code">
+              <button class="copy text-caption" type="button">Copy</button>
+<pre>.my-card {
+  background: var(--color-bg-default);
+  border: var(--border-width-default) solid var(--color-border-default);
+  border-radius: var(--radius-container);
+  padding: var(--space-inset-lg);
+  color: var(--color-fg-default);
+}</pre>
+            </div>
+          </li>
+        </ol>
+
+        <div class="rules">
+          <h3 class="text-label">Two rules</h3>
+          <ul class="text-body-s">
+            <li><strong>Use semantic or component tokens, never primitives.</strong> <code>--color-action-primary-bg-default</code>, not <code>--color-purple-600</code>. That way a design change in Figma reaches your code without edits.</li>
+            <li><strong>Never change tokens in code.</strong> Figma is the source of truth: values are changed there and arrive here through the export.</li>
+          </ul>
+        </div>
+
+        <p class="note text-caption">
+          Note: <code>@main</code> always points to the latest export, but jsDelivr may cache it for up to 12 hours.
+          In a production project you would pin a release, for example <code>@v1.0.0</code>.
+        </p>
       </section>
     </section>
 
@@ -287,7 +403,10 @@
       </section>
     </section>
 
-    <footer class="text-caption">Built with Figma Variables · Token Bridge · Style Dictionary · GitHub Actions</footer>
+    <footer class="text-caption">
+      <p>© 2026 Tobias Stoll</p>
+      <p>Built with Figma Variables · Token Bridge · Style Dictionary · GitHub Actions</p>
+    </footer>
   </main>
 </div>
 
@@ -342,6 +461,20 @@
     });
     document.querySelectorAll('[data-tokens-list]').forEach((el) => {
       el.innerHTML = table(el.dataset.tokensList.split(','));
+    });
+  });
+
+  /* ---------- Copy buttons ---------- */
+  document.querySelectorAll('.copy').forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      const text = btn.parentElement.querySelector('pre').textContent;
+      try {
+        await navigator.clipboard.writeText(text);
+        btn.textContent = 'Copied';
+      } catch {
+        btn.textContent = 'Copy failed';
+      }
+      setTimeout(() => (btn.textContent = 'Copy'), 1500);
     });
   });
 
