@@ -16,6 +16,7 @@
   <link rel="stylesheet" href="components/input.css">
   <link rel="stylesheet" href="components/checkbox.css">
   <link rel="stylesheet" href="components/alert.css">
+  <link rel="stylesheet" href="components/form-field.css">
 
   <style>
     /* Page shell. Built from tokens only, no hard-coded colors. */
@@ -165,6 +166,7 @@
     .alert-live { margin-top: var(--space-16); max-width: 480px; }
     .alert-live:empty { display: none; }
     .variants { display: grid; gap: var(--space-gap-lg); max-width: 480px; }
+    .ff-states { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
     .tokens td { white-space: normal; }
     .tokens td code { white-space: nowrap; }
 
@@ -197,6 +199,10 @@
         <li><a href="#input">Input</a></li>
         <li><a href="#checkbox">Checkbox</a></li>
         <li><a href="#alert">Alert</a></li>
+      </ul>
+      <p class="nav__group text-caption">Molecules</p>
+      <ul class="nav text-body-s">
+        <li><a href="#form-field">Form Field</a></li>
       </ul>
     </nav>
   </aside>
@@ -255,13 +261,14 @@
 &lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Tobias-Stoll/DesignSystem@main/components/button.css"&gt;
 &lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Tobias-Stoll/DesignSystem@main/components/input.css"&gt;
 &lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Tobias-Stoll/DesignSystem@main/components/checkbox.css"&gt;
-&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Tobias-Stoll/DesignSystem@main/components/alert.css"&gt;</pre>
+&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Tobias-Stoll/DesignSystem@main/components/alert.css"&gt;
+&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Tobias-Stoll/DesignSystem@main/components/form-field.css"&gt;</pre>
             </div>
           </li>
 
           <li>
             <h3 class="text-heading-s">Use the components</h3>
-            <p class="text-body-s">Plain HTML with a class. All variants and states are on the component pages: <a href="#button">Button</a>, <a href="#input">Input</a>, <a href="#checkbox">Checkbox</a>, <a href="#alert">Alert</a>.</p>
+            <p class="text-body-s">Plain HTML with a class. All variants and states are on the component pages: <a href="#button">Button</a>, <a href="#input">Input</a>, <a href="#checkbox">Checkbox</a>, <a href="#alert">Alert</a>, <a href="#form-field">Form Field</a>.</p>
             <div class="code">
               <button class="copy text-caption" type="button">Copy</button>
 <pre>&lt;button class="btn btn--primary"&gt;Subscribe&lt;/button&gt;
@@ -441,20 +448,69 @@
       <section class="card">
         <h2 class="text-heading-s">When to use what</h2>
         <p class="text-body-s">Two kinds of feedback, two places.</p>
-        <table class="tokens text-body-s">
+        <div class="tokens-scroll"><table class="tokens text-body-s">
           <thead><tr><th>Feedback</th><th>Where</th><th>Example</th></tr></thead>
           <tbody>
             <tr><td>Field error</td><td>At the field</td><td>"Please enter a valid email address."</td></tr>
             <tr><td>Alert · Danger</td><td>Above the button, form stays filled</td><td>"Something went wrong. Please try again."</td></tr>
             <tr><td>Alert · Success</td><td>Replaces the form</td><td>"You're subscribed! Check your inbox to confirm."</td></tr>
           </tbody>
-        </table>
+        </table></div>
       </section>
 
       <section class="card">
         <h2 class="text-heading-s">Tokens</h2>
         <p class="text-body-s">Semantic tokens used by the alert.</p>
         <div class="tokens-scroll" data-tokens-list="--color-feedback-success-bg,--color-feedback-success-border,--color-feedback-success-fg,--color-feedback-danger-bg,--color-feedback-danger-border,--color-feedback-danger-fg,--space-inset-md,--radius-control,--border-width-default"></div>
+      </section>
+    </section>
+
+    <!-- ============ Form Field ============ -->
+    <section class="view" id="view-form-field" hidden>
+      <p class="eyebrow text-label">Molecule</p>
+      <h1 class="text-heading-l">Form Field</h1>
+      <p class="lead text-body-m">Label + description + Input atom + message. The first molecule: it contains an instance of the Input, so every change to the Input flows in automatically.</p>
+
+      <section class="card">
+        <h2 class="text-heading-s">Try it</h2>
+        <p class="text-body-s">Type an email and leave the field. An invalid address switches the field to State = Error.</p>
+        <div class="field">
+          <div class="form-field" id="ff-demo">
+            <div class="form-field__header">
+              <label class="form-field__label" for="ff-email">Email</label>
+              <span class="form-field__description" id="ff-email-desc">We'll never share your email.</span>
+            </div>
+            <input class="input" id="ff-email" type="email" placeholder="you@example.com" aria-describedby="ff-email-desc ff-email-msg">
+            <span class="form-field__message" id="ff-email-msg">We'll send one email a month.</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2 class="text-heading-s">All states</h2>
+        <p class="text-body-s">As in the Figma component. Hover, focus and disabled come from the nested Input.</p>
+        <div class="states ff-states" id="ff-states"></div>
+      </section>
+
+      <section class="card">
+        <h2 class="text-heading-s">Anatomy</h2>
+        <p class="text-body-s">How the molecule is put together.</p>
+        <div class="tokens-scroll"><table class="tokens text-body-s">
+          <thead><tr><th>Part</th><th>Text style</th><th>Token</th></tr></thead>
+          <tbody>
+            <tr><td>Label</td><td>Label · 14/20</td><td><code>--color-fg-default</code></td></tr>
+            <tr><td>Description</td><td>Caption · 12/16</td><td><code>--color-fg-muted</code></td></tr>
+            <tr><td>Input</td><td>Input atom</td><td><code>--input-*</code></td></tr>
+            <tr><td>Message</td><td>Caption · 12/16</td><td><code>--color-fg-muted</code> · Error: <code>--color-feedback-danger-fg</code></td></tr>
+            <tr><td>Gap</td><td>between header, input, message</td><td><code>--space-gap-sm</code> (8px) · header inside: 0</td></tr>
+          </tbody>
+        </table></div>
+      </section>
+
+      <section class="card">
+        <h2 class="text-heading-s">Tokens</h2>
+        <p class="text-body-s">Semantic tokens used by the form field itself. The input brings its own.</p>
+        <div class="tokens-scroll" data-tokens-list="--color-fg-default,--color-fg-muted,--color-fg-subtle,--color-feedback-danger-fg,--space-gap-sm"></div>
       </section>
     </section>
 
@@ -519,6 +575,35 @@
     });
   });
 
+  /* ---------- Form field ---------- */
+  const ffStates = [
+    ['Default', '', 'placeholder="you@example.com"', "We'll send one email a month."],
+    ['Hover', 'is-hover', 'value="you@example.com"', "We'll send one email a month."],
+    ['Focus', 'is-focus', 'value="tobias@example.com"', "We'll send one email a month."],
+    ['Error', 'is-error', 'value="tobias@"', 'Please enter a valid email address.'],
+    ['Disabled', '', 'value="tobias@example.com" disabled', "We'll send one email a month."],
+  ];
+  document.getElementById('ff-states').innerHTML = ffStates.map(([name, cls, attrs, msg]) =>
+    `<div><p class="state__name text-caption">${name}</p>` +
+    `<div class="form-field ${name === 'Error' ? 'form-field--error' : ''}">` +
+    `<div class="form-field__header"><span class="form-field__label">Email</span>` +
+    `<span class="form-field__description">We'll never share your email.</span></div>` +
+    `<input class="input ${cls}" ${attrs} ${attrs.includes('disabled') ? '' : 'readonly'} tabindex="-1" aria-hidden="true">` +
+    `<span class="form-field__message">${msg}</span></div></div>`).join('');
+
+  // Live validation: State = Error on blur when the email is invalid
+  const ff = document.getElementById('ff-demo');
+  const ffInput = document.getElementById('ff-email');
+  const ffMsg = document.getElementById('ff-email-msg');
+  const setError = (on) => {
+    ff.classList.toggle('form-field--error', on);
+    ffInput.toggleAttribute('aria-invalid', on);
+    if (on) ffInput.setAttribute('aria-invalid', 'true');
+    ffMsg.textContent = on ? 'Please enter a valid email address.' : "We'll send one email a month.";
+  };
+  ffInput.addEventListener('blur', () => setError(ffInput.value !== '' && !ffInput.checkValidity()));
+  ffInput.addEventListener('input', () => { if (ffInput.checkValidity()) setError(false); });
+
   /* ---------- Alert demo ---------- */
   const alertMessages = {
     success: "You're subscribed! Check your inbox to confirm.",
@@ -545,7 +630,7 @@
   });
 
   /* ---------- Hash navigation ---------- */
-  const views = ['overview', 'button', 'input', 'checkbox', 'alert'];
+  const views = ['overview', 'button', 'input', 'checkbox', 'alert', 'form-field'];
   function route() {
     const id = views.includes(location.hash.slice(1)) ? location.hash.slice(1) : 'overview';
     views.forEach((v) => (document.getElementById('view-' + v).hidden = v !== id));

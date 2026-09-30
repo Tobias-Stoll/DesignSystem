@@ -1,0 +1,56 @@
+/**
+ * Form Field (Molecule)
+ * Figma: Component "Form Field" · State = Default | Hover | Focus | Error | Disabled
+ *        Text: Label, Description, Message · Boolean: Show description, Show message
+ * Built from the Input atom + semantic tokens.
+ *
+ * Markup:
+ * <div class="form-field">
+ *   <div class="form-field__header">
+ *     <label class="form-field__label" for="email">Email</label>
+ *     <span class="form-field__description" id="email-desc">We'll never share your email.</span>
+ *   </div>
+ *   <input class="input" id="email" type="email" aria-describedby="email-desc email-msg">
+ *   <span class="form-field__message" id="email-msg">We'll send one email a month.</span>
+ * </div>
+ *
+ * Error: add .form-field--error and aria-invalid="true" on the input.
+ * Hover, focus and disabled come from the Input atom itself.
+ */
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-gap-sm);
+  width: 100%;
+  font-family: var(--font-family-sans);
+}
+
+/* Label and description sit together, no gap: line heights give the air */
+.form-field__header {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-field__label {
+  color: var(--color-fg-default);
+  /* Text style: Label */
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-200);
+  line-height: var(--font-line-height-200);
+}
+
+.form-field__description,
+.form-field__message {
+  color: var(--color-fg-muted);
+  /* Text style: Caption */
+  font-weight: var(--font-weight-regular);
+  font-size: var(--font-size-100);
+  line-height: var(--font-line-height-100);
+}
+
+/* State = Error */
+.form-field--error .form-field__message { color: var(--color-feedback-danger-fg); }
+
+/* State = Disabled: the label steps back with the input */
+.form-field:has(.input:disabled) .form-field__label { color: var(--color-fg-subtle); }
