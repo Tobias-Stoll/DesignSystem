@@ -1,0 +1,42 @@
+/**
+ * Alert
+ * Figma: Component "Alert" · Variant = Success | Danger · Text property "Message"
+ * Uses semantic tokens directly (color/feedback/…).
+ *
+ * Shows the outcome of a whole form. Field errors stay at the field.
+ *
+ * Markup:
+ * <div class="alert alert--success" role="status">You're subscribed!</div>
+ * <div class="alert alert--danger"  role="alert">Something went wrong.</div>
+ */
+
+.alert {
+  --_bg: var(--color-feedback-success-bg);
+  --_border: var(--color-feedback-success-border);
+  --_fg: var(--color-feedback-success-fg);
+
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: var(--space-inset-md);
+  border-radius: var(--radius-control);
+  /* inside stroke, as in Figma: keeps the height at 52px */
+  box-shadow: inset 0 0 0 var(--border-width-default) var(--_border);
+  background: var(--_bg);
+  color: var(--_fg);
+  text-align: left;
+
+  /* Text style: Body S */
+  font-family: var(--font-family-sans);
+  font-weight: var(--font-weight-regular);
+  font-size: var(--font-size-200);
+  line-height: var(--font-line-height-200);
+}
+
+.alert--success { }
+
+.alert--danger {
+  --_bg: var(--color-feedback-danger-bg);
+  --_border: var(--color-feedback-danger-border);
+  --_fg: var(--color-feedback-danger-fg);
+}

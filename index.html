@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="components/button.css">
   <link rel="stylesheet" href="components/input.css">
   <link rel="stylesheet" href="components/checkbox.css">
+  <link rel="stylesheet" href="components/alert.css">
 
   <style>
     /* Page shell. Built from tokens only, no hard-coded colors. */
@@ -161,6 +162,11 @@
     .rules strong { font-weight: var(--font-weight-medium); }
     code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .92em; }
     .note { color: var(--color-fg-muted); margin: var(--space-16) 0 0; }
+    .alert-live { margin-top: var(--space-16); max-width: 480px; }
+    .alert-live:empty { display: none; }
+    .variants { display: grid; gap: var(--space-gap-lg); max-width: 480px; }
+    .tokens td { white-space: normal; }
+    .tokens td code { white-space: nowrap; }
 
     @media (max-width: 760px) {
       .shell { grid-template-columns: minmax(0, 1fr); background: none; }
@@ -190,6 +196,10 @@
         <li><a href="#button">Button</a></li>
         <li><a href="#input">Input</a></li>
         <li><a href="#checkbox">Checkbox</a></li>
+      </ul>
+      <p class="nav__group text-caption">Molecules</p>
+      <ul class="nav text-body-s">
+        <li><a href="#alert">Alert</a></li>
       </ul>
     </nav>
   </aside>
@@ -247,13 +257,14 @@
 &lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Tobias-Stoll/DesignSystem@main/dist/typography.css"&gt;
 &lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Tobias-Stoll/DesignSystem@main/components/button.css"&gt;
 &lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Tobias-Stoll/DesignSystem@main/components/input.css"&gt;
-&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Tobias-Stoll/DesignSystem@main/components/checkbox.css"&gt;</pre>
+&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Tobias-Stoll/DesignSystem@main/components/checkbox.css"&gt;
+&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Tobias-Stoll/DesignSystem@main/components/alert.css"&gt;</pre>
             </div>
           </li>
 
           <li>
             <h3 class="text-heading-s">Use the components</h3>
-            <p class="text-body-s">Plain HTML with a class. All variants and states are on the component pages: <a href="#button">Button</a>, <a href="#input">Input</a>, <a href="#checkbox">Checkbox</a>.</p>
+            <p class="text-body-s">Plain HTML with a class. All variants and states are on the component pages: <a href="#button">Button</a>, <a href="#input">Input</a>, <a href="#checkbox">Checkbox</a>, <a href="#alert">Alert</a>.</p>
             <div class="code">
               <button class="copy text-caption" type="button">Copy</button>
 <pre>&lt;button class="btn btn--primary"&gt;Subscribe&lt;/button&gt;
@@ -266,6 +277,8 @@
     &lt;span class="checkbox__label"&gt;Subscribe to the newsletter&lt;/span&gt;
   &lt;/span&gt;
 &lt;/label&gt;
+
+&lt;div class="alert alert--success" role="status"&gt;You're subscribed!&lt;/div&gt;
 
 &lt;h2 class="text-heading-m"&gt;Text styles work as classes too&lt;/h2&gt;</pre>
             </div>
@@ -403,6 +416,51 @@
       </section>
     </section>
 
+    <!-- ============ Alert ============ -->
+    <section class="view" id="view-alert" hidden>
+      <p class="eyebrow text-label">Molecule</p>
+      <h1 class="text-heading-l">Alert</h1>
+      <p class="lead text-body-m">Shows the outcome of a whole form. Field errors stay at the field, the alert tells how it went. Uses semantic tokens directly (<code>color/feedback/…</code>).</p>
+
+      <section class="card">
+        <h2 class="text-heading-s">Try it</h2>
+        <p class="text-body-s">Trigger an outcome. Screen readers announce it: success politely, errors right away.</p>
+        <div class="row">
+          <button class="btn btn--secondary" type="button" data-alert="success">Show success</button>
+          <button class="btn btn--ghost" type="button" data-alert="danger">Show error</button>
+        </div>
+        <div class="alert-live" id="alert-live"></div>
+      </section>
+
+      <section class="card">
+        <h2 class="text-heading-s">All variants</h2>
+        <p class="text-body-s">As in the Figma component. Height 52px: 16 padding + 20 line height + 16 padding.</p>
+        <div class="variants">
+          <div><p class="state__name text-caption">Success</p><div class="alert alert--success">You're subscribed! Check your inbox to confirm.</div></div>
+          <div><p class="state__name text-caption">Danger</p><div class="alert alert--danger">Something went wrong. Please try again.</div></div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2 class="text-heading-s">When to use what</h2>
+        <p class="text-body-s">Two kinds of feedback, two places.</p>
+        <table class="tokens text-body-s">
+          <thead><tr><th>Feedback</th><th>Where</th><th>Example</th></tr></thead>
+          <tbody>
+            <tr><td>Field error</td><td>At the field</td><td>"Please enter a valid email address."</td></tr>
+            <tr><td>Alert · Danger</td><td>Above the button, form stays filled</td><td>"Something went wrong. Please try again."</td></tr>
+            <tr><td>Alert · Success</td><td>Replaces the form</td><td>"You're subscribed! Check your inbox to confirm."</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="card">
+        <h2 class="text-heading-s">Tokens</h2>
+        <p class="text-body-s">Semantic tokens used by the alert.</p>
+        <div class="tokens-scroll" data-tokens-list="--color-feedback-success-bg,--color-feedback-success-border,--color-feedback-success-fg,--color-feedback-danger-bg,--color-feedback-danger-border,--color-feedback-danger-fg,--space-inset-md,--radius-control,--border-width-default"></div>
+      </section>
+    </section>
+
     <footer class="text-caption">
       <p>© 2026 Tobias Stoll</p>
       <p>Built with Figma Variables · Token Bridge · Style Dictionary · GitHub Actions</p>
@@ -464,6 +522,17 @@
     });
   });
 
+  /* ---------- Alert demo ---------- */
+  const alertMessages = {
+    success: "You're subscribed! Check your inbox to confirm.",
+    danger: 'Something went wrong. Please try again.',
+  };
+  document.querySelectorAll('[data-alert]').forEach((btn) => btn.addEventListener('click', () => {
+    const v = btn.dataset.alert;
+    document.getElementById('alert-live').innerHTML =
+      `<div class="alert alert--${v}" role="${v === 'danger' ? 'alert' : 'status'}">${alertMessages[v]}</div>`;
+  }));
+
   /* ---------- Copy buttons ---------- */
   document.querySelectorAll('.copy').forEach((btn) => {
     btn.addEventListener('click', async () => {
@@ -479,7 +548,7 @@
   });
 
   /* ---------- Hash navigation ---------- */
-  const views = ['overview', 'button', 'input', 'checkbox'];
+  const views = ['overview', 'button', 'input', 'checkbox', 'alert'];
   function route() {
     const id = views.includes(location.hash.slice(1)) ? location.hash.slice(1) : 'overview';
     views.forEach((v) => (document.getElementById('view-' + v).hidden = v !== id));
