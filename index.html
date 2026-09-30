@@ -143,6 +143,8 @@
     .code { display: flex; flex-direction: column; gap: var(--space-gap-sm); min-width: 0; }
     .code__bar { display: flex; justify-content: space-between; align-items: center; gap: var(--space-gap-sm); }
     .code__bar span { color: var(--color-fg-muted); }
+    .code-files { display: flex; flex-wrap: wrap; gap: var(--space-gap-sm); }
+    .code-list { display: grid; gap: var(--space-24); }
 
     /* Numbered steps: text styles only */
     .steps-list { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-32); }
@@ -288,8 +290,8 @@
 
         <div class="compare">
           <figure>
-            <img src="assets/figma/signup-card-states.png" alt="The Sign-up Card in Figma, all four states: default, error, server error, success" width="332" height="1024">
-            <figcaption class="text-caption">In Figma · screenshot returned by the MCP</figcaption>
+            <img src="assets/figma/signup-card-states.png" alt="The Sign-up Card in Figma, all four states: default, error, server error, success" width="332" height="1026">
+            <figcaption class="text-caption">In Figma · all four states</figcaption>
           </figure>
           <figure>
             <div id="ov-live"></div>
@@ -416,6 +418,8 @@
         </div>
       </section>
 
+      <section class="card" data-code="button"></section>
+
       <section class="card">
         <div class="card__header">
           <h2 class="text-heading-s">Tokens</h2>
@@ -450,6 +454,8 @@
         </div>
         <div class="states text-body-s" id="input-states"></div>
       </section>
+
+      <section class="card" data-code="input"></section>
 
       <section class="card">
         <div class="card__header">
@@ -493,6 +499,8 @@
         </div>
         <div class="states" id="checkbox-states"></div>
       </section>
+
+      <section class="card" data-code="checkbox"></section>
 
       <section class="card">
         <div class="card__header">
@@ -546,6 +554,8 @@
           </tbody>
         </table></div>
       </section>
+
+      <section class="card" data-code="alert"></section>
 
       <section class="card">
         <div class="card__header">
@@ -603,6 +613,8 @@
           </tbody>
         </table></div>
       </section>
+
+      <section class="card" data-code="form-field"></section>
 
       <section class="card">
         <div class="card__header">
@@ -681,6 +693,8 @@
           </table>
         </div>
       </section>
+
+      <section class="card" data-code="signup-card"></section>
 
       <section class="card">
         <div class="card__header">
@@ -865,6 +879,150 @@
   suMount('ov', 'ov-live', null);
   document.getElementById('su-reset').addEventListener('click', () => suMount());
 
+  /* ---------- Code sections ---------- */
+  const REPO = 'https://github.com/Tobias-Stoll/DesignSystem/blob/main/';
+  const CDN = 'https://cdn.jsdelivr.net/gh/Tobias-Stoll/DesignSystem@main/';
+  const SNIPPETS = {
+    button: {
+      css: ['components/button.css'],
+      note: 'Hover, pressed and focus come from the browser. Only disabled is set by you.',
+      items: [
+        ['Primary', '<button class="btn btn--primary" type="button">Subscribe</button>'],
+        ['Secondary', '<button class="btn btn--secondary" type="button">Learn more</button>'],
+        ['Ghost', '<button class="btn btn--ghost" type="button">Cancel</button>'],
+        ['Disabled', '<button class="btn btn--primary" type="button" disabled>Subscribe</button>'],
+      ],
+    },
+    input: {
+      css: ['components/input.css'],
+      note: 'Hover and focus come from the browser. Error is set with aria-invalid, so screen readers get it too.',
+      items: [
+        ['Default', '<input class="input" type="email" placeholder="you@example.de" aria-label="Email">'],
+        ['Error', '<input class="input" type="email" value="tobias@" aria-invalid="true" aria-label="Email">'],
+        ['Disabled', '<input class="input" type="email" value="tobias@example.de" disabled aria-label="Email">'],
+      ],
+    },
+    checkbox: {
+      css: ['components/checkbox.css'],
+      note: 'A native checkbox, so keyboard and screen readers work out of the box.',
+      items: [
+        ['Default', `<label class="checkbox">
+  <input type="checkbox" class="checkbox__box">
+  <span class="checkbox__text">
+    <span class="checkbox__label">I want to receive the newsletter</span>
+  </span>
+</label>`],
+        ['With description', `<label class="checkbox">
+  <input type="checkbox" class="checkbox__box">
+  <span class="checkbox__text">
+    <span class="checkbox__label">Label</span>
+    <span class="checkbox__description">Description</span>
+  </span>
+</label>`],
+        ['Error', `<label class="checkbox">
+  <input type="checkbox" class="checkbox__box" aria-invalid="true">
+  <span class="checkbox__text">
+    <span class="checkbox__label">I want to receive the newsletter</span>
+  </span>
+</label>`],
+        ['Disabled', `<label class="checkbox">
+  <input type="checkbox" class="checkbox__box" checked disabled>
+  <span class="checkbox__text">
+    <span class="checkbox__label">Label</span>
+  </span>
+</label>`],
+      ],
+    },
+    alert: {
+      css: ['components/alert.css'],
+      note: 'role="status" is read politely, role="alert" right away.',
+      items: [
+        ['Success', `<div class="alert alert--success" role="status">
+  You're subscribed! Check your inbox to confirm.
+</div>`],
+        ['Danger', `<div class="alert alert--danger" role="alert">
+  Something went wrong. Please try again.
+</div>`],
+      ],
+    },
+    'form-field': {
+      css: ['components/input.css', 'components/form-field.css'],
+      note: 'Needs the Input stylesheet too. aria-describedby links description and message to the field.',
+      items: [
+        ['Default', `<div class="form-field">
+  <div class="form-field__header">
+    <label class="form-field__label" for="email">Email</label>
+    <span class="form-field__description" id="email-desc">We'll never share your email.</span>
+  </div>
+  <input class="input" id="email" type="email" placeholder="you@example.de"
+         aria-describedby="email-desc email-msg">
+  <span class="form-field__message" id="email-msg">We'll send one email a month.</span>
+</div>`],
+        ['Error', `<div class="form-field form-field--error">
+  <div class="form-field__header">
+    <label class="form-field__label" for="email">Email</label>
+  </div>
+  <input class="input" id="email" type="email" value="tobias@"
+         aria-invalid="true" aria-describedby="email-msg">
+  <span class="form-field__message" id="email-msg">Please enter a valid email address.</span>
+</div>`],
+      ],
+    },
+    'signup-card': {
+      css: ['components/button.css', 'components/input.css', 'components/checkbox.css', 'components/alert.css', 'components/form-field.css', 'components/signup-card.css'],
+      note: 'Markup and styles only. Validation and sending the form are up to your app: set the error classes and aria-invalid, swap in the alert.',
+      items: [['Default state', null]],
+    },
+  };
+
+  // Readable, indented HTML for the generated Sign-up Card snippet
+  const VOID = new Set(['input', 'br', 'img', 'hr', 'meta', 'link']);
+  function prettyHtml(node, depth) {
+    const pad = '  '.repeat(depth);
+    if (node.nodeType === 3) { const t = node.textContent.trim(); return t ? pad + t : ''; }
+    if (node.nodeType !== 1) return '';
+    if (node.classList.contains('su-alert-slot')) return `${pad}<!-- Alert goes here on server error -->`;
+    const tag = node.tagName.toLowerCase();
+    const attrs = [...node.attributes].map((a) => (a.value === '' ? a.name : `${a.name}="${a.value}"`)).join(' ');
+    const open = `${pad}<${tag}${attrs ? ' ' + attrs : ''}>`;
+    if (VOID.has(tag)) return open;
+    const kids = [...node.childNodes].map((c) => prettyHtml(c, depth + 1)).filter(Boolean);
+    if (kids.length === 1 && node.childNodes.length === 1 && node.firstChild.nodeType === 3) return `${open}${node.textContent.trim()}</${tag}>`;
+    return [open, ...kids, `${pad}</${tag}>`].join('\n');
+  }
+
+  const codeBlock = (label, code) =>
+    `<div class="code"><div class="code__bar"><span class="text-caption">${label}</span>` +
+    `<button class="btn btn--primary copy" type="button">Copy</button></div><pre>${esc(code)}</pre></div>`;
+
+  document.querySelectorAll('[data-code]').forEach((el) => {
+    const def = SNIPPETS[el.dataset.code];
+    const links = def.css.map((f) => `<link rel="stylesheet" href="${CDN}${f}">`).join('\n');
+    const items = def.items.map(([label, code]) => {
+      if (code === null) {
+        const tmp = document.createElement('div');
+        tmp.innerHTML = suCard('signup', 'Default');
+        code = prettyHtml(tmp.firstElementChild, 0);
+      }
+      return codeBlock(label, code);
+    }).join('');
+    el.innerHTML =
+      `<div class="card__header"><h2 class="text-heading-s">Code</h2>` +
+      `<p class="text-body-s">${def.note}</p></div>` +
+      `<div class="code-files">${def.css.map((f) => `<a class="btn btn--ghost" href="${REPO}${f}">${f.split('/').pop()} on GitHub</a>`).join('')}</div>` +
+      `<div class="code-list">${codeBlock('Stylesheets · needs tokens.css first', links)}${items}</div>`;
+  });
+
+  /* ---------- Copy buttons (delegated, works for generated code blocks too) ---------- */
+  document.addEventListener('click', async (e) => {
+    const btn = e.target.closest('.copy');
+    if (!btn) return;
+    const text = btn.closest('.code').querySelector('pre').textContent;
+    try { await navigator.clipboard.writeText(text); btn.textContent = 'Copied'; }
+    catch { btn.textContent = 'Copy failed'; }
+    setTimeout(() => (btn.textContent = 'Copy'), 1500);
+  });
+
   /* ---------- Alert demo ---------- */
   const alertMessages = {
     success: "You're subscribed! Check your inbox to confirm.",
@@ -875,20 +1033,6 @@
     document.getElementById('alert-live').innerHTML =
       `<div class="alert alert--${v}" role="${v === 'danger' ? 'alert' : 'status'}">${alertMessages[v]}</div>`;
   }));
-
-  /* ---------- Copy buttons ---------- */
-  document.querySelectorAll('.copy').forEach((btn) => {
-    btn.addEventListener('click', async () => {
-      const text = btn.closest('.code').querySelector('pre').textContent;
-      try {
-        await navigator.clipboard.writeText(text);
-        btn.textContent = 'Copied';
-      } catch {
-        btn.textContent = 'Copy failed';
-      }
-      setTimeout(() => (btn.textContent = 'Copy'), 1500);
-    });
-  });
 
   /* ---------- Hash navigation ---------- */
   const views = ['overview', 'button', 'input', 'checkbox', 'alert', 'form-field', 'signup-card'];
