@@ -3,6 +3,7 @@
  * Figma: Component "Checkbox" · State = Default | Hover | Focus | Error | Checked | Disabled
  *        Boolean "Show description"
  * Uses semantic tokens directly (no component tokens, by design).
+ * States verified against Figma via Figma MCP (atoms frame, node 46:238).
  *
  * Markup:
  * <label class="checkbox">
@@ -24,7 +25,8 @@
 
 .checkbox__box {
   --_bg: var(--color-bg-default);
-  --_border: var(--color-border-strong);
+  --_border: var(--color-border-default);          /* Figma: color/border/default */
+  --_border-width: var(--border-width-default);
   --_check: var(--color-action-primary-fg);
 
   appearance: none;
@@ -36,7 +38,7 @@
   margin: 2px 0 0;
   border-radius: var(--radius-indicator);
   background: var(--_bg);
-  box-shadow: inset 0 0 0 var(--border-width-default) var(--_border);
+  box-shadow: inset 0 0 0 var(--_border-width) var(--_border);
   cursor: inherit;
   transition: background-color 120ms ease, box-shadow 120ms ease;
 }
@@ -62,6 +64,8 @@
 }
 
 .checkbox__description {
+  /* Figma: description row = 16px spacer + space/gap/md, so it starts 4px right of the label */
+  margin-left: calc(var(--space-gap-md) - var(--space-gap-sm));
   color: var(--color-fg-muted);
   font-weight: var(--font-weight-regular);
   font-size: var(--font-size-100);        /* Caption */
@@ -72,13 +76,14 @@
 
 /* Hover */
 .checkbox:hover .checkbox__box:not(:checked):not(:disabled),
-.checkbox__box.is-hover { --_border: var(--color-fg-muted); }
+.checkbox__box.is-hover { --_border: var(--color-border-strong); }
 
-/* Focus */
+/* Focus: the border itself turns into a 2px focus border (Figma: border-width/focus) */
 .checkbox__box:focus-visible,
 .checkbox__box.is-focus {
-  outline: var(--border-width-focus) solid var(--color-border-focus);
-  outline-offset: 0;
+  --_border: var(--color-border-focus);
+  --_border-width: var(--border-width-focus);
+  outline: none;
 }
 
 /* Error (required but not checked) */
@@ -98,12 +103,12 @@
 .checkbox__box:disabled,
 .checkbox__box.is-disabled {
   --_bg: var(--color-action-primary-bg-disabled);
-  --_border: transparent;
+  --_border: var(--color-border-strong);           /* Figma: color/border/strong */
   --_check: var(--color-action-disabled-fg);
 }
 .checkbox:has(.checkbox__box:disabled) { cursor: not-allowed; }
 .checkbox:has(.checkbox__box:disabled) .checkbox__label,
-.checkbox:has(.checkbox__box:disabled) .checkbox__description { color: var(--color-fg-subtle); }
+.checkbox:has(.checkbox__box:disabled) .checkbox__description { color: var(--color-fg-muted); }  /* Figma: muted */
 
 /* ---------- Not drawn in Figma, follows the system rules ---------- */
 
@@ -115,3 +120,6 @@
   --_bg: var(--color-bg-muted);
   --_border: var(--color-border-default);
 }
+
+/* Checked + focus: keep the focus border visible on the filled box */
+.checkbox__box:checked:focus-visible { --_border: var(--color-border-focus); }

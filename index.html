@@ -42,41 +42,45 @@
     .brand { padding: 0 var(--space-12) var(--space-24); }
     .brand__name { margin: 0; }
     .brand__sub { margin: var(--space-4) 0 0; color: var(--color-fg-muted); }
-    .nav__group { margin: var(--space-16) var(--space-12) var(--space-8); color: var(--color-fg-subtle); text-transform: uppercase; letter-spacing: .08em; }
+    /* Group titles: text style Label */
+    .nav__group { margin: var(--space-16) var(--space-12) var(--space-8); color: var(--color-fg-muted); }
     .nav { list-style: none; margin: 0; padding: 0; }
+    /* Nav items behave like the Ghost button: same tokens, same states */
     .nav a {
       display: block;
-      padding: var(--space-8) var(--space-12);
-      border-radius: var(--radius-control);
+      padding: var(--button-padding-y) var(--button-padding-x);
+      border-radius: var(--button-radius);
       color: var(--color-fg-muted);
       text-decoration: none;
     }
-    .nav a:hover { background: var(--color-bg-subtle); color: var(--color-fg-default); }
-    .nav a[aria-current="page"] {
-      background: var(--color-action-ghost-bg-hover);
-      color: var(--color-action-ghost-fg);
-    }
-    .nav a:focus-visible { outline: var(--border-width-focus) solid var(--color-border-focus); outline-offset: 0; }
+    .nav a:hover { background: var(--button-ghost-bg-hover); color: var(--button-ghost-fg); }
+    .nav a[aria-current="page"] { background: var(--button-ghost-bg-pressed); color: var(--button-ghost-fg); }
+    .nav a:focus-visible { outline: var(--button-focus-ring-width) solid var(--button-focus-ring-color); outline-offset: 0; }
 
     /* Content */
     .content { padding: var(--space-48) var(--space-40); max-width: 1040px; width: 100%; }
     .view[hidden] { display: none; }
-    .eyebrow { color: var(--color-fg-muted); text-transform: uppercase; letter-spacing: .08em; margin: 0 0 var(--space-8); }
+    /* Page category above the title: text style Heading S */
+    .eyebrow { color: var(--color-fg-muted); margin: 0 0 var(--space-4); }
     h1, h2, h3 { margin: 0; }
     .lead { color: var(--color-fg-muted); max-width: 62ch; margin: var(--space-12) 0 0; }
     .links { display: flex; flex-wrap: wrap; gap: var(--space-gap-sm); margin-top: var(--space-24); }
     .links a { text-decoration: none; }
 
+    /* Doc card = the Sign-up Card surface: same tokens, same spacing */
     .card {
+      display: flex; flex-direction: column; gap: var(--space-gap-lg);
       background: var(--color-bg-default);
       border: var(--border-width-default) solid var(--color-border-default);
       border-radius: var(--radius-container);
       padding: var(--space-inset-lg);
       margin-top: var(--space-24);
+      min-width: 0;
     }
-    .card > h2 { margin-bottom: var(--space-4); }
-    .card > p { color: var(--color-fg-muted); margin: 0 0 var(--space-24); }
-    .label { color: var(--color-fg-muted); margin: 0 0 var(--space-12); }
+    .card > * { margin: 0; min-width: 0; }
+    .card__header { display: flex; flex-direction: column; gap: var(--space-gap-sm); }
+    .card__header > * { margin: 0; }
+    .card__header p { color: var(--color-fg-muted); }
 
     .row { display: flex; flex-wrap: wrap; align-items: flex-start; gap: var(--space-gap-lg); }
     .field { width: 280px; max-width: 100%; }
@@ -89,7 +93,7 @@
     .matrix td:first-child { color: var(--color-fg-muted); width: 110px; }
     .matrix .preview { pointer-events: none; }
     .states { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: var(--space-24) var(--space-gap-lg); pointer-events: none; }
-    .state__name { color: var(--color-fg-muted); margin: 0 0 var(--space-8); }
+    .state__name { color: var(--color-fg-muted); margin: 0 0 var(--space-gap-sm); }
 
     /* Token table */
     table.tokens { border-collapse: collapse; width: 100%; }
@@ -112,11 +116,6 @@
       font: 13px/1.6 ui-monospace, SFMono-Regular, Menlo, monospace;
     }
     .dim { opacity: .55; }
-    .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: var(--space-gap-md); margin: 0; padding: 0; list-style: none; counter-reset: step; }
-    .steps li { counter-increment: step; background: var(--color-bg-subtle); border-radius: var(--radius-control); padding: var(--space-inset-md); }
-    .steps li::before { content: counter(step); display: block; color: var(--color-action-primary-bg-default); margin-bottom: var(--space-4); }
-    .steps strong { display: block; font-weight: var(--font-weight-medium); }
-    .steps span { color: var(--color-fg-muted); }
     footer {
       color: var(--color-fg-muted);
       margin-top: var(--space-48);
@@ -126,45 +125,9 @@
     footer p { margin: 0 0 var(--space-4); }
     footer p:first-child { color: var(--color-fg-default); }
 
-    /* "Use it in your project" */
-    .use { list-style: none; margin: 0; padding: 0; counter-reset: use; display: grid; gap: var(--space-32); }
-    .use > li { counter-increment: use; position: relative; padding-left: var(--space-40); min-width: 0; }
-    .use > li::before {
-      content: counter(use);
-      position: absolute; left: 0; top: 0;
-      width: 28px; height: 28px; border-radius: var(--radius-full);
-      display: grid; place-items: center;
-      background: var(--color-action-ghost-bg-hover); color: var(--color-action-ghost-fg);
-      font-weight: var(--font-weight-medium); font-size: var(--font-size-200);
-    }
-    .use h3 { margin: 0 0 var(--space-4); }
-    .use p { color: var(--color-fg-muted); margin: 0 0 var(--space-12); }
-    .use a { color: var(--color-action-ghost-fg); }
-    .code { position: relative; min-width: 0; }
-    .code pre { padding-top: var(--space-40); }
-    .copy {
-      position: absolute; top: var(--space-8); right: var(--space-8);
-      padding: var(--space-4) var(--space-12);
-      border: 0; border-radius: var(--radius-control); cursor: pointer;
-      background: transparent; color: var(--color-fg-inverse);
-      box-shadow: inset 0 0 0 var(--border-width-default) var(--color-fg-muted);
-      font-family: var(--font-family-sans);
-    }
-    .copy:hover { background: var(--color-fg-default); }
-    .copy:focus-visible { outline: var(--border-width-focus) solid var(--color-border-focus); outline-offset: 0; }
-    .rules {
-      margin-top: var(--space-32);
-      padding: var(--space-inset-md);
-      border-radius: var(--radius-control);
-      background: var(--color-feedback-info-bg);
-      box-shadow: inset 0 0 0 var(--border-width-default) var(--color-feedback-info-border);
-    }
-    .rules h3 { margin: 0 0 var(--space-8); color: var(--color-feedback-info-fg); }
-    .rules ul { margin: 0; padding-left: var(--space-20); display: grid; gap: var(--space-8); }
-    .rules strong { font-weight: var(--font-weight-medium); }
     code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .92em; }
-    .note { color: var(--color-fg-muted); margin: var(--space-16) 0 0; }
-    .alert-live { margin-top: var(--space-16); max-width: 480px; }
+    .note { color: var(--color-fg-muted); }
+    .alert-live { max-width: 480px; }
     .alert-live:empty { display: none; }
     .variants { display: grid; gap: var(--space-gap-lg); max-width: 480px; }
     .ff-states { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
@@ -175,6 +138,37 @@
     .su-states { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: var(--space-32) var(--space-24); align-items: start; }
     .su-preview { pointer-events: none; min-width: 0; }
     .tokens td { white-space: normal; }
+
+    /* Code blocks (doc element): Copy is a Primary button above the block */
+    .code { display: flex; flex-direction: column; gap: var(--space-gap-sm); min-width: 0; }
+    .code__bar { display: flex; justify-content: space-between; align-items: center; gap: var(--space-gap-sm); }
+    .code__bar span { color: var(--color-fg-muted); }
+
+    /* Numbered steps: text styles only */
+    .steps-list { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-32); }
+    .steps-list > li { display: flex; flex-direction: column; gap: var(--space-gap-sm); min-width: 0; }
+    .steps-list h3, .steps-list p { margin: 0; }
+    .steps-list p { color: var(--color-fg-muted); }
+    .steps-list a { color: var(--button-ghost-fg); }
+
+    /* Workflow lanes */
+    .lane { display: flex; flex-direction: column; gap: var(--space-gap-sm); }
+    .lane h3 { margin: 0; }
+    .lane ol { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--space-gap-md); counter-reset: s; }
+    .lane li { counter-increment: s; display: flex; flex-direction: column; gap: var(--space-4); padding: var(--space-inset-md); border-radius: var(--radius-control); background: var(--color-bg-subtle); }
+    .lane li b { font-weight: var(--font-weight-medium); }
+    .lane li b::before { content: counter(s) " · "; color: var(--button-ghost-fg); }
+    .lane li span { color: var(--color-fg-muted); }
+    .principle { padding-top: var(--space-gap-lg); border-top: var(--border-width-default) solid var(--color-border-default); }
+    .principle p { margin: 0; }
+    .principle p + p { color: var(--color-fg-muted); margin-top: var(--space-gap-sm); }
+
+    /* Figma vs code */
+    .compare { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--space-32); align-items: start; }
+    .compare figure { margin: 0; display: flex; flex-direction: column; gap: var(--space-gap-sm); }
+    .compare figcaption { color: var(--color-fg-muted); }
+    .compare img { display: block; width: 332px; max-width: 100%; height: auto; border-radius: var(--radius-control); box-shadow: inset 0 0 0 var(--border-width-default) var(--color-border-default); }
+    .compare #ov-live { max-width: 440px; }
     .tokens td code { white-space: nowrap; }
 
     @media (max-width: 760px) {
@@ -184,6 +178,8 @@
       .nav { display: flex; flex-wrap: wrap; gap: var(--space-4); }
       .nav__group { margin-top: var(--space-8); }
       .content { padding: var(--space-32) var(--space-16); }
+      .lane ol { grid-template-columns: minmax(0, 1fr); }
+      .compare { grid-template-columns: minmax(0, 1fr); }
     }
   </style>
 </head>
@@ -200,18 +196,18 @@
       <ul class="nav text-body-s">
         <li><a href="#overview">Overview</a></li>
       </ul>
-      <p class="nav__group text-caption">Atoms</p>
+      <p class="nav__group text-label">Atoms</p>
       <ul class="nav text-body-s">
         <li><a href="#button">Button</a></li>
         <li><a href="#input">Input</a></li>
         <li><a href="#checkbox">Checkbox</a></li>
         <li><a href="#alert">Alert</a></li>
       </ul>
-      <p class="nav__group text-caption">Molecules</p>
+      <p class="nav__group text-label">Molecules</p>
       <ul class="nav text-body-s">
         <li><a href="#form-field">Form Field</a></li>
       </ul>
-      <p class="nav__group text-caption">Organisms</p>
+      <p class="nav__group text-label">Organisms</p>
       <ul class="nav text-body-s">
         <li><a href="#signup-card">Sign-up Card</a></li>
       </ul>
@@ -222,31 +218,91 @@
 
     <!-- ============ Overview ============ -->
     <section class="view" id="view-overview">
-      <p class="eyebrow text-label">Design System</p>
+      <p class="eyebrow text-heading-s">Design System</p>
       <h1 class="text-display">Tokens to Code</h1>
       <p class="lead text-body-l">
-        Figma is the single source of truth. Variables are exported as design tokens,
-        built to CSS by a GitHub Action, and every component here uses those tokens only.
+        Figma is the single source of truth. Tokens sync to code automatically,
+        components are read straight from Figma via the Figma MCP, and everything here is built from those tokens only.
       </p>
       <div class="links">
         <a class="btn btn--primary" href="https://github.com/Tobias-Stoll/DesignSystem">View repository</a>
-        <a class="btn btn--ghost" href="dist/tokens.css">tokens.css</a>
+        <a class="btn btn--ghost" href="#signup-card">See the Sign-up Card</a>
       </div>
 
-      <section class="card">
-        <h2 class="text-heading-m">Workflow</h2>
-        <p class="text-body-s">From a design decision in Figma to a live component, without touching code.</p>
-        <ol class="steps text-body-s">
-          <li><strong>Structure</strong><span>Claude defines token layers and naming</span></li>
-          <li><strong>Design</strong><span>Figma Variables are the source of truth</span></li>
-          <li><strong>Export</strong><span>Token Bridge commits tokens to GitHub</span></li>
-          <li><strong>Build</strong><span>A GitHub Action turns tokens into CSS</span></li>
-        </ol>
+      <section class="card" aria-labelledby="wf-title">
+        <div class="card__header">
+          <h2 id="wf-title" class="text-heading-s">Workflow</h2>
+          <p class="text-body-s">Two paths, one source of truth. Values flow automatically, structure is read on demand.</p>
+        </div>
+
+        <div class="lane">
+          <h3 class="text-label">Tokens · fully automated</h3>
+          <ol class="text-body-s">
+            <li><b>Structure</b><span>Claude defines layers and naming</span></li>
+            <li><b>Design</b><span>Figma Variables hold every value</span></li>
+            <li><b>Sync</b><span>Token Bridge commits tokens to GitHub</span></li>
+            <li><b>Build</b><span>A GitHub Action writes tokens.css</span></li>
+          </ol>
+        </div>
+
+        <div class="lane">
+          <h3 class="text-label">Components · via Figma MCP</h3>
+          <ol class="text-body-s">
+            <li><b>Design</b><span>Figma component with bound variables</span></li>
+            <li><b>Read</b><span>Claude reads it via the Figma MCP</span></li>
+            <li><b>Review</b><span>Design QA: wrong bindings get fixed in Figma</span></li>
+            <li><b>Code</b><span>Existing components are reused</span></li>
+          </ol>
+        </div>
+
+        <div class="principle">
+          <p class="text-body-m">Where a standard exists, use it. Where none fits, build the gap.</p>
+          <p class="text-body-s">Figma's Variables REST API is Enterprise-only, so tokens travel through a custom plugin. For components, the Figma MCP is the standard, so it is used as is.</p>
+        </div>
       </section>
 
-      <section class="card">
-        <h2 class="text-heading-m">One token, three layers</h2>
-        <p class="text-body-s">Aliases survive the whole way from Figma into CSS.</p>
+      <section class="card" aria-labelledby="guide-title">
+        <div class="card__header">
+          <h2 id="guide-title" class="text-heading-s">From Figma to a live component</h2>
+          <p class="text-body-s">How the Sign-up Card went from Figma to code. Two MCP reads, no hand-written spec.</p>
+        </div>
+
+        <ol class="steps-list">
+          <li>
+            <h3 class="text-heading-s">1. Select the component in Figma</h3>
+            <p class="text-body-s">Right-click the component set, copy the link to the selection. The link carries the node id, so only this component is read.</p>
+          </li>
+          <li>
+            <h3 class="text-heading-s">2. Claude reads it via the Figma MCP</h3>
+            <p class="text-body-s">One call to <code>get_design_context</code> returns every state, the auto layout, the text styles and the variable bound to each layer.</p>
+          </li>
+          <li>
+            <h3 class="text-heading-s">3. Design QA, then read again</h3>
+            <p class="text-body-s">The first read showed foreign library variables and mixed-up tokens that no screenshot would reveal. They were fixed in Figma, a second read confirmed it.</p>
+          </li>
+          <li>
+            <h3 class="text-heading-s">4. Translate into the project</h3>
+            <p class="text-body-s">The MCP returns a React + Tailwind reference. It is adapted to this project: Form Field, Checkbox, Alert and Button are reused, only the card layout is new. <a href="#signup-card">Full breakdown</a></p>
+          </li>
+        </ol>
+
+        <div class="compare">
+          <figure>
+            <img src="assets/figma/signup-card-states.png" alt="The Sign-up Card in Figma, all four states: default, error, server error, success" width="332" height="1024">
+            <figcaption class="text-caption">In Figma · screenshot returned by the MCP</figcaption>
+          </figure>
+          <figure>
+            <div id="ov-live"></div>
+            <figcaption class="text-caption">In code · live. Submit empty, then fill it in.</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="card" aria-labelledby="layers-title">
+        <div class="card__header">
+          <h2 id="layers-title" class="text-heading-s">One token, three layers</h2>
+          <p class="text-body-s">Aliases survive the whole way from Figma into CSS.</p>
+        </div>
 <pre><span class="dim">/* Component */</span>
 --button-primary-bg-default: var(--color-action-primary-bg-default);
 <span class="dim">/* Semantic */</span>
@@ -256,15 +312,17 @@
       </section>
 
       <section class="card" aria-labelledby="use-title">
-        <h2 id="use-title" class="text-heading-m">Use it in your project</h2>
-        <p class="text-body-s">No install needed. The CSS is served straight from the public repository via jsDelivr.</p>
+        <div class="card__header">
+          <h2 id="use-title" class="text-heading-s">Use it in your project</h2>
+          <p class="text-body-s">No install needed. The CSS is served straight from the public repository via jsDelivr.</p>
+        </div>
 
-        <ol class="use">
+        <ol class="steps-list">
           <li>
-            <h3 class="text-heading-s">Add the stylesheets</h3>
+            <h3 class="text-heading-s">1. Add the stylesheets</h3>
             <p class="text-body-s">Tokens first, then the components you need. Plus the two web fonts.</p>
             <div class="code">
-              <button class="copy text-caption" type="button">Copy</button>
+              <div class="code__bar"><span class="text-caption">HTML · head</span><button class="btn btn--primary copy" type="button">Copy</button></div>
 <pre>&lt;link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&amp;family=Roboto:wght@400;500&amp;display=swap"&gt;
 
 &lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Tobias-Stoll/DesignSystem@main/dist/tokens.css"&gt;
@@ -277,20 +335,19 @@
 &lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Tobias-Stoll/DesignSystem@main/components/signup-card.css"&gt;</pre>
             </div>
           </li>
-
           <li>
-            <h3 class="text-heading-s">Use the components</h3>
+            <h3 class="text-heading-s">2. Use the components</h3>
             <p class="text-body-s">Plain HTML with a class. All variants and states are on the component pages: <a href="#button">Button</a>, <a href="#input">Input</a>, <a href="#checkbox">Checkbox</a>, <a href="#alert">Alert</a>, <a href="#form-field">Form Field</a>, <a href="#signup-card">Sign-up Card</a>.</p>
             <div class="code">
-              <button class="copy text-caption" type="button">Copy</button>
+              <div class="code__bar"><span class="text-caption">HTML · body</span><button class="btn btn--primary copy" type="button">Copy</button></div>
 <pre>&lt;button class="btn btn--primary"&gt;Subscribe&lt;/button&gt;
 
-&lt;input class="input" type="email" placeholder="you@example.com"&gt;
+&lt;input class="input" type="email" placeholder="you@example.de"&gt;
 
 &lt;label class="checkbox"&gt;
   &lt;input type="checkbox" class="checkbox__box"&gt;
   &lt;span class="checkbox__text"&gt;
-    &lt;span class="checkbox__label"&gt;Subscribe to the newsletter&lt;/span&gt;
+    &lt;span class="checkbox__label"&gt;I want to receive the newsletter&lt;/span&gt;
   &lt;/span&gt;
 &lt;/label&gt;
 
@@ -299,12 +356,11 @@
 &lt;h2 class="text-heading-m"&gt;Text styles work as classes too&lt;/h2&gt;</pre>
             </div>
           </li>
-
           <li>
-            <h3 class="text-heading-s">Use tokens in your own CSS</h3>
+            <h3 class="text-heading-s">3. Use tokens in your own CSS</h3>
             <p class="text-body-s">Every Figma variable is a CSS custom property.</p>
             <div class="code">
-              <button class="copy text-caption" type="button">Copy</button>
+              <div class="code__bar"><span class="text-caption">CSS</span><button class="btn btn--primary copy" type="button">Copy</button></div>
 <pre>.my-card {
   background: var(--color-bg-default);
   border: var(--border-width-default) solid var(--color-border-default);
@@ -314,15 +370,12 @@
 }</pre>
             </div>
           </li>
+          <li>
+            <h3 class="text-heading-s">Two rules</h3>
+            <p class="text-body-s"><strong>Use semantic or component tokens, never primitives.</strong> <code>--color-action-primary-bg-default</code>, not <code>--color-purple-600</code>. That way a design change in Figma reaches your code without edits.</p>
+            <p class="text-body-s"><strong>Never change tokens in code.</strong> Figma is the source of truth: values are changed there and arrive here through the export.</p>
+          </li>
         </ol>
-
-        <div class="rules">
-          <h3 class="text-label">Two rules</h3>
-          <ul class="text-body-s">
-            <li><strong>Use semantic or component tokens, never primitives.</strong> <code>--color-action-primary-bg-default</code>, not <code>--color-purple-600</code>. That way a design change in Figma reaches your code without edits.</li>
-            <li><strong>Never change tokens in code.</strong> Figma is the source of truth: values are changed there and arrive here through the export.</li>
-          </ul>
-        </div>
 
         <p class="note text-caption">
           Note: <code>@main</code> always points to the latest export, but jsDelivr may cache it for up to 12 hours.
@@ -333,13 +386,15 @@
 
     <!-- ============ Button ============ -->
     <section class="view" id="view-button" hidden>
-      <p class="eyebrow text-label">Atom</p>
+      <p class="eyebrow text-heading-s">Atom</p>
       <h1 class="text-heading-l">Button</h1>
       <p class="lead text-body-m">3 variants × 5 states. One Figma component set, one CSS class. Uses component tokens (<code>button/…</code>).</p>
 
       <section class="card">
-        <h2 class="text-heading-s">Try it</h2>
-        <p class="text-body-s">Hover, click, or press Tab to focus.</p>
+        <div class="card__header">
+          <h2 class="text-heading-s">Try it</h2>
+          <p class="text-body-s">Hover, click, or press Tab to focus.</p>
+        </div>
         <div class="row">
           <button class="btn btn--primary">Primary</button>
           <button class="btn btn--secondary">Secondary</button>
@@ -349,8 +404,10 @@
       </section>
 
       <section class="card">
-        <h2 class="text-heading-s">All states</h2>
-        <p class="text-body-s">As in the Figma component set.</p>
+        <div class="card__header">
+          <h2 class="text-heading-s">All states</h2>
+          <p class="text-body-s">As in the Figma component set.</p>
+        </div>
         <div class="matrix-scroll">
           <table class="matrix text-body-s">
             <thead><tr><th></th><th>Default</th><th>Hover</th><th>Pressed</th><th>Focus</th><th>Disabled</th></tr></thead>
@@ -360,21 +417,25 @@
       </section>
 
       <section class="card">
-        <h2 class="text-heading-s">Tokens</h2>
-        <p class="text-body-s">Read live from <code>tokens.css</code>. Alias → resolved value.</p>
+        <div class="card__header">
+          <h2 class="text-heading-s">Tokens</h2>
+          <p class="text-body-s">Read live from <code>tokens.css</code>. Alias → resolved value.</p>
+        </div>
         <div class="tokens-scroll" data-tokens="--button-"></div>
       </section>
     </section>
 
     <!-- ============ Input ============ -->
     <section class="view" id="view-input" hidden>
-      <p class="eyebrow text-label">Atom</p>
+      <p class="eyebrow text-heading-s">Atom</p>
       <h1 class="text-heading-l">Input</h1>
       <p class="lead text-body-m">5 states, 36px high, text style Body S. Uses component tokens (<code>input/…</code>).</p>
 
       <section class="card">
-        <h2 class="text-heading-s">Try it</h2>
-        <p class="text-body-s">Hover, click to focus, type.</p>
+        <div class="card__header">
+          <h2 class="text-heading-s">Try it</h2>
+          <p class="text-body-s">Hover, click to focus, type.</p>
+        </div>
         <div class="row">
           <div class="field"><input class="input" type="email" placeholder="you@example.com" aria-label="Email"></div>
           <div class="field"><input class="input" type="text" value="Invalid value" aria-invalid="true" aria-label="Error example"></div>
@@ -383,27 +444,33 @@
       </section>
 
       <section class="card">
-        <h2 class="text-heading-s">All states</h2>
-        <p class="text-body-s">As in the Figma component.</p>
+        <div class="card__header">
+          <h2 class="text-heading-s">All states</h2>
+          <p class="text-body-s">As in the Figma component.</p>
+        </div>
         <div class="states text-body-s" id="input-states"></div>
       </section>
 
       <section class="card">
-        <h2 class="text-heading-s">Tokens</h2>
-        <p class="text-body-s">Read live from <code>tokens.css</code>. Alias → resolved value.</p>
+        <div class="card__header">
+          <h2 class="text-heading-s">Tokens</h2>
+          <p class="text-body-s">Read live from <code>tokens.css</code>. Alias → resolved value.</p>
+        </div>
         <div class="tokens-scroll" data-tokens="--input-"></div>
       </section>
     </section>
 
     <!-- ============ Checkbox ============ -->
     <section class="view" id="view-checkbox" hidden>
-      <p class="eyebrow text-label">Atom</p>
+      <p class="eyebrow text-heading-s">Atom</p>
       <h1 class="text-heading-l">Checkbox</h1>
       <p class="lead text-body-m">6 states, optional description. Uses semantic tokens directly: no component tokens needed.</p>
 
       <section class="card">
-        <h2 class="text-heading-s">Try it</h2>
-        <p class="text-body-s">Click to check, or press Tab and Space.</p>
+        <div class="card__header">
+          <h2 class="text-heading-s">Try it</h2>
+          <p class="text-body-s">Click to check, or press Tab and Space.</p>
+        </div>
         <div class="row">
           <label class="checkbox">
             <input type="checkbox" class="checkbox__box">
@@ -420,27 +487,33 @@
       </section>
 
       <section class="card">
-        <h2 class="text-heading-s">All states</h2>
-        <p class="text-body-s">As in the Figma component. Combinations like checked + hover follow the system rules in code.</p>
+        <div class="card__header">
+          <h2 class="text-heading-s">All states</h2>
+          <p class="text-body-s">As in the Figma component. Combinations like checked + hover follow the system rules in code.</p>
+        </div>
         <div class="states" id="checkbox-states"></div>
       </section>
 
       <section class="card">
-        <h2 class="text-heading-s">Tokens</h2>
-        <p class="text-body-s">Semantic tokens used by the checkbox.</p>
+        <div class="card__header">
+          <h2 class="text-heading-s">Tokens</h2>
+          <p class="text-body-s">Semantic tokens used by the checkbox.</p>
+        </div>
         <div class="tokens-scroll" data-tokens-list="--color-bg-default,--color-border-strong,--color-fg-muted,--color-border-focus,--color-feedback-danger-fg,--color-action-primary-bg-default,--color-action-primary-bg-hover,--color-action-primary-fg,--color-action-primary-bg-disabled,--color-action-disabled-fg,--radius-indicator"></div>
       </section>
     </section>
 
     <!-- ============ Alert ============ -->
     <section class="view" id="view-alert" hidden>
-      <p class="eyebrow text-label">Atom</p>
+      <p class="eyebrow text-heading-s">Atom</p>
       <h1 class="text-heading-l">Alert</h1>
       <p class="lead text-body-m">Shows the outcome of a whole form. Field errors stay at the field, the alert tells how it went. Uses semantic tokens directly (<code>color/feedback/…</code>).</p>
 
       <section class="card">
-        <h2 class="text-heading-s">Try it</h2>
-        <p class="text-body-s">Trigger an outcome. Screen readers announce it: success politely, errors right away.</p>
+        <div class="card__header">
+          <h2 class="text-heading-s">Try it</h2>
+          <p class="text-body-s">Trigger an outcome. Screen readers announce it: success politely, errors right away.</p>
+        </div>
         <div class="row">
           <button class="btn btn--secondary" type="button" data-alert="success">Show success</button>
           <button class="btn btn--ghost" type="button" data-alert="danger">Show error</button>
@@ -449,8 +522,10 @@
       </section>
 
       <section class="card">
-        <h2 class="text-heading-s">All variants</h2>
-        <p class="text-body-s">As in the Figma component. Height 52px: 16 padding + 20 line height + 16 padding.</p>
+        <div class="card__header">
+          <h2 class="text-heading-s">All variants</h2>
+          <p class="text-body-s">As in the Figma component. Height 52px: 16 padding + 20 line height + 16 padding.</p>
+        </div>
         <div class="variants">
           <div><p class="state__name text-caption">Success</p><div class="alert alert--success">You're subscribed! Check your inbox to confirm.</div></div>
           <div><p class="state__name text-caption">Danger</p><div class="alert alert--danger">Something went wrong. Please try again.</div></div>
@@ -458,8 +533,10 @@
       </section>
 
       <section class="card">
-        <h2 class="text-heading-s">When to use what</h2>
-        <p class="text-body-s">Two kinds of feedback, two places.</p>
+        <div class="card__header">
+          <h2 class="text-heading-s">When to use what</h2>
+          <p class="text-body-s">Two kinds of feedback, two places.</p>
+        </div>
         <div class="tokens-scroll"><table class="tokens text-body-s">
           <thead><tr><th>Feedback</th><th>Where</th><th>Example</th></tr></thead>
           <tbody>
@@ -471,21 +548,25 @@
       </section>
 
       <section class="card">
-        <h2 class="text-heading-s">Tokens</h2>
-        <p class="text-body-s">Semantic tokens used by the alert.</p>
+        <div class="card__header">
+          <h2 class="text-heading-s">Tokens</h2>
+          <p class="text-body-s">Semantic tokens used by the alert.</p>
+        </div>
         <div class="tokens-scroll" data-tokens-list="--color-feedback-success-bg,--color-feedback-success-border,--color-feedback-success-fg,--color-feedback-danger-bg,--color-feedback-danger-border,--color-feedback-danger-fg,--space-inset-md,--radius-control,--border-width-default"></div>
       </section>
     </section>
 
     <!-- ============ Form Field ============ -->
     <section class="view" id="view-form-field" hidden>
-      <p class="eyebrow text-label">Molecule</p>
+      <p class="eyebrow text-heading-s">Molecule</p>
       <h1 class="text-heading-l">Form Field</h1>
       <p class="lead text-body-m">Label + description + Input atom + message. The first molecule: it contains an instance of the Input, so every change to the Input flows in automatically.</p>
 
       <section class="card">
-        <h2 class="text-heading-s">Try it</h2>
-        <p class="text-body-s">Type an email and leave the field. An invalid address switches the field to State = Error.</p>
+        <div class="card__header">
+          <h2 class="text-heading-s">Try it</h2>
+          <p class="text-body-s">Type an email and leave the field. An invalid address switches the field to State = Error.</p>
+        </div>
         <div class="field">
           <div class="form-field" id="ff-demo">
             <div class="form-field__header">
@@ -499,14 +580,18 @@
       </section>
 
       <section class="card">
-        <h2 class="text-heading-s">All states</h2>
-        <p class="text-body-s">As in the Figma component. Hover, focus and disabled come from the nested Input.</p>
+        <div class="card__header">
+          <h2 class="text-heading-s">All states</h2>
+          <p class="text-body-s">As in the Figma component. Hover, focus and disabled come from the nested Input.</p>
+        </div>
         <div class="states ff-states" id="ff-states"></div>
       </section>
 
       <section class="card">
-        <h2 class="text-heading-s">Anatomy</h2>
-        <p class="text-body-s">How the molecule is put together.</p>
+        <div class="card__header">
+          <h2 class="text-heading-s">Anatomy</h2>
+          <p class="text-body-s">How the molecule is put together.</p>
+        </div>
         <div class="tokens-scroll"><table class="tokens text-body-s">
           <thead><tr><th>Part</th><th>Text style</th><th>Token</th></tr></thead>
           <tbody>
@@ -520,21 +605,25 @@
       </section>
 
       <section class="card">
-        <h2 class="text-heading-s">Tokens</h2>
-        <p class="text-body-s">Semantic tokens used by the form field itself. The input brings its own.</p>
+        <div class="card__header">
+          <h2 class="text-heading-s">Tokens</h2>
+          <p class="text-body-s">Semantic tokens used by the form field itself. The input brings its own.</p>
+        </div>
         <div class="tokens-scroll" data-tokens-list="--color-fg-default,--color-fg-muted,--color-fg-subtle,--color-feedback-danger-fg,--space-gap-sm"></div>
       </section>
     </section>
 
     <!-- ============ Sign-up Card ============ -->
     <section class="view" id="view-signup-card" hidden>
-      <p class="eyebrow text-label">Organism</p>
+      <p class="eyebrow text-heading-s">Organism</p>
       <h1 class="text-heading-l">Sign-up Card</h1>
       <p class="lead text-body-m">Everything comes together: three Form Fields, a Checkbox, an Alert and a Button. This one was translated straight from Figma via the Figma MCP.</p>
 
       <section class="card">
-        <h2 class="text-heading-s">Try it</h2>
-        <p class="text-body-s">Submit empty to see the errors, fill everything in to subscribe. Turn on the switch to see the server error.</p>
+        <div class="card__header">
+          <h2 class="text-heading-s">Try it</h2>
+          <p class="text-body-s">Submit empty to see the errors, fill everything in to subscribe. Turn on the switch to see the server error.</p>
+        </div>
         <div class="su-demo">
           <div id="su-live"></div>
           <div class="su-controls">
@@ -549,14 +638,18 @@
       </section>
 
       <section class="card">
-        <h2 class="text-heading-s">All states</h2>
-        <p class="text-body-s">As in the Figma component set (node 46:774).</p>
+        <div class="card__header">
+          <h2 class="text-heading-s">All states</h2>
+          <p class="text-body-s">As in the Figma component set (node 46:774).</p>
+        </div>
         <div class="su-states" id="su-states"></div>
       </section>
 
       <section class="card">
-        <h2 class="text-heading-s">From Figma to code</h2>
-        <p class="text-body-s">One call to the Figma MCP (<code>get_design_context</code>) returned structure, variants and the variable bound to every layer.</p>
+        <div class="card__header">
+          <h2 class="text-heading-s">From Figma to code</h2>
+          <p class="text-body-s">One call to the Figma MCP (<code>get_design_context</code>) returned structure, variants and the variable bound to every layer.</p>
+        </div>
         <div class="tokens-scroll">
           <table class="tokens text-body-s">
             <thead><tr><th>Figma</th><th>MCP output</th><th>In this project</th></tr></thead>
@@ -572,8 +665,10 @@
       </section>
 
       <section class="card">
-        <h2 class="text-heading-s">Design QA with the MCP</h2>
-        <p class="text-body-s">The MCP shows what is bound, not just how it looks. The first read found issues a screenshot would never show.</p>
+        <div class="card__header">
+          <h2 class="text-heading-s">Design QA with the MCP</h2>
+          <p class="text-body-s">The MCP shows what is bound, not just how it looks. The first read found issues a screenshot would never show.</p>
+        </div>
         <div class="tokens-scroll">
           <table class="tokens text-body-s">
             <thead><tr><th>Where</th><th>Read 1</th><th>Read 2</th></tr></thead>
@@ -588,8 +683,10 @@
       </section>
 
       <section class="card">
-        <h2 class="text-heading-s">Tokens</h2>
-        <p class="text-body-s">Tokens used by the card itself. The nested components bring their own.</p>
+        <div class="card__header">
+          <h2 class="text-heading-s">Tokens</h2>
+          <p class="text-body-s">Tokens used by the card itself. The nested components bring their own.</p>
+        </div>
         <div class="tokens-scroll" data-tokens-list="--color-bg-default,--color-border-default,--border-width-default,--radius-container,--space-inset-lg,--space-gap-lg,--space-gap-md,--space-gap-sm,--color-fg-default,--color-fg-muted,--color-feedback-danger-fg"></div>
       </section>
     </section>
@@ -728,26 +825,26 @@
   document.querySelectorAll('.su-preview input, .su-preview button').forEach((el) => { el.tabIndex = -1; el.setAttribute('aria-hidden', 'true'); });
 
   // Live demo
-  function suMount() {
-    const live = document.getElementById('su-live');
-    live.innerHTML = suCard('su', 'Default');
-    const form = document.getElementById('su-form');
+  function suMount(p = 'su', liveId = 'su-live', simulateId = 'su-simulate') {
+    const live = document.getElementById(liveId);
+    live.innerHTML = suCard(p, 'Default');
+    const form = document.getElementById(`${p}-form`);
     const setErr = (id, on) => {
-      const input = document.getElementById(`su-${id}`);
-      const msg = document.getElementById(`su-${id}-msg`);
+      const input = document.getElementById(`${p}-${id}`);
+      const msg = document.getElementById(`${p}-${id}-msg`);
       if (id === 'consent') { input.toggleAttribute('aria-invalid', on); }
       else { input.closest('.form-field').classList.toggle('form-field--error', on); input.toggleAttribute('aria-invalid', on); }
       if (on) input.setAttribute('aria-invalid', 'true');
       msg.hidden = !on; msg.textContent = on ? SU[id] : '';
     };
     const valid = {
-      first: () => document.getElementById('su-first').value.trim() !== '',
-      last: () => document.getElementById('su-last').value.trim() !== '',
-      email: () => { const i = document.getElementById('su-email'); return i.value.trim() !== '' && i.checkValidity(); },
-      consent: () => document.getElementById('su-consent').checked,
+      first: () => document.getElementById(`${p}-first`).value.trim() !== '',
+      last: () => document.getElementById(`${p}-last`).value.trim() !== '',
+      email: () => { const i = document.getElementById(`${p}-email`); return i.value.trim() !== '' && i.checkValidity(); },
+      consent: () => document.getElementById(`${p}-consent`).checked,
     };
     Object.keys(valid).forEach((id) => {
-      const el = document.getElementById(`su-${id}`);
+      const el = document.getElementById(`${p}-${id}`);
       el.addEventListener(id === 'consent' ? 'change' : 'input', () => { if (valid[id]()) setErr(id, false); });
     });
     form.addEventListener('submit', (ev) => {
@@ -755,16 +852,18 @@
       form.querySelector('.su-alert-slot').innerHTML = '';
       const bad = Object.keys(valid).filter((id) => !valid[id]());
       Object.keys(valid).forEach((id) => setErr(id, bad.includes(id)));
-      if (bad.length) { document.getElementById(`su-${bad[0]}`).focus(); return; }
-      if (document.getElementById('su-simulate').checked) {
+      if (bad.length) { document.getElementById(`${p}-${bad[0]}`).focus(); return; }
+      const sim = simulateId && document.getElementById(simulateId);
+      if (sim && sim.checked) {
         form.querySelector('.su-alert-slot').innerHTML = '<div class="alert alert--danger" role="alert">Something went wrong. Please try again.</div>';
         return;
       }
-      live.innerHTML = suCard('su', 'Success');
+      live.innerHTML = suCard(p, 'Success');
     });
   }
   suMount();
-  document.getElementById('su-reset').addEventListener('click', suMount);
+  suMount('ov', 'ov-live', null);
+  document.getElementById('su-reset').addEventListener('click', () => suMount());
 
   /* ---------- Alert demo ---------- */
   const alertMessages = {
@@ -780,7 +879,7 @@
   /* ---------- Copy buttons ---------- */
   document.querySelectorAll('.copy').forEach((btn) => {
     btn.addEventListener('click', async () => {
-      const text = btn.parentElement.querySelector('pre').textContent;
+      const text = btn.closest('.code').querySelector('pre').textContent;
       try {
         await navigator.clipboard.writeText(text);
         btn.textContent = 'Copied';
