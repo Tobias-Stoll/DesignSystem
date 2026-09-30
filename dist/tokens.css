@@ -81,7 +81,7 @@
   --space-8: 8px;
   --space-12: 12px;
   --space-16: 16px;
-  --space-20: 29px;
+  --space-20: 20px;
   --space-24: 24px;
   --space-32: 32px;
   --space-40: 40px;
@@ -166,7 +166,6 @@
   --radius-control: var(--radius-md);
   --radius-container: var(--radius-lg);
   --radius-pill: var(--radius-full);
-  --radius-input: var(--radius-sm);
   --radius-indicator: var(--radius-sm);
   --radius-input: var(--radius-sm);
   --border-width-default: var(--border-width-1);
