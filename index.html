@@ -60,6 +60,14 @@
     /* Content */
     .content { padding: var(--space-48) var(--space-40); max-width: 1040px; width: 100%; }
     .view[hidden] { display: none; }
+
+    /* Keyboard: skip link appears on focus, focus targets without a visible ring */
+    .skip-link { position: absolute; left: var(--space-16); top: var(--space-16); z-index: 10; transform: translateY(-200%); }
+    .skip-link:focus { transform: none; }
+    main:focus, .view h1:focus { outline: none; }
+    .tokens-scroll:focus-visible, .matrix-scroll:focus-visible, pre:focus-visible {
+      outline: var(--border-width-focus) solid var(--color-border-focus); outline-offset: var(--space-4);
+    }
     /* Page category above the title: text style Heading S */
     .eyebrow { color: var(--color-fg-muted); margin: 0 0 var(--space-4); }
     h1, h2, h3 { margin: 0; }
@@ -186,6 +194,7 @@
   </style>
 </head>
 <body>
+<a class="skip-link btn btn--primary" href="#main">Skip to content</a>
 <div class="shell">
 
   <!-- Navigation -->
@@ -216,12 +225,12 @@
     </nav>
   </aside>
 
-  <main class="content">
+  <main class="content" id="main" tabindex="-1">
 
     <!-- ============ Overview ============ -->
     <section class="view" id="view-overview">
       <p class="eyebrow text-heading-s">Design System</p>
-      <h1 class="text-display">Design to Code - An example workflow</h1>
+      <h1 class="text-display" tabindex="-1">Design to Code - An example workflow</h1>
       <p class="lead text-body-l">
         Figma is the single source of truth. Tokens sync to code automatically,
         components are read straight from Figma via the Figma MCP, and everything here is built from those tokens only.
@@ -389,7 +398,7 @@
     <!-- ============ Button ============ -->
     <section class="view" id="view-button" hidden>
       <p class="eyebrow text-heading-s">Atom</p>
-      <h1 class="text-heading-l">Button</h1>
+      <h1 class="text-heading-l" tabindex="-1">Button</h1>
       <p class="lead text-body-m">3 variants × 5 states. One Figma component set, one CSS class. Uses component tokens (<code>button/…</code>).</p>
 
       <section class="card">
@@ -432,7 +441,7 @@
     <!-- ============ Input ============ -->
     <section class="view" id="view-input" hidden>
       <p class="eyebrow text-heading-s">Atom</p>
-      <h1 class="text-heading-l">Input</h1>
+      <h1 class="text-heading-l" tabindex="-1">Input</h1>
       <p class="lead text-body-m">5 states, 36px high, text style Body S. Uses component tokens (<code>input/…</code>).</p>
 
       <section class="card">
@@ -469,7 +478,7 @@
     <!-- ============ Checkbox ============ -->
     <section class="view" id="view-checkbox" hidden>
       <p class="eyebrow text-heading-s">Atom</p>
-      <h1 class="text-heading-l">Checkbox</h1>
+      <h1 class="text-heading-l" tabindex="-1">Checkbox</h1>
       <p class="lead text-body-m">6 states, optional description. Uses semantic tokens directly: no component tokens needed.</p>
 
       <section class="card">
@@ -514,7 +523,7 @@
     <!-- ============ Alert ============ -->
     <section class="view" id="view-alert" hidden>
       <p class="eyebrow text-heading-s">Atom</p>
-      <h1 class="text-heading-l">Alert</h1>
+      <h1 class="text-heading-l" tabindex="-1">Alert</h1>
       <p class="lead text-body-m">Shows the outcome of a whole form. Field errors stay at the field, the alert tells how it went. Uses semantic tokens directly (<code>color/feedback/…</code>).</p>
 
       <section class="card">
@@ -569,7 +578,7 @@
     <!-- ============ Form Field ============ -->
     <section class="view" id="view-form-field" hidden>
       <p class="eyebrow text-heading-s">Molecule</p>
-      <h1 class="text-heading-l">Form Field</h1>
+      <h1 class="text-heading-l" tabindex="-1">Form Field</h1>
       <p class="lead text-body-m">Label + description + Input atom + message. The first molecule: it contains an instance of the Input, so every change to the Input flows in automatically.</p>
 
       <section class="card">
@@ -628,7 +637,7 @@
     <!-- ============ Sign-up Card ============ -->
     <section class="view" id="view-signup-card" hidden>
       <p class="eyebrow text-heading-s">Organism</p>
-      <h1 class="text-heading-l">Sign-up Card</h1>
+      <h1 class="text-heading-l" tabindex="-1">Sign-up Card</h1>
       <p class="lead text-body-m">Everything comes together: three Form Fields, a Checkbox, an Alert and a Button. This one was translated straight from Figma via the Figma MCP.</p>
 
       <section class="card">
@@ -1042,9 +1051,39 @@
     document.querySelectorAll('.nav a').forEach((a) =>
       a.getAttribute('href') === '#' + id ? a.setAttribute('aria-current', 'page') : a.removeAttribute('aria-current'));
     window.scrollTo(0, 0);
+    return id;
   }
-  addEventListener('hashchange', route);
+  // On navigation, move focus to the new page title so keyboard and screen reader users land in the content
+  addEventListener('hashchange', () => {
+    const id = route();
+    const title = document.querySelector(`#view-${id} h1`);
+    if (title) title.focus({ preventScroll: true });
+  });
   route();
+
+  // Skip link: jump to the title of the current page without changing the page
+  document.querySelector('.skip-link').addEventListener('click', (e) => {
+    e.preventDefault();
+    const title = document.querySelector('.view:not([hidden]) h1');
+    (title || document.getElementById('main')).focus();
+  });
+
+  // Tables and code blocks that scroll sideways get a tab stop, so they can be scrolled with the arrow keys
+  function markScrollable() {
+    document.querySelectorAll('.view:not([hidden]) :is(.tokens-scroll, .matrix-scroll, pre)').forEach((el) => {
+      if (el.scrollWidth > el.clientWidth + 1) {
+        el.tabIndex = 0;
+        el.setAttribute('role', 'region');
+        el.setAttribute('aria-label', el.tagName === 'PRE' ? 'Code, scrollable' : 'Table, scrollable');
+      } else if (el.getAttribute('role') === 'region') {
+        el.removeAttribute('tabindex'); el.removeAttribute('role'); el.removeAttribute('aria-label');
+      }
+    });
+  }
+  addEventListener('hashchange', () => requestAnimationFrame(markScrollable));
+  addEventListener('resize', () => requestAnimationFrame(markScrollable));
+  addEventListener('load', markScrollable);
+  setTimeout(markScrollable, 300); // token tables are filled after tokens.css is fetched
 </script>
 </body>
 </html>
