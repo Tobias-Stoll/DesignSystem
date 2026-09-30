@@ -64,7 +64,7 @@
     /* Keyboard: skip link appears on focus, focus targets without a visible ring */
     .skip-link { position: absolute; left: var(--space-16); top: var(--space-16); z-index: 10; transform: translateY(-200%); }
     .skip-link:focus { transform: none; }
-    main:focus, .view h1:focus { outline: none; }
+    main:focus, .view h1:focus, .card h2[tabindex]:focus { outline: none; }
     .tokens-scroll:focus-visible, .matrix-scroll:focus-visible, pre:focus-visible {
       outline: var(--border-width-focus) solid var(--color-border-focus); outline-offset: var(--space-4);
     }
@@ -181,6 +181,63 @@
     .compare #ov-live { max-width: 440px; }
     .tokens td code { white-space: nowrap; }
 
+    /* Tokens page */
+    .tk-layers { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--space-gap-md); }
+    .tk-layer {
+      display: flex; flex-direction: column; gap: var(--space-4); height: 100%;
+      padding: var(--space-inset-md); border-radius: var(--radius-control);
+      background: var(--color-bg-subtle); color: inherit; text-decoration: none;
+    }
+    .tk-layer:hover { background: var(--button-ghost-bg-hover); }
+    .tk-layer:focus-visible { outline: var(--border-width-focus) solid var(--color-border-focus); outline-offset: 0; }
+    .tk-layer__count { color: var(--button-ghost-fg); }
+    .tk-layer span:last-child { color: var(--color-fg-muted); }
+    .card h3.text-label { color: var(--color-fg-default); }
+
+    .tk-scales { display: grid; gap: var(--space-12); }
+    .tk-scale { display: grid; grid-template-columns: 72px minmax(0, 1fr); gap: var(--space-12); align-items: start; }
+    .tk-scale__name { padding-top: var(--space-4); color: var(--color-fg-muted); }
+    .tk-scale__steps { display: grid; grid-template-columns: repeat(10, minmax(0, 1fr)); gap: var(--space-4); }
+    .tk-step { display: flex; flex-direction: column; gap: var(--space-4); min-width: 0; }
+    .tk-step__chip {
+      height: 40px; border-radius: var(--radius-indicator);
+      box-shadow: inset 0 0 0 var(--border-width-default) var(--color-border-default);
+    }
+    .tk-step code { font-size: 11px; line-height: 1.3; color: var(--color-fg-muted); overflow: hidden; text-overflow: ellipsis; }
+    .tk-step code b { display: block; font-weight: var(--font-weight-medium); color: var(--color-fg-default); overflow: hidden; text-overflow: ellipsis; }
+
+    .tk-space { display: grid; gap: var(--space-8); }
+    .tk-space__row { display: grid; grid-template-columns: 88px 56px minmax(0, 1fr); gap: var(--space-12); align-items: center; }
+    .tk-space__bar { height: 12px; border-radius: var(--radius-indicator); background: var(--color-border-focus); max-width: 100%; }
+    .tk-space__row code { font-size: 12px; }
+
+    .tk-split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--space-24); }
+    .tk-split > div { display: flex; flex-direction: column; gap: var(--space-gap-lg); }
+    .tk-chips { display: flex; flex-wrap: wrap; gap: var(--space-gap-md); }
+    .tk-chip { display: flex; flex-direction: column; align-items: center; gap: var(--space-4); }
+    .tk-chip__shape { width: 48px; height: 48px; background: var(--color-bg-subtle); border: var(--border-width-default) solid var(--color-border-strong); }
+    .tk-chip code { font-size: 11px; line-height: 1.3; text-align: center; color: var(--color-fg-muted); }
+    .tk-chip code b { display: block; font-weight: var(--font-weight-medium); color: var(--color-fg-default); }
+
+    .tokens .tk-group td { border-top: none; padding-top: var(--space-24); color: var(--color-fg-muted); font-weight: var(--font-weight-medium); }
+    .tokens tr:first-child.tk-group td { padding-top: var(--space-8); }
+    .tk-table td { padding-top: var(--space-4); padding-bottom: var(--space-4); }
+
+    .tk-type { display: grid; }
+    .tk-type__row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 260px); gap: var(--space-24); align-items: center; padding: var(--space-12) 0; border-top: var(--border-width-default) solid var(--color-border-default); }
+    .tk-type__row:first-child { border-top: none; padding-top: 0; }
+    .tk-type__row p { margin: 0; overflow-wrap: anywhere; }
+    .tk-type__row code { font-size: 12px; color: var(--color-fg-muted); }
+    .tk-type__row code b { display: block; font-weight: var(--font-weight-medium); color: var(--color-fg-default); }
+
+    @media (max-width: 760px) {
+      .tk-layers { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .tk-scale { grid-template-columns: minmax(0, 1fr); gap: var(--space-4); }
+      .tk-scale__steps { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+      .tk-split { grid-template-columns: minmax(0, 1fr); }
+      .tk-type__row { grid-template-columns: minmax(0, 1fr); gap: var(--space-4); }
+    }
+
     @media (max-width: 760px) {
       .shell { grid-template-columns: minmax(0, 1fr); background: none; }
       .sidebar { position: static; height: auto; background: var(--color-bg-default); border-bottom: var(--border-width-default) solid var(--color-border-default); padding: var(--space-24) var(--space-16) var(--space-12); }
@@ -206,6 +263,10 @@
     <nav aria-label="Design system">
       <ul class="nav text-body-s">
         <li><a href="#overview">Overview</a></li>
+      </ul>
+      <p class="nav__group text-label">Foundations</p>
+      <ul class="nav text-body-s">
+        <li><a href="#tokens">Tokens</a></li>
       </ul>
       <p class="nav__group text-label">Atoms</p>
       <ul class="nav text-body-s">
@@ -237,7 +298,8 @@
       </p>
       <div class="links">
         <a class="btn btn--primary" href="https://github.com/Tobias-Stoll/DesignSystem">View repository</a>
-        <a class="btn btn--ghost" href="#signup-card">See the Sign-up Card</a>
+        <a class="btn btn--secondary" href="https://www.figma.com/design/NvYNqHYZlROxpwRCq7yy3p/Design-System?node-id=46-693">Open in Figma</a>
+        <a class="btn btn--ghost" href="#tokens">Browse all tokens</a>
       </div>
 
       <section class="card" aria-labelledby="wf-title">
@@ -396,6 +458,74 @@
     </section>
 
     <!-- ============ Button ============ -->
+    <!-- ============ Tokens ============ -->
+    <section class="view" id="view-tokens" hidden>
+      <p class="eyebrow text-heading-s">Foundations</p>
+      <h1 class="text-display" tabindex="-1">Tokens</h1>
+      <p class="lead text-body-l">
+        Every variable from Figma, in three layers. Names come from the exported token files,
+        values are read live from <code>tokens.css</code>, so this page always shows what ships.
+      </p>
+      <div class="links">
+        <a class="btn btn--secondary" href="https://www.figma.com/design/NvYNqHYZlROxpwRCq7yy3p/Design-System?node-id=46-693">Open in Figma</a>
+        <a class="btn btn--ghost" href="https://github.com/Tobias-Stoll/DesignSystem/blob/main/dist/tokens.css">tokens.css on GitHub</a>
+      </div>
+
+      <section class="card" aria-labelledby="tk-layers-title">
+        <div class="card__header">
+          <h2 id="tk-layers-title" class="text-heading-s">Three layers</h2>
+          <p class="text-body-s">Each layer only points to the one below. A change travels up, never sideways.</p>
+        </div>
+        <ol class="tk-layers" id="tk-layers">
+          <li><a href="#tk-primitives-title" class="tk-layer" data-jump><span class="tk-layer__count text-display" data-count="primitives">–</span><b class="text-label">Primitives</b><span class="text-body-s">Raw values, named by hue and step</span></a></li>
+          <li><a href="#tk-semantic-title" class="tk-layer" data-jump><span class="tk-layer__count text-display" data-count="semantic">–</span><b class="text-label">Semantic</b><span class="text-body-s">Named by purpose, alias a primitive</span></a></li>
+          <li><a href="#tk-component-title" class="tk-layer" data-jump><span class="tk-layer__count text-display" data-count="component">–</span><b class="text-label">Component</b><span class="text-body-s">Scoped to one component, alias a semantic</span></a></li>
+          <li><a href="#tk-type-title" class="tk-layer" data-jump><span class="tk-layer__count text-display" data-count="typography">–</span><b class="text-label">Text styles</b><span class="text-body-s">Built from the font primitives</span></a></li>
+        </ol>
+      </section>
+
+      <section class="card" aria-labelledby="tk-primitives-title">
+        <div class="card__header">
+          <h2 id="tk-primitives-title" class="text-heading-s" tabindex="-1">Primitives</h2>
+          <p class="text-body-s">Figma collection <b>Primitives</b>. Hidden from the Figma pickers, only semantic tokens point here.</p>
+        </div>
+        <h3 class="text-label">Color</h3>
+        <div class="tk-scales" id="tk-colors"></div>
+        <h3 class="text-label">Space</h3>
+        <div id="tk-space" class="tk-space"></div>
+        <div class="tk-split">
+          <div><h3 class="text-label">Radius</h3><div id="tk-radius" class="tk-chips"></div></div>
+          <div><h3 class="text-label">Border width</h3><div id="tk-border" class="tk-chips"></div></div>
+        </div>
+        <h3 class="text-label">Font</h3>
+        <div class="tokens-scroll" id="tk-font"></div>
+      </section>
+
+      <section class="card" aria-labelledby="tk-semantic-title">
+        <div class="card__header">
+          <h2 id="tk-semantic-title" class="text-heading-s" tabindex="-1">Semantic</h2>
+          <p class="text-body-s">Figma collection <b>Semantic</b>. Names say what a value is for. Every row is an alias of a primitive.</p>
+        </div>
+        <div class="tokens-scroll" id="tk-semantic"></div>
+      </section>
+
+      <section class="card" aria-labelledby="tk-component-title">
+        <div class="card__header">
+          <h2 id="tk-component-title" class="text-heading-s" tabindex="-1">Component</h2>
+          <p class="text-body-s">Figma collection <b>Component</b>. Only Button and Input have their own layer, the other components use semantic tokens directly.</p>
+        </div>
+        <div class="tokens-scroll" id="tk-component"></div>
+      </section>
+
+      <section class="card" aria-labelledby="tk-type-title">
+        <div class="card__header">
+          <h2 id="tk-type-title" class="text-heading-s" tabindex="-1">Text styles</h2>
+          <p class="text-body-s">Figma text styles, bound to the font primitives. In code each one is a class from <code>typography.css</code>.</p>
+        </div>
+        <div id="tk-type" class="tk-type"></div>
+      </section>
+    </section>
+
     <section class="view" id="view-button" hidden>
       <p class="eyebrow text-heading-s">Atom</p>
       <h1 class="text-heading-l" tabindex="-1">Button</h1>
@@ -775,6 +905,92 @@
     });
   });
 
+
+  /* ---------- Tokens page: names from tokens/*.json, values live from tokens.css ---------- */
+  const flat = (obj, path = []) => Object.entries(obj).flatMap(([k, v]) =>
+    k.startsWith('$') ? [] : (v && v.$value !== undefined ? [{ path: [...path, k], type: v.$type, value: v.$value }] : flat(v, [...path, k])));
+  const cssVar = (t) => '--' + t.path.join('-').toLowerCase();
+  const figName = (t) => t.path.join('/');
+  const refName = (v) => (typeof v === 'string' && v.startsWith('{') ? v.slice(1, -1).split('.').join('/') : '');
+  const isColor = (v) => /^(#|rgb)/.test(v);
+  const valueCell = (name) => { const v = resolved(name); return `${isColor(v) ? `<span class="swatch" style="background:${v}"></span>` : ''}<code>${v}</code>`; };
+  const tokenCell = (t) => `<code>${figName(t)}</code></td><td><code class="alias">${cssVar(t)}</code>`;
+  const groupedTable = (list, groupOf, withAlias) => {
+    let last = '';
+    const cols = withAlias ? 4 : 3;
+    const rows = list.map((t) => {
+      const g = groupOf(t);
+      const head = g !== last ? `<tr class="tk-group"><td colspan="${cols}">${g}</td></tr>` : '';
+      last = g;
+      return head + `<tr><td>${tokenCell(t)}</td>${withAlias ? `<td><code>${refName(t.value) || '–'}</code></td>` : ''}<td>${valueCell(cssVar(t))}</td></tr>`;
+    }).join('');
+    return `<table class="tokens tk-table text-body-s"><thead><tr><th>Figma variable</th><th>CSS variable</th>${withAlias ? '<th>Points to</th>' : ''}<th>Value</th></tr></thead><tbody>${rows}</tbody></table>`;
+  };
+
+  Promise.all(['primitives', 'semantic', 'component', 'typography'].map((f) => fetch(`tokens/${f}.json`).then((r) => r.json())))
+    .then(([pri, sem, com, typo]) => {
+      const P = flat(pri), S = flat(sem), C = flat(com), T = flat(typo.typography || typo);
+      const counts = { primitives: P.length, semantic: S.length, component: C.length, typography: T.length };
+      document.querySelectorAll('[data-count]').forEach((el) => (el.textContent = counts[el.dataset.count]));
+
+      // Color scales
+      const hues = [...new Set(P.filter((t) => t.path[0] === 'color').map((t) => t.path[1]))];
+      document.getElementById('tk-colors').innerHTML = hues.map((h) => {
+        const steps = P.filter((t) => t.path[0] === 'color' && t.path[1] === h);
+        return `<div class="tk-scale"><span class="tk-scale__name text-body-s">${h}</span><div class="tk-scale__steps">` +
+          steps.map((t) => { const v = resolved(cssVar(t)); return `<div class="tk-step"><span class="tk-step__chip" style="background:${v}"></span><code><b>${t.path[2]}</b>${v.replace('rgba(255, 255, 255, 0)', 'transparent')}</code></div>`; }).join('') +
+          `</div></div>`;
+      }).join('');
+
+      // Space
+      const space = P.filter((t) => t.path[0] === 'space');
+      document.getElementById('tk-space').innerHTML = space.map((t) => {
+        const v = resolved(cssVar(t));
+        return `<div class="tk-space__row text-body-s"><code>${figName(t)}</code><code>${v}</code><span class="tk-space__bar" style="width:${v}"></span></div>`;
+      }).join('');
+
+      // Radius and border width
+      document.getElementById('tk-radius').innerHTML = P.filter((t) => t.path[0] === 'radius').map((t) => {
+        const v = resolved(cssVar(t));
+        return `<div class="tk-chip"><span class="tk-chip__shape" style="border-radius:${v}"></span><code><b>${t.path[1]}</b>${v}</code></div>`;
+      }).join('');
+      document.getElementById('tk-border').innerHTML = P.filter((t) => t.path[0] === 'border-width').map((t) => {
+        const v = resolved(cssVar(t));
+        return `<div class="tk-chip"><span class="tk-chip__shape" style="border-width:${v};border-radius:var(--radius-control)"></span><code><b>${t.path[1]}</b>${v}</code></div>`;
+      }).join('');
+
+      // Font primitives
+      document.getElementById('tk-font').innerHTML =
+        groupedTable(P.filter((t) => t.path[0] === 'font'), (t) => t.path.slice(0, 2).join('/'), false);
+
+      // Semantic and component layers
+      document.getElementById('tk-semantic').innerHTML =
+        groupedTable(S, (t) => (t.path[0] === 'color' ? t.path.slice(0, 2) : t.path.slice(0, 1)).join('/'), true);
+      document.getElementById('tk-component').innerHTML =
+        groupedTable(C, (t) => t.path[0], true);
+
+      // Text styles
+      const cap = (s) => s.length <= 2 ? s.toUpperCase() : s[0].toUpperCase() + s.slice(1);
+      const weightName = { 400: 'Regular', 500: 'Medium', 700: 'Bold' };
+      const px = (t) => parseInt(resolved('--' + refName(t.value.fontSize).split('/').join('-')));
+      document.getElementById('tk-type').innerHTML = [...T].sort((a, b) => px(b) - px(a)).map((t) => {
+        const r = (k) => resolved('--' + refName(t.value[k]).split('/').join('-'));
+        const fam = r('fontFamily').split(',')[0].replace(/['"]/g, '');
+        const spec = `${fam} ${weightName[r('fontWeight')] || r('fontWeight')} · ${parseInt(r('fontSize'))}/${parseInt(r('lineHeight'))}`;
+        return `<div class="tk-type__row"><p class="text-${t.path.join('-')}">The quick brown fox</p>` +
+          `<code><b>${t.path.map(cap).join('/')}</b>${spec}<br>.text-${t.path.join('-')}</code></div>`;
+      }).join('');
+      requestAnimationFrame(markScrollable);
+    });
+
+  // In-page jumps on the tokens page (the hash is used for routing)
+  document.querySelectorAll('[data-jump]').forEach((a) => a.addEventListener('click', (e) => {
+    e.preventDefault();
+    const target = document.querySelector(a.getAttribute('href'));
+    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    target.focus({ preventScroll: true });
+  }));
+
   /* ---------- Form field ---------- */
   const ffStates = [
     ['Default', '', 'placeholder="you@example.com"', "We'll send one email a month."],
@@ -1044,7 +1260,7 @@
   }));
 
   /* ---------- Hash navigation ---------- */
-  const views = ['overview', 'button', 'input', 'checkbox', 'alert', 'form-field', 'signup-card'];
+  const views = ['overview', 'tokens', 'button', 'input', 'checkbox', 'alert', 'form-field', 'signup-card'];
   function route() {
     const id = views.includes(location.hash.slice(1)) ? location.hash.slice(1) : 'overview';
     views.forEach((v) => (document.getElementById('view-' + v).hidden = v !== id));

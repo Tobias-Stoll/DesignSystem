@@ -2,7 +2,8 @@
 
 Design tokens and components with **Figma as the single source of truth**.
 
-**Live:** https://tobias-stoll.github.io/DesignSystem/
+**Live:** https://tobias-stoll.github.io/DesignSystem/ · **All tokens:** https://tobias-stoll.github.io/DesignSystem/#tokens
+**Figma:** [Design System file](https://www.figma.com/design/NvYNqHYZlROxpwRCq7yy3p/Design-System?node-id=46-693) (view only)
 
 ```
 Tokens      Figma Variables ──Token Bridge──▶ tokens/*.json ──GitHub Action──▶ dist/*.css
