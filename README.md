@@ -1,10 +1,23 @@
 # Design System
 
-Design tokens with **Figma as the single source of truth**, synced to code automatically.
+Design tokens and components with **Figma as the single source of truth**.
+
+**Live:** https://tobias-stoll.github.io/DesignSystem/
 
 ```
-Figma Variables ──Token Bridge──▶ tokens/*.json ──GitHub Action──▶ dist/*.css
+Tokens      Figma Variables ──Token Bridge──▶ tokens/*.json ──GitHub Action──▶ dist/*.css
+Components  Figma component ──Figma MCP──▶ design QA ──▶ components/*.css
 ```
+
+## Repository
+
+| Folder | Content |
+|---|---|
+| `tokens/` | Design tokens exported from Figma (generated, do not edit) |
+| `dist/` | CSS built from the tokens by the GitHub Action (generated) |
+| `components/` | Component styles: Button, Input, Checkbox, Alert, Form Field, Sign-up Card |
+| `token-bridge/` | The Figma plugin that syncs Figma Variables with this repo ([README](token-bridge/README.md)) |
+| `index.html` | The live documentation site |
 
 ## Token layers
 

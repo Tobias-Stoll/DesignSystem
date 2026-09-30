@@ -1,0 +1,123 @@
+<style>
+  * { box-sizing: border-box; }
+  body { font: 12px/1.4 Inter, system-ui, sans-serif; margin: 0; padding: 16px; color: #1e1e1e; }
+  h2 { font-size: 14px; margin: 0 0 8px; }
+  p { margin: 0 0 12px; color: #666; }
+  .tabs { display: flex; gap: 4px; margin-bottom: 12px; }
+  .tab { flex: 1; padding: 8px; border: 1px solid #ddd; border-radius: 6px; background: #fff; color: #1e1e1e; font-weight: 600; cursor: pointer; margin: 0; }
+  .tab.active { background: #1e1e1e; color: #fff; border-color: #1e1e1e; }
+  .panel { display: none; } .panel.active { display: block; }
+  textarea { width: 100%; height: 220px; font: 11px/1.4 ui-monospace, monospace; border: 1px solid #ddd; border-radius: 6px; padding: 8px; }
+  label { display: block; font-weight: 600; margin: 8px 0 4px; }
+  input { width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 6px; font: inherit; }
+  .row { display: flex; gap: 8px; } .row > div { flex: 1; }
+  .go { margin-top: 12px; width: 100%; padding: 10px; border: 0; border-radius: 6px; background: #7c3aed; color: #fff; font-weight: 600; cursor: pointer; }
+  .go:disabled { opacity: .5; cursor: default; }
+  ul { padding-left: 16px; margin: 12px 0 0; }
+  small { color: #888; }
+</style>
+
+<div class="tabs">
+  <button class="tab active" data-tab="import">Import</button>
+  <button class="tab" data-tab="export">Export → GitHub</button>
+</div>
+
+<div class="panel active" id="import">
+  <h2>Token Bridge · Import</h2>
+  <p>Semantic und Component Tokens (von Claude) werden als Aliase angelegt: Primitives ← Semantic ← Component.</p>
+  <textarea id="json">__TOKENS__</textarea>
+  <button class="go" id="go-import">Tokens importieren</button>
+</div>
+
+<div class="panel" id="export">
+  <h2>Token Bridge · Export</h2>
+  <p>Figma Variables und Text Styles werden als W3C Design Tokens ins Repo geschrieben. Figma bleibt Source of Truth.</p>
+  <div class="row">
+    <div><label>Owner</label><input id="owner" placeholder="github-user"></div>
+    <div><label>Repo</label><input id="repo" placeholder="design-tokens-workflow"></div>
+  </div>
+  <div class="row">
+    <div><label>Branch</label><input id="branch" value="main"></div>
+  </div>
+  <label>Personal Access Token</label>
+  <input id="token" type="password" placeholder="github_pat_…">
+  <small>Wird nur lokal in Figma gespeichert.</small>
+  <label>Commit-Nachricht</label>
+  <input id="message" value="tokens: sync from Figma">
+  <button class="go" id="go-export">Nach GitHub exportieren</button>
+</div>
+
+<ul id="log"></ul>
+
+<script>
+  const $ = (id) => document.getElementById(id);
+  const send = (m) => parent.postMessage({ pluginMessage: m }, '*');
+  const log = (lines) => ($('log').innerHTML = lines.map((l) => '<li>' + l + '</li>').join(''));
+  const fields = ['owner', 'repo', 'branch', 'token'];
+
+  document.querySelectorAll('.tab').forEach((t) => (t.onclick = () => {
+    document.querySelectorAll('.tab, .panel').forEach((e) => e.classList.remove('active'));
+    t.classList.add('active'); $(t.dataset.tab).classList.add('active'); log([]);
+  }));
+
+  $('go-import').onclick = () => { log(['Import läuft…']); send({ type: 'import', json: $('json').value }); };
+
+  $('go-export').onclick = () => {
+    const s = Object.fromEntries(fields.map((f) => [f, $(f).value.trim()]));
+    if (!s.owner || !s.repo || !s.token) return log(['⚠️ Owner, Repo und Token ausfüllen']);
+    send({ type: 'save-settings', settings: s });
+    $('go-export').disabled = true;
+    log(['Tokens werden aus Figma gelesen…']);
+    send({ type: 'export' });
+  };
+
+  // One export = one commit (Git Data API): build a tree on top of the branch, commit, move the branch.
+  async function push(files, preLog) {
+    const s = Object.fromEntries(fields.map((f) => [f, $(f).value.trim()]));
+    const api = `https://api.github.com/repos/${s.owner}/${s.repo}/git/`;
+    const headers = { Authorization: 'Bearer ' + s.token, Accept: 'application/vnd.github+json' };
+    const call = async (path, method = 'GET', body) => {
+      const r = await fetch(api + path, { method, headers, body: body && JSON.stringify(body) });
+      const data = await r.json();
+      if (!r.ok) throw new Error(`${r.status} ${data.message}`);
+      return data;
+    };
+    const lines = [...preLog, 'Commit wird erstellt…'];
+    log(lines);
+
+    const ref = await call(`ref/heads/${encodeURIComponent(s.branch)}`);
+    const parent = await call(`commits/${ref.object.sha}`);
+    const tree = await call('trees', 'POST', {
+      base_tree: parent.tree.sha,
+      tree: Object.entries(files).map(([path, data]) => ({
+        path, mode: '100644', type: 'blob', content: JSON.stringify(data, null, 2) + '\n',
+      })),
+    });
+
+    lines.pop();
+    if (tree.sha === parent.tree.sha) {
+      lines.push('= Keine Änderungen seit dem letzten Export');
+    } else {
+      const commit = await call('commits', 'POST', {
+        message: $('message').value || 'tokens: sync from Figma',
+        tree: tree.sha,
+        parents: [ref.object.sha],
+      });
+      await call(`refs/heads/${encodeURIComponent(s.branch)}`, 'PATCH', { sha: commit.sha });
+      lines.push(`✅ 1 Commit mit ${Object.keys(files).length} Dateien (${commit.sha.slice(0, 7)})`);
+      lines.push(`→ github.com/${s.owner}/${s.repo}/commit/${commit.sha.slice(0, 7)}`);
+    }
+    log(lines);
+    $('go-export').disabled = false;
+    send({ type: 'notify', text: '✅ Export abgeschlossen' });
+  }
+
+  onmessage = (e) => {
+    const m = e.data.pluginMessage;
+    if (!m) return;
+    if (m.type === 'done') log(m.log);
+    if (m.type === 'settings') fields.forEach((f) => m.settings[f] && ($(f).value = m.settings[f]));
+    if (m.type === 'export-files') push(m.files, m.log).catch((err) => { log(['❌ ' + err.message]); $('go-export').disabled = false; });
+  };
+  send({ type: 'load-settings' });
+</script>

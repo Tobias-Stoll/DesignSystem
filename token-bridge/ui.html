@@ -1,0 +1,610 @@
+<style>
+  * { box-sizing: border-box; }
+  body { font: 12px/1.4 Inter, system-ui, sans-serif; margin: 0; padding: 16px; color: #1e1e1e; }
+  h2 { font-size: 14px; margin: 0 0 8px; }
+  p { margin: 0 0 12px; color: #666; }
+  .tabs { display: flex; gap: 4px; margin-bottom: 12px; }
+  .tab { flex: 1; padding: 8px; border: 1px solid #ddd; border-radius: 6px; background: #fff; color: #1e1e1e; font-weight: 600; cursor: pointer; margin: 0; }
+  .tab.active { background: #1e1e1e; color: #fff; border-color: #1e1e1e; }
+  .panel { display: none; } .panel.active { display: block; }
+  textarea { width: 100%; height: 220px; font: 11px/1.4 ui-monospace, monospace; border: 1px solid #ddd; border-radius: 6px; padding: 8px; }
+  label { display: block; font-weight: 600; margin: 8px 0 4px; }
+  input { width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 6px; font: inherit; }
+  .row { display: flex; gap: 8px; } .row > div { flex: 1; }
+  .go { margin-top: 12px; width: 100%; padding: 10px; border: 0; border-radius: 6px; background: #7c3aed; color: #fff; font-weight: 600; cursor: pointer; }
+  .go:disabled { opacity: .5; cursor: default; }
+  ul { padding-left: 16px; margin: 12px 0 0; }
+  small { color: #888; }
+</style>
+
+<div class="tabs">
+  <button class="tab active" data-tab="import">Import</button>
+  <button class="tab" data-tab="export">Export → GitHub</button>
+</div>
+
+<div class="panel active" id="import">
+  <h2>Token Bridge · Import</h2>
+  <p>Semantic und Component Tokens (von Claude) werden als Aliase angelegt: Primitives ← Semantic ← Component.</p>
+  <textarea id="json">{
+  &quot;Semantic&quot;: {
+    &quot;$description&quot;: &quot;Semantic layer. Every value is an alias to a primitive in the Figma collection &#x27;Primitives&#x27;. Figma remains the source of truth.&quot;,
+    &quot;color&quot;: {
+      &quot;bg&quot;: {
+        &quot;default&quot;: {
+          &quot;$type&quot;: &quot;color&quot;,
+          &quot;$value&quot;: &quot;{color.base.white}&quot;
+        },
+        &quot;subtle&quot;: {
+          &quot;$type&quot;: &quot;color&quot;,
+          &quot;$value&quot;: &quot;{color.neutral.50}&quot;
+        },
+        &quot;muted&quot;: {
+          &quot;$type&quot;: &quot;color&quot;,
+          &quot;$value&quot;: &quot;{color.neutral.100}&quot;
+        },
+        &quot;inverse&quot;: {
+          &quot;$type&quot;: &quot;color&quot;,
+          &quot;$value&quot;: &quot;{color.neutral.900}&quot;
+        }
+      },
+      &quot;fg&quot;: {
+        &quot;default&quot;: {
+          &quot;$type&quot;: &quot;color&quot;,
+          &quot;$value&quot;: &quot;{color.neutral.900}&quot;
+        },
+        &quot;muted&quot;: {
+          &quot;$type&quot;: &quot;color&quot;,
+          &quot;$value&quot;: &quot;{color.neutral.600}&quot;
+        },
+        &quot;subtle&quot;: {
+          &quot;$type&quot;: &quot;color&quot;,
+          &quot;$value&quot;: &quot;{color.neutral.400}&quot;
+        },
+        &quot;inverse&quot;: {
+          &quot;$type&quot;: &quot;color&quot;,
+          &quot;$value&quot;: &quot;{color.base.white}&quot;
+        }
+      },
+      &quot;border&quot;: {
+        &quot;default&quot;: {
+          &quot;$type&quot;: &quot;color&quot;,
+          &quot;$value&quot;: &quot;{color.neutral.200}&quot;
+        },
+        &quot;strong&quot;: {
+          &quot;$type&quot;: &quot;color&quot;,
+          &quot;$value&quot;: &quot;{color.neutral.400}&quot;
+        },
+        &quot;focus&quot;: {
+          &quot;$type&quot;: &quot;color&quot;,
+          &quot;$value&quot;: &quot;{color.purple.500}&quot;
+        }
+      },
+      &quot;action&quot;: {
+        &quot;primary&quot;: {
+          &quot;bg&quot;: {
+            &quot;default&quot;: {
+              &quot;$type&quot;: &quot;color&quot;,
+              &quot;$value&quot;: &quot;{color.purple.600}&quot;
+            },
+            &quot;hover&quot;: {
+              &quot;$type&quot;: &quot;color&quot;,
+              &quot;$value&quot;: &quot;{color.purple.700}&quot;
+            },
+            &quot;pressed&quot;: {
+              &quot;$type&quot;: &quot;color&quot;,
+              &quot;$value&quot;: &quot;{color.purple.800}&quot;
+            },
+            &quot;disabled&quot;: {
+              &quot;$type&quot;: &quot;color&quot;,
+              &quot;$value&quot;: &quot;{color.neutral.200}&quot;
+            }
+          },
+          &quot;fg&quot;: {
+            &quot;$type&quot;: &quot;color&quot;,
+            &quot;$value&quot;: &quot;{color.base.white}&quot;
+          }
+        },
+        &quot;secondary&quot;: {
+          &quot;bg&quot;: {
+            &quot;default&quot;: {
+              &quot;$type&quot;: &quot;color&quot;,
+              &quot;$value&quot;: &quot;{color.cyan.600}&quot;
+            },
+            &quot;hover&quot;: {
+              &quot;$type&quot;: &quot;color&quot;,
+              &quot;$value&quot;: &quot;{color.cyan.700}&quot;
+            },
+            &quot;pressed&quot;: {
+              &quot;$type&quot;: &quot;color&quot;,
+              &quot;$value&quot;: &quot;{color.cyan.800}&quot;
+            },
+            &quot;disabled&quot;: {
+              &quot;$type&quot;: &quot;color&quot;,
+              &quot;$value&quot;: &quot;{color.neutral.200}&quot;
+            }
+          },
+          &quot;fg&quot;: {
+            &quot;$type&quot;: &quot;color&quot;,
+            &quot;$value&quot;: &quot;{color.base.white}&quot;
+          }
+        },
+        &quot;ghost&quot;: {
+          &quot;bg&quot;: {
+            &quot;default&quot;: {
+              &quot;$type&quot;: &quot;color&quot;,
+              &quot;$value&quot;: &quot;{color.base.transparent}&quot;
+            },
+            &quot;hover&quot;: {
+              &quot;$type&quot;: &quot;color&quot;,
+              &quot;$value&quot;: &quot;{color.purple.50}&quot;
+            },
+            &quot;pressed&quot;: {
+              &quot;$type&quot;: &quot;color&quot;,
+              &quot;$value&quot;: &quot;{color.purple.100}&quot;
+            }
+          },
+          &quot;fg&quot;: {
+            &quot;$type&quot;: &quot;color&quot;,
+            &quot;$value&quot;: &quot;{color.purple.700}&quot;
+          }
+        },
+        &quot;disabled&quot;: {
+          &quot;fg&quot;: {
+            &quot;$type&quot;: &quot;color&quot;,
+            &quot;$value&quot;: &quot;{color.neutral.400}&quot;
+          }
+        }
+      },
+      &quot;feedback&quot;: {
+        &quot;success&quot;: {
+          &quot;bg&quot;: {
+            &quot;$type&quot;: &quot;color&quot;,
+            &quot;$value&quot;: &quot;{color.green.50}&quot;
+          },
+          &quot;fg&quot;: {
+            &quot;$type&quot;: &quot;color&quot;,
+            &quot;$value&quot;: &quot;{color.green.700}&quot;
+          },
+          &quot;border&quot;: {
+            &quot;$type&quot;: &quot;color&quot;,
+            &quot;$value&quot;: &quot;{color.green.300}&quot;
+          }
+        },
+        &quot;warning&quot;: {
+          &quot;bg&quot;: {
+            &quot;$type&quot;: &quot;color&quot;,
+            &quot;$value&quot;: &quot;{color.amber.50}&quot;
+          },
+          &quot;fg&quot;: {
+            &quot;$type&quot;: &quot;color&quot;,
+            &quot;$value&quot;: &quot;{color.amber.700}&quot;
+          },
+          &quot;border&quot;: {
+            &quot;$type&quot;: &quot;color&quot;,
+            &quot;$value&quot;: &quot;{color.amber.300}&quot;
+          }
+        },
+        &quot;danger&quot;: {
+          &quot;bg&quot;: {
+            &quot;$type&quot;: &quot;color&quot;,
+            &quot;$value&quot;: &quot;{color.red.50}&quot;
+          },
+          &quot;fg&quot;: {
+            &quot;$type&quot;: &quot;color&quot;,
+            &quot;$value&quot;: &quot;{color.red.700}&quot;
+          },
+          &quot;border&quot;: {
+            &quot;$type&quot;: &quot;color&quot;,
+            &quot;$value&quot;: &quot;{color.red.300}&quot;
+          }
+        },
+        &quot;info&quot;: {
+          &quot;bg&quot;: {
+            &quot;$type&quot;: &quot;color&quot;,
+            &quot;$value&quot;: &quot;{color.blue.50}&quot;
+          },
+          &quot;fg&quot;: {
+            &quot;$type&quot;: &quot;color&quot;,
+            &quot;$value&quot;: &quot;{color.blue.700}&quot;
+          },
+          &quot;border&quot;: {
+            &quot;$type&quot;: &quot;color&quot;,
+            &quot;$value&quot;: &quot;{color.blue.300}&quot;
+          }
+        }
+      }
+    },
+    &quot;space&quot;: {
+      &quot;inset&quot;: {
+        &quot;xs&quot;: {
+          &quot;$type&quot;: &quot;dimension&quot;,
+          &quot;$value&quot;: &quot;{space.4}&quot;
+        },
+        &quot;sm&quot;: {
+          &quot;$type&quot;: &quot;dimension&quot;,
+          &quot;$value&quot;: &quot;{space.8}&quot;
+        },
+        &quot;md&quot;: {
+          &quot;$type&quot;: &quot;dimension&quot;,
+          &quot;$value&quot;: &quot;{space.16}&quot;
+        },
+        &quot;lg&quot;: {
+          &quot;$type&quot;: &quot;dimension&quot;,
+          &quot;$value&quot;: &quot;{space.24}&quot;
+        }
+      },
+      &quot;gap&quot;: {
+        &quot;xs&quot;: {
+          &quot;$type&quot;: &quot;dimension&quot;,
+          &quot;$value&quot;: &quot;{space.4}&quot;
+        },
+        &quot;sm&quot;: {
+          &quot;$type&quot;: &quot;dimension&quot;,
+          &quot;$value&quot;: &quot;{space.8}&quot;
+        },
+        &quot;md&quot;: {
+          &quot;$type&quot;: &quot;dimension&quot;,
+          &quot;$value&quot;: &quot;{space.12}&quot;
+        },
+        &quot;lg&quot;: {
+          &quot;$type&quot;: &quot;dimension&quot;,
+          &quot;$value&quot;: &quot;{space.16}&quot;
+        }
+      }
+    },
+    &quot;radius&quot;: {
+      &quot;control&quot;: {
+        &quot;$type&quot;: &quot;dimension&quot;,
+        &quot;$value&quot;: &quot;{radius.md}&quot;
+      },
+      &quot;container&quot;: {
+        &quot;$type&quot;: &quot;dimension&quot;,
+        &quot;$value&quot;: &quot;{radius.lg}&quot;
+      },
+      &quot;pill&quot;: {
+        &quot;$type&quot;: &quot;dimension&quot;,
+        &quot;$value&quot;: &quot;{radius.full}&quot;
+      },
+      &quot;indicator&quot;: {
+        &quot;$type&quot;: &quot;dimension&quot;,
+        &quot;$value&quot;: &quot;{radius.sm}&quot;
+      },
+      &quot;input&quot;: {
+        &quot;$type&quot;: &quot;dimension&quot;,
+        &quot;$value&quot;: &quot;{radius.sm}&quot;
+      }
+    },
+    &quot;border-width&quot;: {
+      &quot;default&quot;: {
+        &quot;$type&quot;: &quot;dimension&quot;,
+        &quot;$value&quot;: &quot;{border-width.1}&quot;
+      },
+      &quot;focus&quot;: {
+        &quot;$type&quot;: &quot;dimension&quot;,
+        &quot;$value&quot;: &quot;{border-width.2}&quot;
+      }
+    },
+    &quot;$textStyles&quot;: {
+      &quot;Display&quot;: {
+        &quot;family&quot;: &quot;{font.family.display}&quot;,
+        &quot;weight&quot;: &quot;{font.weight.bold}&quot;,
+        &quot;size&quot;: &quot;{font.size.800}&quot;,
+        &quot;lineHeight&quot;: &quot;{font.line-height.800}&quot;
+      },
+      &quot;Heading/L&quot;: {
+        &quot;family&quot;: &quot;{font.family.display}&quot;,
+        &quot;weight&quot;: &quot;{font.weight.medium}&quot;,
+        &quot;size&quot;: &quot;{font.size.700}&quot;,
+        &quot;lineHeight&quot;: &quot;{font.line-height.700}&quot;
+      },
+      &quot;Heading/M&quot;: {
+        &quot;family&quot;: &quot;{font.family.display}&quot;,
+        &quot;weight&quot;: &quot;{font.weight.medium}&quot;,
+        &quot;size&quot;: &quot;{font.size.600}&quot;,
+        &quot;lineHeight&quot;: &quot;{font.line-height.600}&quot;
+      },
+      &quot;Heading/S&quot;: {
+        &quot;family&quot;: &quot;{font.family.display}&quot;,
+        &quot;weight&quot;: &quot;{font.weight.medium}&quot;,
+        &quot;size&quot;: &quot;{font.size.500}&quot;,
+        &quot;lineHeight&quot;: &quot;{font.line-height.500}&quot;
+      },
+      &quot;Body/L&quot;: {
+        &quot;family&quot;: &quot;{font.family.sans}&quot;,
+        &quot;weight&quot;: &quot;{font.weight.regular}&quot;,
+        &quot;size&quot;: &quot;{font.size.400}&quot;,
+        &quot;lineHeight&quot;: &quot;{font.line-height.400}&quot;
+      },
+      &quot;Body/M&quot;: {
+        &quot;family&quot;: &quot;{font.family.sans}&quot;,
+        &quot;weight&quot;: &quot;{font.weight.regular}&quot;,
+        &quot;size&quot;: &quot;{font.size.300}&quot;,
+        &quot;lineHeight&quot;: &quot;{font.line-height.300}&quot;
+      },
+      &quot;Body/S&quot;: {
+        &quot;family&quot;: &quot;{font.family.sans}&quot;,
+        &quot;weight&quot;: &quot;{font.weight.regular}&quot;,
+        &quot;size&quot;: &quot;{font.size.200}&quot;,
+        &quot;lineHeight&quot;: &quot;{font.line-height.200}&quot;
+      },
+      &quot;Label&quot;: {
+        &quot;family&quot;: &quot;{font.family.sans}&quot;,
+        &quot;weight&quot;: &quot;{font.weight.medium}&quot;,
+        &quot;size&quot;: &quot;{font.size.200}&quot;,
+        &quot;lineHeight&quot;: &quot;{font.line-height.200}&quot;
+      },
+      &quot;Caption&quot;: {
+        &quot;family&quot;: &quot;{font.family.sans}&quot;,
+        &quot;weight&quot;: &quot;{font.weight.regular}&quot;,
+        &quot;size&quot;: &quot;{font.size.100}&quot;,
+        &quot;lineHeight&quot;: &quot;{font.line-height.100}&quot;
+      }
+    }
+  },
+  &quot;Component&quot;: {
+    &quot;$description&quot;: &quot;Component layer. Values alias the Semantic collection.&quot;,
+    &quot;button&quot;: {
+      &quot;primary&quot;: {
+        &quot;bg&quot;: {
+          &quot;default&quot;: {
+            &quot;$type&quot;: &quot;color&quot;,
+            &quot;$value&quot;: &quot;{color.action.primary.bg.default}&quot;
+          },
+          &quot;hover&quot;: {
+            &quot;$type&quot;: &quot;color&quot;,
+            &quot;$value&quot;: &quot;{color.action.primary.bg.hover}&quot;
+          },
+          &quot;pressed&quot;: {
+            &quot;$type&quot;: &quot;color&quot;,
+            &quot;$value&quot;: &quot;{color.action.primary.bg.pressed}&quot;
+          },
+          &quot;disabled&quot;: {
+            &quot;$type&quot;: &quot;color&quot;,
+            &quot;$value&quot;: &quot;{color.action.primary.bg.disabled}&quot;
+          }
+        },
+        &quot;fg&quot;: {
+          &quot;$type&quot;: &quot;color&quot;,
+          &quot;$value&quot;: &quot;{color.action.primary.fg}&quot;
+        }
+      },
+      &quot;secondary&quot;: {
+        &quot;bg&quot;: {
+          &quot;default&quot;: {
+            &quot;$type&quot;: &quot;color&quot;,
+            &quot;$value&quot;: &quot;{color.action.secondary.bg.default}&quot;
+          },
+          &quot;hover&quot;: {
+            &quot;$type&quot;: &quot;color&quot;,
+            &quot;$value&quot;: &quot;{color.action.secondary.bg.hover}&quot;
+          },
+          &quot;pressed&quot;: {
+            &quot;$type&quot;: &quot;color&quot;,
+            &quot;$value&quot;: &quot;{color.action.secondary.bg.pressed}&quot;
+          },
+          &quot;disabled&quot;: {
+            &quot;$type&quot;: &quot;color&quot;,
+            &quot;$value&quot;: &quot;{color.action.secondary.bg.disabled}&quot;
+          }
+        },
+        &quot;fg&quot;: {
+          &quot;$type&quot;: &quot;color&quot;,
+          &quot;$value&quot;: &quot;{color.action.secondary.fg}&quot;
+        }
+      },
+      &quot;ghost&quot;: {
+        &quot;bg&quot;: {
+          &quot;default&quot;: {
+            &quot;$type&quot;: &quot;color&quot;,
+            &quot;$value&quot;: &quot;{color.action.ghost.bg.default}&quot;
+          },
+          &quot;hover&quot;: {
+            &quot;$type&quot;: &quot;color&quot;,
+            &quot;$value&quot;: &quot;{color.action.ghost.bg.hover}&quot;
+          },
+          &quot;pressed&quot;: {
+            &quot;$type&quot;: &quot;color&quot;,
+            &quot;$value&quot;: &quot;{color.action.ghost.bg.pressed}&quot;
+          },
+          &quot;disabled&quot;: {
+            &quot;$type&quot;: &quot;color&quot;,
+            &quot;$value&quot;: &quot;{color.action.ghost.bg.default}&quot;
+          }
+        },
+        &quot;fg&quot;: {
+          &quot;$type&quot;: &quot;color&quot;,
+          &quot;$value&quot;: &quot;{color.action.ghost.fg}&quot;
+        }
+      },
+      &quot;disabled&quot;: {
+        &quot;fg&quot;: {
+          &quot;$type&quot;: &quot;color&quot;,
+          &quot;$value&quot;: &quot;{color.action.disabled.fg}&quot;
+        }
+      },
+      &quot;padding-x&quot;: {
+        &quot;$type&quot;: &quot;dimension&quot;,
+        &quot;$value&quot;: &quot;{space.inset.md}&quot;
+      },
+      &quot;padding-y&quot;: {
+        &quot;$type&quot;: &quot;dimension&quot;,
+        &quot;$value&quot;: &quot;{space.inset.sm}&quot;
+      },
+      &quot;radius&quot;: {
+        &quot;$type&quot;: &quot;dimension&quot;,
+        &quot;$value&quot;: &quot;{radius.control}&quot;
+      },
+      &quot;focus-ring&quot;: {
+        &quot;color&quot;: {
+          &quot;$type&quot;: &quot;color&quot;,
+          &quot;$value&quot;: &quot;{color.border.focus}&quot;
+        },
+        &quot;width&quot;: {
+          &quot;$type&quot;: &quot;dimension&quot;,
+          &quot;$value&quot;: &quot;{border-width.focus}&quot;
+        }
+      }
+    },
+    &quot;input&quot;: {
+      &quot;bg&quot;: {
+        &quot;default&quot;: {
+          &quot;$type&quot;: &quot;color&quot;,
+          &quot;$value&quot;: &quot;{color.bg.default}&quot;
+        },
+        &quot;disabled&quot;: {
+          &quot;$type&quot;: &quot;color&quot;,
+          &quot;$value&quot;: &quot;{color.bg.muted}&quot;
+        }
+      },
+      &quot;border&quot;: {
+        &quot;default&quot;: {
+          &quot;$type&quot;: &quot;color&quot;,
+          &quot;$value&quot;: &quot;{color.border.default}&quot;
+        },
+        &quot;hover&quot;: {
+          &quot;$type&quot;: &quot;color&quot;,
+          &quot;$value&quot;: &quot;{color.border.strong}&quot;
+        },
+        &quot;focus&quot;: {
+          &quot;$type&quot;: &quot;color&quot;,
+          &quot;$value&quot;: &quot;{color.border.focus}&quot;
+        },
+        &quot;error&quot;: {
+          &quot;$type&quot;: &quot;color&quot;,
+          &quot;$value&quot;: &quot;{color.feedback.danger.fg}&quot;
+        }
+      },
+      &quot;fg&quot;: {
+        &quot;default&quot;: {
+          &quot;$type&quot;: &quot;color&quot;,
+          &quot;$value&quot;: &quot;{color.fg.default}&quot;
+        },
+        &quot;placeholder&quot;: {
+          &quot;$type&quot;: &quot;color&quot;,
+          &quot;$value&quot;: &quot;{color.fg.muted}&quot;
+        },
+        &quot;disabled&quot;: {
+          &quot;$type&quot;: &quot;color&quot;,
+          &quot;$value&quot;: &quot;{color.fg.subtle}&quot;
+        }
+      },
+      &quot;border-width&quot;: {
+        &quot;default&quot;: {
+          &quot;$type&quot;: &quot;dimension&quot;,
+          &quot;$value&quot;: &quot;{border-width.default}&quot;
+        },
+        &quot;focus&quot;: {
+          &quot;$type&quot;: &quot;dimension&quot;,
+          &quot;$value&quot;: &quot;{border-width.focus}&quot;
+        }
+      },
+      &quot;padding-x&quot;: {
+        &quot;$type&quot;: &quot;dimension&quot;,
+        &quot;$value&quot;: &quot;{space.inset.md}&quot;
+      },
+      &quot;padding-y&quot;: {
+        &quot;$type&quot;: &quot;dimension&quot;,
+        &quot;$value&quot;: &quot;{space.inset.sm}&quot;
+      },
+      &quot;radius&quot;: {
+        &quot;$type&quot;: &quot;dimension&quot;,
+        &quot;$value&quot;: &quot;{radius.input}&quot;
+      }
+    }
+  }
+}</textarea>
+  <button class="go" id="go-import">Tokens importieren</button>
+</div>
+
+<div class="panel" id="export">
+  <h2>Token Bridge · Export</h2>
+  <p>Figma Variables und Text Styles werden als W3C Design Tokens ins Repo geschrieben. Figma bleibt Source of Truth.</p>
+  <div class="row">
+    <div><label>Owner</label><input id="owner" placeholder="github-user"></div>
+    <div><label>Repo</label><input id="repo" placeholder="design-tokens-workflow"></div>
+  </div>
+  <div class="row">
+    <div><label>Branch</label><input id="branch" value="main"></div>
+  </div>
+  <label>Personal Access Token</label>
+  <input id="token" type="password" placeholder="github_pat_…">
+  <small>Wird nur lokal in Figma gespeichert.</small>
+  <label>Commit-Nachricht</label>
+  <input id="message" value="tokens: sync from Figma">
+  <button class="go" id="go-export">Nach GitHub exportieren</button>
+</div>
+
+<ul id="log"></ul>
+
+<script>
+  const $ = (id) => document.getElementById(id);
+  const send = (m) => parent.postMessage({ pluginMessage: m }, '*');
+  const log = (lines) => ($('log').innerHTML = lines.map((l) => '<li>' + l + '</li>').join(''));
+  const fields = ['owner', 'repo', 'branch', 'token'];
+
+  document.querySelectorAll('.tab').forEach((t) => (t.onclick = () => {
+    document.querySelectorAll('.tab, .panel').forEach((e) => e.classList.remove('active'));
+    t.classList.add('active'); $(t.dataset.tab).classList.add('active'); log([]);
+  }));
+
+  $('go-import').onclick = () => { log(['Import läuft…']); send({ type: 'import', json: $('json').value }); };
+
+  $('go-export').onclick = () => {
+    const s = Object.fromEntries(fields.map((f) => [f, $(f).value.trim()]));
+    if (!s.owner || !s.repo || !s.token) return log(['⚠️ Owner, Repo und Token ausfüllen']);
+    send({ type: 'save-settings', settings: s });
+    $('go-export').disabled = true;
+    log(['Tokens werden aus Figma gelesen…']);
+    send({ type: 'export' });
+  };
+
+  // One export = one commit (Git Data API): build a tree on top of the branch, commit, move the branch.
+  async function push(files, preLog) {
+    const s = Object.fromEntries(fields.map((f) => [f, $(f).value.trim()]));
+    const api = `https://api.github.com/repos/${s.owner}/${s.repo}/git/`;
+    const headers = { Authorization: 'Bearer ' + s.token, Accept: 'application/vnd.github+json' };
+    const call = async (path, method = 'GET', body) => {
+      const r = await fetch(api + path, { method, headers, body: body && JSON.stringify(body) });
+      const data = await r.json();
+      if (!r.ok) throw new Error(`${r.status} ${data.message}`);
+      return data;
+    };
+    const lines = [...preLog, 'Commit wird erstellt…'];
+    log(lines);
+
+    const ref = await call(`ref/heads/${encodeURIComponent(s.branch)}`);
+    const parent = await call(`commits/${ref.object.sha}`);
+    const tree = await call('trees', 'POST', {
+      base_tree: parent.tree.sha,
+      tree: Object.entries(files).map(([path, data]) => ({
+        path, mode: '100644', type: 'blob', content: JSON.stringify(data, null, 2) + '\n',
+      })),
+    });
+
+    lines.pop();
+    if (tree.sha === parent.tree.sha) {
+      lines.push('= Keine Änderungen seit dem letzten Export');
+    } else {
+      const commit = await call('commits', 'POST', {
+        message: $('message').value || 'tokens: sync from Figma',
+        tree: tree.sha,
+        parents: [ref.object.sha],
+      });
+      await call(`refs/heads/${encodeURIComponent(s.branch)}`, 'PATCH', { sha: commit.sha });
+      lines.push(`✅ 1 Commit mit ${Object.keys(files).length} Dateien (${commit.sha.slice(0, 7)})`);
+      lines.push(`→ github.com/${s.owner}/${s.repo}/commit/${commit.sha.slice(0, 7)}`);
+    }
+    log(lines);
+    $('go-export').disabled = false;
+    send({ type: 'notify', text: '✅ Export abgeschlossen' });
+  }
+
+  onmessage = (e) => {
+    const m = e.data.pluginMessage;
+    if (!m) return;
+    if (m.type === 'done') log(m.log);
+    if (m.type === 'settings') fields.forEach((f) => m.settings[f] && ($(f).value = m.settings[f]));
+    if (m.type === 'export-files') push(m.files, m.log).catch((err) => { log(['❌ ' + err.message]); $('go-export').disabled = false; });
+  };
+  send({ type: 'load-settings' });
+</script>
