@@ -34,7 +34,7 @@
   gap: var(--space-gap-sm);
   min-width: 0;
   margin: 0;
-  padding: var(--space-20);
+  padding: var(--space-inset-card);
   border: var(--border-width-default) solid var(--color-border-default);
   border-radius: var(--radius-card);
   background: var(--color-bg-default);
@@ -50,9 +50,9 @@
 .info-card__kicker,
 .info-card--facts dt {
   color: var(--color-action-ghost-fg);
-  /* Text style: Overline (regular weight) */
+  /* Text style: Overline */
   font-family: var(--font-family-mono);
-  font-weight: var(--font-weight-regular);
+  font-weight: var(--font-weight-medium);
   font-size: var(--font-size-100);
   line-height: var(--font-line-height-100);
   letter-spacing: 0.08em;
@@ -76,7 +76,7 @@
 /* Result chip sits at the bottom, so chips line up across a row of cards */
 .info-card__chip { align-self: flex-start; margin-top: auto; }
 .info-card__text + .info-card__chip { margin-top: auto; }
-.info-card:has(.info-card__chip) .info-card__text { margin-bottom: var(--space-8); }
+.info-card:has(.info-card__chip) .info-card__text { margin-bottom: var(--space-inset-sm); }
 
 /* Step: bigger title */
 .info-card--step .info-card__title {
@@ -95,8 +95,8 @@ a.info-card__title:focus-visible::after { outline: var(--border-width-focus) sol
 }
 
 /* Facts: definition list */
-.info-card--facts { gap: var(--space-16); padding: var(--space-20) var(--space-24); }
-.info-card--facts > div { display: grid; gap: var(--space-4); }
+.info-card--facts { gap: var(--space-inset-md); padding: var(--space-inset-card) var(--space-inset-lg); }
+.info-card--facts > div { display: grid; gap: var(--space-inset-xs); }
 .info-card--facts dd { margin: 0; }
 
 @media (prefers-reduced-motion: reduce) {

@@ -22,10 +22,10 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  gap: var(--space-12);
+  gap: var(--space-gap-md);
   max-width: var(--site-footer-max, 1120px);
   margin: 0 auto;
-  padding: var(--space-24);
+  padding: var(--space-inset-lg);
   color: var(--color-fg-muted);
   /* Text style: Body S */
   font-family: var(--font-family-sans);
@@ -47,5 +47,5 @@
 .site-footer__icon--love { fill: var(--color-decor-pin); }
 
 @media (max-width: 560px) {
-  .site-footer__inner { padding-inline: var(--space-16); }
+  .site-footer__inner { padding-inline: var(--space-inset-md); }
 }

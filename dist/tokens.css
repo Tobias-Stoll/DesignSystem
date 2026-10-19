@@ -181,6 +181,9 @@
   --space-inset-xs: var(--space-4);
   --space-inset-sm: var(--space-8);
   --space-inset-lg: var(--space-24);
+  --space-inset-card: var(--space-20);
+  --space-inset-xl: var(--space-32);
+  --space-inset-2xl: var(--space-48);
   --space-gap-lg: var(--space-16);
   --space-gap-xs: var(--space-4);
   --space-gap-sm: var(--space-8);

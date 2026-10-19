@@ -254,6 +254,18 @@
       "lg": {
         "$type": "dimension",
         "$value": "{space.24}"
+      },
+      "card": {
+        "$type": "dimension",
+        "$value": "{space.20}"
+      },
+      "xl": {
+        "$type": "dimension",
+        "$value": "{space.32}"
+      },
+      "2xl": {
+        "$type": "dimension",
+        "$value": "{space.48}"
       }
     },
     "gap": {

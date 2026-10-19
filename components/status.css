@@ -15,7 +15,7 @@
   display: inline-flex;
   align-items: center;
   gap: var(--space-gap-sm);
-  padding: var(--space-4) var(--space-12);
+  padding: var(--space-inset-xs) var(--space-gap-md);
   border: var(--border-width-default) solid var(--color-feedback-success-border);
   border-radius: var(--radius-pill);
   background: var(--color-feedback-success-bg);

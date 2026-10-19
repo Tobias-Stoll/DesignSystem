@@ -28,9 +28,9 @@
 .work-row {
   display: grid;
   grid-template-columns: minmax(0, 240px) minmax(0, 1fr) auto;
-  gap: var(--space-8) var(--space-24);
+  gap: var(--space-gap-sm) var(--space-inset-lg);
   align-items: baseline;
-  padding: var(--space-20) var(--space-8);
+  padding: var(--space-inset-card) var(--space-inset-sm);
   border-bottom: var(--border-width-default) solid var(--color-border-default);
   transition: background-color var(--motion-duration-base),
               padding var(--motion-duration-slow) var(--motion-easing-standard);
@@ -49,9 +49,9 @@
 
 .work-row__tag {
   color: var(--color-fg-subtle);
-  /* Text style: Overline (regular weight) */
+  /* Text style: Overline */
   font-family: var(--font-family-mono);
-  font-weight: var(--font-weight-regular);
+  font-weight: var(--font-weight-medium);
   font-size: var(--font-size-100);
   line-height: var(--font-line-height-100);
   letter-spacing: 0.08em;
@@ -63,7 +63,7 @@
 .work-row--soon .work-row__tag { color: var(--color-action-ghost-fg); }
 
 @media (hover: hover) {
-  .work-row:not(.work-row--soon):hover { background: var(--color-bg-default); padding-left: var(--space-16); }
+  .work-row:not(.work-row--soon):hover { background: var(--color-bg-default); padding-left: var(--space-inset-md); }
 }
 
 /* Small screens: description moves under name and tag */

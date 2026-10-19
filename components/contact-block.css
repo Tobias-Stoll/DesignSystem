@@ -25,8 +25,8 @@
 
 .contact-block {
   display: grid;
-  gap: var(--space-16);
-  padding-block: var(--space-48);
+  gap: var(--space-gap-lg);
+  padding-block: var(--space-inset-2xl);
 }
 
 .contact-block__title {
@@ -43,20 +43,20 @@
 }
 
 .contact-block__line { display: block; }
-.contact-block__line--cta { margin-top: var(--space-16); color: var(--color-action-primary-bg-default); }
+.contact-block__line--cta { margin-top: var(--space-inset-md); color: var(--color-action-primary-bg-default); }
 
 .contact-block__row {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: var(--space-gap-sm) var(--space-gap-md);
-  margin-top: var(--space-8);
+  margin-top: var(--space-inset-sm);
 }
 
 .contact-block__row .btn { text-decoration: none; }
 
 .contact-block__mail {
-  margin-right: var(--space-8);
+  margin-right: var(--space-inset-sm);
   overflow-wrap: anywhere;
   user-select: all;
   font-family: var(--font-family-mono);

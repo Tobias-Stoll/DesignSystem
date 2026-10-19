@@ -25,9 +25,9 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: var(--space-12);
+  gap: var(--space-gap-md);
   min-height: 180px;
-  padding: var(--space-20);
+  padding: var(--space-inset-card);
   border-radius: var(--radius-indicator);
   background: var(--_paper);
   box-shadow: var(--shadow-card);
@@ -51,7 +51,7 @@
 }
 
 .note__text {
-  margin: var(--space-8) 0 0;
+  margin: var(--space-inset-sm) 0 0;
   overflow-wrap: anywhere;
   /* Text style: Body L */
   font-family: var(--font-family-sans);
@@ -74,7 +74,7 @@
 .note--plain {
   --_paper: var(--color-bg-default);
   --_pin: var(--color-feedback-success-accent);
-  padding-top: var(--space-32);
+  padding-top: var(--space-inset-xl);
   border: var(--border-width-default) solid var(--color-border-default);
 }
 

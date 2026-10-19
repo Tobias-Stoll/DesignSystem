@@ -57,7 +57,7 @@
   aspect-ratio: 16 / 10;
   max-width: 100%;
   overflow: hidden;
-  padding: var(--space-16) 0 0 var(--space-16);
+  padding: var(--space-inset-md) 0 0 var(--space-inset-md);
   background: linear-gradient(140deg, var(--_stage-start), var(--_stage-end));
 }
 
@@ -79,7 +79,7 @@
   flex: 1;
   flex-direction: column;
   gap: var(--space-gap-sm);
-  padding: var(--space-16) var(--space-20) var(--space-20);
+  padding: var(--space-inset-md) var(--space-inset-card) var(--space-inset-card);
 }
 
 .case-card__pillar {
@@ -87,7 +87,7 @@
   color: var(--color-action-ghost-fg);
   /* Text style: Overline */
   font-family: var(--font-family-mono);
-  font-weight: var(--font-weight-regular);
+  font-weight: var(--font-weight-medium);
   font-size: var(--font-size-100);
   line-height: var(--font-line-height-100);
   letter-spacing: 0.08em;
@@ -110,7 +110,7 @@
   flex-wrap: wrap;
   gap: var(--space-gap-xs) var(--space-gap-sm);
   margin: auto 0 0;
-  padding-top: var(--space-4);
+  padding-top: var(--space-inset-xs);
 }
 
 @media (hover: hover) {
