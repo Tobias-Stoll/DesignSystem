@@ -71,7 +71,13 @@
   line-height: var(--font-line-height-500);
 }
 
-.info-card__text { color: var(--color-fg-muted); }
+.info-card__text {
+  color: var(--color-fg-muted);
+  /* Text style: Body M */
+  font-family: var(--font-family-sans);
+  font-size: var(--font-size-300);
+  line-height: var(--font-line-height-300);
+}
 
 /* Result chip sits at the bottom, so chips line up across a row of cards */
 .info-card__chip { align-self: flex-start; margin-top: auto; }

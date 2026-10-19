@@ -9,6 +9,7 @@
  * The current section link gets aria-current="page" (or .is-active from a scroll spy).
  * Case studies can show a reading progress bar: set --site-header-progress (0 to 1) via JS.
  * Under 640px the status badge hides and the nav tightens.
+ * On pages with a white ground set --site-header-bg: var(--color-bg-default), so the header blends in.
  *
  * Markup:
  * <header class="site-header">
@@ -29,7 +30,7 @@
   top: env(safe-area-inset-top, 0px);
   z-index: 20;
   border-bottom: var(--border-width-default) solid transparent;
-  background: color-mix(in srgb, var(--color-bg-canvas) 86%, transparent);
+  background: color-mix(in srgb, var(--site-header-bg, var(--color-bg-canvas)) 86%, transparent);
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   transition: border-color var(--motion-duration-base);
