@@ -3,9 +3,12 @@
  */
 
 :root {
+  --shadow-card: 0px 1px 2px 0px #2b2b2f0f, 0px 8px 24px -8px #2b2b2f24;
+  --shadow-lift: 0px 2px 4px 0px #2b2b2f0f, 0px 24px 48px -16px #2b2b2f38;
   --color-base-white: #ffffff;
   --color-base-black: #000000;
   --color-base-transparent: rgba(255, 255, 255, 0);
+  --color-neutral-25: #fbfbfd;
   --color-neutral-50: #f6f7f8;
   --color-neutral-100: #ececef;
   --color-neutral-200: #dadadf;
@@ -98,6 +101,7 @@
   --border-width-2: 2px;
   --font-family-sans: 'Roboto', sans-serif;
   --font-family-display: 'Oswald', sans-serif;
+  --font-family-mono: 'Roboto Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
   --font-size-100: 12px;
   --font-size-200: 14px;
   --font-size-300: 16px;
@@ -117,10 +121,17 @@
   --font-weight-regular: 400;
   --font-weight-medium: 500;
   --font-weight-bold: 700;
+  --motion-duration-150: 150ms;
+  --motion-duration-200: 200ms;
+  --motion-duration-350: 350ms;
+  --motion-duration-500: 500ms;
+  --motion-easing-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --motion-easing-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
   --color-bg-default: var(--color-base-white);
   --color-bg-subtle: var(--color-neutral-50);
   --color-bg-muted: var(--color-neutral-100);
   --color-bg-inverse: var(--color-neutral-900);
+  --color-bg-canvas: var(--color-neutral-25);
   --color-fg-default: var(--color-neutral-900);
   --color-fg-muted: var(--color-neutral-600);
   --color-fg-subtle: var(--color-neutral-400);
@@ -146,6 +157,7 @@
   --color-feedback-success-bg: var(--color-green-50);
   --color-feedback-success-fg: var(--color-green-700);
   --color-feedback-success-border: var(--color-green-300);
+  --color-feedback-success-accent: var(--color-green-500);
   --color-feedback-warning-bg: var(--color-amber-50);
   --color-feedback-warning-fg: var(--color-amber-700);
   --color-feedback-warning-border: var(--color-amber-300);
@@ -155,6 +167,16 @@
   --color-feedback-info-bg: var(--color-blue-50);
   --color-feedback-info-fg: var(--color-blue-700);
   --color-feedback-info-border: var(--color-blue-300);
+  --color-decor-paper: var(--color-amber-100);
+  --color-decor-paper-accent: var(--color-purple-100);
+  --color-decor-pin: var(--color-red-500);
+  --color-decor-pin-accent: var(--color-purple-600);
+  --color-decor-stage-dark-start: var(--color-neutral-800);
+  --color-decor-stage-dark-end: var(--color-neutral-900);
+  --color-decor-stage-purple-start: var(--color-purple-100);
+  --color-decor-stage-purple-end: var(--color-purple-200);
+  --color-decor-stage-blue-start: var(--color-blue-50);
+  --color-decor-stage-blue-end: var(--color-blue-100);
   --space-inset-md: var(--space-16);
   --space-inset-xs: var(--space-4);
   --space-inset-sm: var(--space-8);
@@ -168,8 +190,15 @@
   --radius-pill: var(--radius-full);
   --radius-indicator: var(--radius-sm);
   --radius-input: var(--radius-sm);
+  --radius-card: var(--radius-xl);
   --border-width-default: var(--border-width-1);
   --border-width-focus: var(--border-width-2);
+  --motion-duration-fast: var(--motion-duration-150);
+  --motion-duration-base: var(--motion-duration-200);
+  --motion-duration-slow: var(--motion-duration-350);
+  --motion-duration-slower: var(--motion-duration-500);
+  --motion-easing-standard: var(--motion-easing-out);
+  --motion-easing-playful: var(--motion-easing-spring);
   --button-primary-bg-default: var(--color-action-primary-bg-default);
   --button-primary-bg-hover: var(--color-action-primary-bg-hover);
   --button-primary-bg-pressed: var(--color-action-primary-bg-pressed);

@@ -16,6 +16,10 @@
       "inverse": {
         "$type": "color",
         "$value": "{color.neutral.900}"
+      },
+      "canvas": {
+        "$type": "color",
+        "$value": "{color.neutral.25}"
       }
     },
     "fg": {
@@ -139,6 +143,10 @@
         "border": {
           "$type": "color",
           "$value": "{color.green.300}"
+        },
+        "accent": {
+          "$type": "color",
+          "$value": "{color.green.500}"
         }
       },
       "warning": {
@@ -181,6 +189,50 @@
         "border": {
           "$type": "color",
           "$value": "{color.blue.300}"
+        }
+      }
+    },
+    "decor": {
+      "paper": {
+        "$type": "color",
+        "$value": "{color.amber.100}"
+      },
+      "paper-accent": {
+        "$type": "color",
+        "$value": "{color.purple.100}"
+      },
+      "pin": {
+        "$type": "color",
+        "$value": "{color.red.500}"
+      },
+      "pin-accent": {
+        "$type": "color",
+        "$value": "{color.purple.600}"
+      },
+      "stage": {
+        "dark-start": {
+          "$type": "color",
+          "$value": "{color.neutral.800}"
+        },
+        "dark-end": {
+          "$type": "color",
+          "$value": "{color.neutral.900}"
+        },
+        "purple-start": {
+          "$type": "color",
+          "$value": "{color.purple.100}"
+        },
+        "purple-end": {
+          "$type": "color",
+          "$value": "{color.purple.200}"
+        },
+        "blue-start": {
+          "$type": "color",
+          "$value": "{color.blue.50}"
+        },
+        "blue-end": {
+          "$type": "color",
+          "$value": "{color.blue.100}"
         }
       }
     }
@@ -243,6 +295,10 @@
     "input": {
       "$type": "dimension",
       "$value": "{radius.sm}"
+    },
+    "card": {
+      "$type": "dimension",
+      "$value": "{radius.xl}"
     }
   },
   "border-width": {
@@ -253,6 +309,36 @@
     "focus": {
       "$type": "dimension",
       "$value": "{border-width.2}"
+    }
+  },
+  "motion": {
+    "duration": {
+      "fast": {
+        "$type": "duration",
+        "$value": "{motion.duration.150}"
+      },
+      "base": {
+        "$type": "duration",
+        "$value": "{motion.duration.200}"
+      },
+      "slow": {
+        "$type": "duration",
+        "$value": "{motion.duration.350}"
+      },
+      "slower": {
+        "$type": "duration",
+        "$value": "{motion.duration.500}"
+      }
+    },
+    "easing": {
+      "standard": {
+        "$type": "cubicBezier",
+        "$value": "{motion.easing.out}"
+      },
+      "playful": {
+        "$type": "cubicBezier",
+        "$value": "{motion.easing.spring}"
+      }
     }
   }
 }

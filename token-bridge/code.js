@@ -133,8 +133,16 @@ const slug = (s) => s.toLowerCase().replace(/\s+/g, '-');
 
 function tokenType(v) {
   if (v.resolvedType === 'COLOR') return 'color';
-  if (v.resolvedType === 'STRING') return v.name.startsWith('font/family') ? 'fontFamily' : 'string';
-  if (v.resolvedType === 'FLOAT') return v.name.startsWith('font/weight') ? 'fontWeight' : 'dimension';
+  if (v.resolvedType === 'STRING') {
+    if (v.name.startsWith('font/family')) return 'fontFamily';
+    if (v.name.startsWith('motion/easing')) return 'cubicBezier';
+    return 'string';
+  }
+  if (v.resolvedType === 'FLOAT') {
+    if (v.name.startsWith('font/weight')) return 'fontWeight';
+    if (v.name.startsWith('motion/duration')) return 'duration';
+    return 'dimension';
+  }
   return 'string';
 }
 
@@ -145,6 +153,9 @@ function formatValue(raw, type, byId) {
   }
   if (type === 'color') return toHex(raw);
   if (type === 'dimension') return raw + 'px';
+  if (type === 'duration') return raw + 'ms';
+  // "cubic-bezier(.2, .8, .2, 1)" -> [0.2, 0.8, 0.2, 1] (W3C cubicBezier)
+  if (type === 'cubicBezier') return (String(raw).match(/-?[\d.]+/g) || []).map(Number);
   return raw;
 }
 
@@ -186,18 +197,38 @@ async function exportTokens() {
     };
     for (const s of styles) {
       const lh = s.lineHeight && s.lineHeight.unit === 'PIXELS' ? s.lineHeight.value + 'px' : 'normal';
-      setPath(typo, s.name.split('/').map(slug), {
-        $type: 'typography',
-        $value: {
-          fontFamily: ref(s, 'fontFamily', s.fontName.family),
-          fontWeight: ref(s, 'fontWeight', s.fontName.style),
-          fontSize: ref(s, 'fontSize', s.fontSize + 'px'),
-          lineHeight: ref(s, 'lineHeight', lh),
-        },
-      });
+      const value = {
+        fontFamily: ref(s, 'fontFamily', s.fontName.family),
+        fontWeight: ref(s, 'fontWeight', s.fontName.style),
+        fontSize: ref(s, 'fontSize', s.fontSize + 'px'),
+        lineHeight: ref(s, 'lineHeight', lh),
+      };
+      // Only written when set, so existing styles export exactly as before
+      const ls = s.letterSpacing;
+      if (ls && ls.value) value.letterSpacing = ls.unit === 'PERCENT' ? +(ls.value / 100).toFixed(4) + 'em' : ls.value + 'px';
+      if (s.textCase && s.textCase !== 'ORIGINAL') value.textTransform = s.textCase === 'UPPER' ? 'uppercase' : s.textCase === 'LOWER' ? 'lowercase' : 'capitalize';
+      setPath(typo, s.name.split('/').map(slug), { $type: 'typography', $value: value });
     }
     files['tokens/typography.json'] = { typography: typo };
     log.push(`Text Styles: ${styles.length} Typography Tokens`);
+  }
+
+  // Effect styles (drop shadows) -> W3C shadow tokens
+  const effects = await figma.getLocalEffectStylesAsync();
+  if (effects.length) {
+    const fx = {};
+    for (const s of effects) {
+      const layers = s.effects.filter((e) => e.type === 'DROP_SHADOW' && e.visible !== false).map((e) => ({
+        color: toHex(e.color),
+        offsetX: e.offset.x + 'px',
+        offsetY: e.offset.y + 'px',
+        blur: e.radius + 'px',
+        spread: (e.spread || 0) + 'px',
+      }));
+      if (layers.length) setPath(fx, s.name.split('/').map(slug), { $type: 'shadow', $value: layers });
+    }
+    files['tokens/effects.json'] = fx;
+    log.push(`Effect Styles: ${effects.length} Shadow Tokens`);
   }
   return { files, log };
 }

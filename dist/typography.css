@@ -64,3 +64,12 @@
   font-size: var(--font-size-500);
   line-height: var(--font-line-height-500);
 }
+
+.text-overline {
+  font-family: var(--font-family-mono);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-100);
+  line-height: var(--font-line-height-100);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}

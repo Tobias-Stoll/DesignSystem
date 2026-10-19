@@ -18,7 +18,10 @@ StyleDictionary.registerFormat({
         `  font-family: ${cssVar(v.fontFamily)};\n` +
         `  font-weight: ${cssVar(v.fontWeight)};\n` +
         `  font-size: ${cssVar(v.fontSize)};\n` +
-        `  line-height: ${cssVar(v.lineHeight)};\n}`;
+        `  line-height: ${cssVar(v.lineHeight)};\n` +
+        // Overline: tracking and case come straight from the Figma text style
+        (v.letterSpacing ? `  letter-spacing: ${v.letterSpacing};\n` : '') +
+        (v.textTransform ? `  text-transform: ${v.textTransform};\n` : '') + '}';
     });
     return header + rules.join('\n\n') + '\n';
   },
@@ -29,7 +32,10 @@ StyleDictionary.registerTransform({
   name: 'fontFamily/fallback',
   type: 'value',
   filter: (t) => t.$type === 'fontFamily',
-  transform: (t) => `'${t.$value}', sans-serif`,
+  transform: (t) => {
+    const name = String(t.$value).replace(/['"]/g, '');
+    return /mono/i.test(name) ? `'${name}', ui-monospace, SFMono-Regular, Menlo, monospace` : `'${name}', sans-serif`;
+  },
 });
 
 const sd = new StyleDictionary({

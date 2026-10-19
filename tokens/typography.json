@@ -84,6 +84,17 @@
           "lineHeight": "{font.line-height.500}"
         }
       }
+    },
+    "overline": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "{font.family.mono}",
+        "fontWeight": "{font.weight.medium}",
+        "fontSize": "{font.size.100}",
+        "lineHeight": "{font.line-height.100}",
+        "letterSpacing": "0.08em",
+        "textTransform": "uppercase"
+      }
     }
   }
 }
