@@ -6,7 +6,7 @@
   <title>Design System Test · Tobias Stoll</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Roboto:wght@400;500&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
 
   <!-- Generated from Figma via Token Bridge + GitHub Action -->
   <link rel="stylesheet" href="dist/tokens.css">
@@ -18,6 +18,16 @@
   <link rel="stylesheet" href="components/alert.css">
   <link rel="stylesheet" href="components/form-field.css">
   <link rel="stylesheet" href="components/signup-card.css">
+  <link rel="stylesheet" href="components/chip.css">
+  <link rel="stylesheet" href="components/status.css">
+  <link rel="stylesheet" href="components/kicker.css">
+  <link rel="stylesheet" href="components/case-card.css">
+  <link rel="stylesheet" href="components/info-card.css">
+  <link rel="stylesheet" href="components/work-row.css">
+  <link rel="stylesheet" href="components/note.css">
+  <link rel="stylesheet" href="components/site-header.css">
+  <link rel="stylesheet" href="components/contact-block.css">
+  <link rel="stylesheet" href="components/site-footer.css">
 
   <style>
     /* Page shell. Built from tokens only, no hard-coded colors. */
@@ -124,17 +134,17 @@
       font: 13px/1.6 ui-monospace, SFMono-Regular, Menlo, monospace;
     }
     .dim { opacity: .55; }
-    footer {
+    .page-footer {
       color: var(--color-fg-muted);
       margin-top: var(--space-48);
       padding-top: var(--space-24);
       border-top: var(--border-width-default) solid var(--color-border-default);
     }
-    footer p { margin: 0 0 var(--space-4); }
-    footer p:first-child { color: var(--color-fg-default); }
+    .page-footer p { margin: 0 0 var(--space-4); }
+    .page-footer p:first-child { color: var(--color-fg-default); }
 
     code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .92em; }
-    .note { color: var(--color-fg-muted); }
+    .page-note { color: var(--color-fg-muted); }
     .alert-live { max-width: 480px; }
     .alert-live:empty { display: none; }
     .variants { display: grid; gap: var(--space-gap-lg); max-width: 480px; }
@@ -181,6 +191,34 @@
     .compare #ov-live { max-width: 440px; }
     .tokens td code { white-space: nowrap; }
 
+    /* Previews of the portfolio components: on the page ground they were made for */
+    .preview-canvas { margin: 0; padding: var(--space-24); border-radius: var(--radius-container); background: var(--color-bg-canvas); list-style: none; }
+    .preview-canvas--flush { padding: 0; overflow: hidden; }
+    .demo-grid { display: grid; gap: var(--space-20); align-items: stretch; }
+    .demo-grid--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .demo-grid > div { display: flex; flex-direction: column; min-width: 0; }
+    .demo-grid > div > :last-child { flex: 1; }
+    .note-wall { align-items: start; padding: var(--space-32) var(--space-24); }
+    .note-demo__textarea { resize: vertical; min-height: 88px; }
+    .note-demo__actions { display: flex; align-items: center; justify-content: space-between; gap: var(--space-12); color: var(--color-fg-subtle); }
+    .kicker-demo { display: grid; gap: var(--space-12); }
+    .kicker-demo p { margin: 0; }
+    .states--wide { grid-template-columns: minmax(0, 1fr); pointer-events: auto; }
+    .header-demo { border-radius: var(--radius-container); overflow: hidden; background: var(--color-bg-canvas); box-shadow: inset 0 0 0 var(--border-width-default) var(--color-border-default); }
+    .header-demo .site-header { position: relative; }
+    .tk-shadows { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: var(--space-24); padding: var(--space-24); border-radius: var(--radius-container); background: var(--color-bg-canvas); }
+    .tk-shadow { display: flex; flex-direction: column; gap: var(--space-12); }
+    .tk-shadow__box { height: 88px; border-radius: var(--radius-card); background: var(--color-bg-default); }
+    .tk-shadow code { font-size: 12px; color: var(--color-fg-muted); }
+    .tk-shadow code b { display: block; font-weight: var(--font-weight-medium); color: var(--color-fg-default); }
+    .tk-motion { display: grid; gap: var(--space-8); }
+    .tk-motion__row { display: grid; grid-template-columns: 180px 72px minmax(0, 1fr); gap: var(--space-12); align-items: center; }
+    .tk-motion__track { position: relative; height: 12px; border-radius: var(--radius-pill); background: var(--color-bg-muted); }
+    .tk-motion__dot { position: absolute; left: 0; top: 0; width: 12px; height: 12px; border-radius: 50%; background: var(--color-border-focus); }
+    .tk-motion:hover .tk-motion__dot, .tk-motion:focus-within .tk-motion__dot { left: calc(100% - 12px); }
+    .tk-motion__row code { font-size: 12px; }
+    @media (max-width: 900px) { .demo-grid--3 { grid-template-columns: minmax(0, 1fr); } }
+
     /* Tokens page */
     .tk-layers { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--space-gap-md); }
     .tk-layer {
@@ -197,7 +235,7 @@
     .tk-scales { display: grid; gap: var(--space-12); }
     .tk-scale { display: grid; grid-template-columns: 72px minmax(0, 1fr); gap: var(--space-12); align-items: start; }
     .tk-scale__name { padding-top: var(--space-4); color: var(--color-fg-muted); }
-    .tk-scale__steps { display: grid; grid-template-columns: repeat(10, minmax(0, 1fr)); gap: var(--space-4); }
+    .tk-scale__steps { display: grid; grid-template-columns: repeat(11, minmax(0, 1fr)); gap: var(--space-4); }
     .tk-step { display: flex; flex-direction: column; gap: var(--space-4); min-width: 0; }
     .tk-step__chip {
       height: 40px; border-radius: var(--radius-indicator);
@@ -274,14 +312,24 @@
         <li><a href="#input">Input</a></li>
         <li><a href="#checkbox">Checkbox</a></li>
         <li><a href="#alert">Alert</a></li>
+        <li><a href="#chip">Chip</a></li>
+        <li><a href="#status">Status Badge</a></li>
+        <li><a href="#kicker">Kicker</a></li>
       </ul>
       <p class="nav__group text-label">Molecules</p>
       <ul class="nav text-body-s">
         <li><a href="#form-field">Form Field</a></li>
+        <li><a href="#case-card">Case Card</a></li>
+        <li><a href="#info-card">Info Card</a></li>
+        <li><a href="#work-row">Work Row</a></li>
+        <li><a href="#note">Note</a></li>
       </ul>
       <p class="nav__group text-label">Organisms</p>
       <ul class="nav text-body-s">
         <li><a href="#signup-card">Sign-up Card</a></li>
+        <li><a href="#site-header">Site Header</a></li>
+        <li><a href="#contact-block">Contact Block</a></li>
+        <li><a href="#site-footer">Site Footer</a></li>
       </ul>
     </nav>
   </aside>
@@ -410,7 +458,7 @@
           </li>
           <li>
             <h3 class="text-heading-s">2. Use the components</h3>
-            <p class="text-body-s">Plain HTML with a class. All variants and states are on the component pages: <a href="#button">Button</a>, <a href="#input">Input</a>, <a href="#checkbox">Checkbox</a>, <a href="#alert">Alert</a>, <a href="#form-field">Form Field</a>, <a href="#signup-card">Sign-up Card</a>.</p>
+            <p class="text-body-s">Plain HTML with a class. All variants and states are on the component pages: <a href="#button">Button</a>, <a href="#input">Input</a>, <a href="#checkbox">Checkbox</a>, <a href="#alert">Alert</a>, <a href="#chip">Chip</a>, <a href="#status">Status Badge</a>, <a href="#kicker">Kicker</a>, <a href="#form-field">Form Field</a>, <a href="#case-card">Case Card</a>, <a href="#info-card">Info Card</a>, <a href="#work-row">Work Row</a>, <a href="#note">Note</a>, <a href="#signup-card">Sign-up Card</a>, <a href="#site-header">Site Header</a>, <a href="#contact-block">Contact Block</a>, <a href="#site-footer">Site Footer</a>.</p>
             <div class="code">
               <div class="code__bar"><span class="text-caption">HTML · body</span><button class="btn btn--primary copy" type="button">Copy</button></div>
 <pre>&lt;button class="btn btn--primary"&gt;Subscribe&lt;/button&gt;
@@ -450,7 +498,7 @@
           </li>
         </ol>
 
-        <p class="note text-caption">
+        <p class="page-note text-caption">
           Note: <code>@main</code> always points to the latest export, but jsDelivr may cache it for up to 12 hours.
           In a production project you would pin a release, for example <code>@v1.0.0</code>.
         </p>
@@ -499,6 +547,9 @@
         </div>
         <h3 class="text-label">Font</h3>
         <div class="tokens-scroll" id="tk-font"></div>
+        <h3 class="text-label">Motion</h3>
+        <p class="text-body-s page-note">Hover the tracks to play each duration with the standard easing. Semantic names (<code>fast</code>, <code>base</code>, <code>slow</code>, <code>slower</code>) point here.</p>
+        <div class="tk-motion" id="tk-motion" tabindex="0" aria-label="Motion durations, focus to play"></div>
       </section>
 
       <section class="card" aria-labelledby="tk-semantic-title">
@@ -523,6 +574,14 @@
           <p class="text-body-s">Figma text styles, bound to the font primitives. In code each one is a class from <code>typography.css</code>.</p>
         </div>
         <div id="tk-type" class="tk-type"></div>
+      </section>
+
+      <section class="card" aria-labelledby="tk-shadow-title">
+        <div class="card__header">
+          <h2 id="tk-shadow-title" class="text-heading-s" tabindex="-1">Shadows</h2>
+          <p class="text-body-s">Figma effect styles, exported as W3C shadow tokens (<code>tokens/effects.json</code>).</p>
+        </div>
+        <div id="tk-shadows" class="tk-shadows"></div>
       </section>
     </section>
 
@@ -844,7 +903,421 @@
       </section>
     </section>
 
-    <footer class="text-caption">
+    <!-- ============ Chip ============ -->
+    <section class="view" id="view-chip" hidden>
+      <p class="eyebrow text-heading-s">Atom</p>
+      <h1 class="text-heading-l" tabindex="-1">Chip</h1>
+      <p class="lead text-body-m">A short fact about a project: platform, industry, a measured result. Chips are labels, not buttons, so they have no hover or focus. 3 variants, uses semantic tokens directly (<code>color/feedback/…</code>).</p>
+      <div class="links"><a class="btn btn--ghost" href="https://concept2design.de/#work">See it on concept2design.de</a></div>
+
+      <section class="card">
+        <div class="card__header">
+          <h2 class="text-heading-s">All variants</h2>
+          <p class="text-body-s">As in the Figma component. Height 20px: 2 + 16 line height + 2.</p>
+        </div>
+        <div class="states">
+          <div><p class="state__name text-caption">Neutral</p><span class="chip">B2B</span></div>
+          <div><p class="state__name text-caption">Success</p><span class="chip chip--success">−30% drop-off</span></div>
+          <div><p class="state__name text-caption">Info</p><span class="chip chip--info">Live demo</span></div>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="card__header">
+          <h2 class="text-heading-s">When to use what</h2>
+          <p class="text-body-s">Color carries meaning, so it stays rare.</p>
+        </div>
+        <div class="tokens-scroll"><table class="tokens text-body-s">
+          <thead><tr><th>Variant</th><th>Use for</th><th>Rule</th></tr></thead>
+          <tbody>
+            <tr><td>Neutral</td><td>Context: platform, industry, discipline</td><td>As many as needed, keep them to one or two words</td></tr>
+            <tr><td>Success</td><td>A measured result</td><td>One per card, always first. Only real numbers</td></tr>
+            <tr><td>Info</td><td>A pointer to something extra, for example a live demo</td><td>One per card</td></tr>
+          </tbody>
+        </table></div>
+      </section>
+
+      <section class="card" data-code="chip"></section>
+
+      <section class="card">
+        <div class="card__header">
+          <h2 class="text-heading-s">Tokens</h2>
+          <p class="text-body-s">Semantic tokens used by the chip.</p>
+        </div>
+        <div class="tokens-scroll" data-tokens-list="--color-bg-muted,--color-fg-muted,--color-feedback-success-bg,--color-feedback-success-fg,--color-feedback-info-bg,--color-feedback-info-fg,--color-feedback-info-border,--radius-pill,--space-8,--font-size-100"></div>
+      </section>
+    </section>
+
+    <!-- ============ Status Badge ============ -->
+    <section class="view" id="view-status" hidden>
+      <p class="eyebrow text-heading-s">Atom</p>
+      <h1 class="text-heading-l" tabindex="-1">Status Badge</h1>
+      <p class="lead text-body-m">A live status with a pulsing dot, for example "Open to work". It sits in the Site Header. The dot is decoration, the label carries the meaning, so it also works without color.</p>
+      <div class="links"><a class="btn btn--ghost" href="https://concept2design.de/">See it on concept2design.de</a></div>
+
+      <section class="card">
+        <div class="card__header">
+          <h2 class="text-heading-s">Try it</h2>
+          <p class="text-body-s">The dot pulses 3 times after loading, then rests. Hover to restart it.</p>
+        </div>
+        <div class="row"><span class="status"><span class="status__dot" aria-hidden="true"></span>Open to work</span></div>
+      </section>
+
+      <section class="card">
+        <div class="card__header">
+          <h2 class="text-heading-s">Motion</h2>
+          <p class="text-body-s">Calm by default, so it never competes with the content.</p>
+        </div>
+        <div class="tokens-scroll"><table class="tokens text-body-s">
+          <thead><tr><th>Rule</th><th>Why</th></tr></thead>
+          <tbody>
+            <tr><td>3 pulses (about 5 s), then still</td><td>WCAG 2.2.2: moving content stops within 5 seconds</td></tr>
+            <tr><td>Hover restarts the pulse</td><td>A small reward for curiosity, never on its own</td></tr>
+            <tr><td>No motion with reduced motion</td><td><code>prefers-reduced-motion: reduce</code> keeps the dot still</td></tr>
+          </tbody>
+        </table></div>
+      </section>
+
+      <section class="card" data-code="status"></section>
+
+      <section class="card">
+        <div class="card__header">
+          <h2 class="text-heading-s">Tokens</h2>
+          <p class="text-body-s">Semantic tokens used by the badge.</p>
+        </div>
+        <div class="tokens-scroll" data-tokens-list="--color-feedback-success-bg,--color-feedback-success-fg,--color-feedback-success-border,--color-feedback-success-accent,--radius-pill,--space-gap-sm,--motion-easing-standard"></div>
+      </section>
+    </section>
+
+    <!-- ============ Kicker ============ -->
+    <section class="view" id="view-kicker" hidden>
+      <p class="eyebrow text-heading-s">Atom</p>
+      <h1 class="text-heading-l" tabindex="-1">Kicker</h1>
+      <p class="lead text-body-m">The small mono label above a headline. The kicker names the section, the headline says what it means. Built on the new text style <code>Overline</code>: Roboto Mono, uppercase, 8% tracking.</p>
+      <div class="links"><a class="btn btn--ghost" href="https://concept2design.de/#work">See it on concept2design.de</a></div>
+
+      <section class="card">
+        <div class="card__header">
+          <h2 class="text-heading-s">In use</h2>
+          <p class="text-body-s">Always directly above the headline, 12px gap.</p>
+        </div>
+        <div class="kicker-demo">
+          <p class="kicker">Let's start</p>
+          <h3 class="text-heading-l">Selected work</h3>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="card__header">
+          <h2 class="text-heading-s">Inside an h1</h2>
+          <p class="text-body-s">The kicker can be part of the h1, so search engines read the keywords. Same look, better structure.</p>
+        </div>
+        <div class="kicker-demo">
+          <p class="text-heading-l"><span class="kicker">Product Designer (UX/UI) · Berlin</span><br>Product design, from the first data point to the final pixel.</p>
+        </div>
+      </section>
+
+      <section class="card" data-code="kicker"></section>
+
+      <section class="card">
+        <div class="card__header">
+          <h2 class="text-heading-s">Tokens</h2>
+          <p class="text-body-s">Text style <code>Overline</code> and one semantic color.</p>
+        </div>
+        <div class="tokens-scroll" data-tokens-list="--font-family-mono,--font-weight-medium,--font-size-100,--font-line-height-100,--color-action-ghost-fg"></div>
+      </section>
+    </section>
+
+    <!-- ============ Case Card ============ -->
+    <section class="view" id="view-case-card" hidden>
+      <p class="eyebrow text-heading-s">Molecule</p>
+      <h1 class="text-heading-l" tabindex="-1">Case Card</h1>
+      <p class="lead text-body-m">One project as a teaser. A visual on a tinted stage, the pillar it proves, a result-first title and a few chips. The whole card is one link. Built from the Chip atom, surface tokens <code>radius/card</code> and <code>Shadow/Card</code>.</p>
+      <div class="links"><a class="btn btn--ghost" href="https://concept2design.de/#work">See it on concept2design.de</a></div>
+
+      <section class="card">
+        <div class="card__header">
+          <h2 class="text-heading-s">Try it</h2>
+          <p class="text-body-s">Hover a card: it lifts, tilts a little and the image drifts toward you. Tab focuses the whole card.</p>
+        </div>
+        <ul class="demo-grid demo-grid--3 preview-canvas" role="list">
+          <li class="case-card case-card--blue"><a class="case-card__link" href="#case-card">
+            <div class="case-card__stage"><img src="assets/figma/signup-card-states.png" alt="Sign-up card in four states" width="960" height="2968"></div>
+            <div class="case-card__body"><p class="case-card__pillar">KPI-driven product design</p><h3 class="case-card__title">Three moments that decide a booking</h3>
+            <p class="case-card__meta"><span class="chip chip--success">Conversion ↑</span><span class="chip">Desktop &amp; Mobile</span><span class="chip">B2C</span></p></div></a></li>
+          <li class="case-card case-card--purple"><a class="case-card__link" href="#case-card">
+            <div class="case-card__stage"><img src="assets/figma/signup-card-states.png" alt="Sign-up card in four states" width="960" height="2968"></div>
+            <div class="case-card__body"><p class="case-card__pillar">Design systems 0→1</p><h3 class="case-card__title">60 legacy components, one source of truth</h3>
+            <p class="case-card__meta"><span class="chip chip--success">229 tokens</span><span class="chip chip--info">Live demo</span><span class="chip">B2B</span></p></div></a></li>
+          <li class="case-card case-card--dark"><a class="case-card__link" href="#case-card">
+            <div class="case-card__stage"><img src="assets/figma/signup-card-states.png" alt="Sign-up card in four states" width="960" height="2968"></div>
+            <div class="case-card__body"><p class="case-card__pillar">Research &amp; UX strategy</p><h3 class="case-card__title">An esports platform people can follow</h3>
+            <p class="case-card__meta"><span class="chip chip--success">−30% drop-off</span><span class="chip">B2C</span><span class="chip">UX</span></p></div></a></li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <div class="card__header">
+          <h2 class="text-heading-s">Anatomy</h2>
+          <p class="text-body-s">Four parts, top to bottom.</p>
+        </div>
+        <div class="tokens-scroll"><table class="tokens text-body-s">
+          <thead><tr><th>Part</th><th>Style</th><th>Rule</th></tr></thead>
+          <tbody>
+            <tr><td>Stage</td><td>16:10, gradient in Dark, Purple or Blue</td><td>A screenshot that bleeds out to the right, or an animation</td></tr>
+            <tr><td>Pillar</td><td>Overline, ghost color</td><td>Names what the project proves, not the client</td></tr>
+            <tr><td>Title</td><td>Heading M</td><td>The result first, the method later in the case study</td></tr>
+            <tr><td>Meta</td><td>Chips</td><td>One Success chip with a real number, then context. Sits at the bottom, so chips line up across a row</td></tr>
+          </tbody>
+        </table></div>
+      </section>
+
+      <section class="card" data-code="case-card"></section>
+
+      <section class="card">
+        <div class="card__header">
+          <h2 class="text-heading-s">Tokens</h2>
+          <p class="text-body-s">Semantic tokens, shadows and motion used by the card.</p>
+        </div>
+        <div class="tokens-scroll" data-tokens-list="--color-bg-default,--color-border-default,--radius-card,--shadow-card,--shadow-lift,--color-decor-stage-dark-start,--color-decor-stage-dark-end,--color-decor-stage-purple-start,--color-decor-stage-purple-end,--color-decor-stage-blue-start,--color-decor-stage-blue-end,--color-action-ghost-fg,--motion-duration-slow,--motion-duration-slower,--motion-easing-standard"></div>
+      </section>
+    </section>
+
+    <!-- ============ Info Card ============ -->
+    <section class="view" id="view-info-card" hidden>
+      <p class="eyebrow text-heading-s">Molecule</p>
+      <h1 class="text-heading-l" tabindex="-1">Info Card</h1>
+      <p class="lead text-body-m">The Case Card surface without a stage. Three variants for case study content: a result, a step, the facts. They used to be three separate cards in the portfolio with the same surface, now it is one component.</p>
+      <div class="links"><a class="btn btn--ghost" href="https://concept2design.de/invia/">See it in a case study</a></div>
+
+      <section class="card">
+        <div class="card__header">
+          <h2 class="text-heading-s">All variants</h2>
+          <p class="text-body-s">The Step card links to a section: hover it.</p>
+        </div>
+        <div class="demo-grid demo-grid--3 preview-canvas">
+          <div><p class="state__name text-caption">Default</p>
+            <article class="info-card"><h3 class="info-card__title">Faster handoff</h3><p class="info-card__text">Developers read the same names as designers, so fewer questions come back.</p></article></div>
+          <div><p class="state__name text-caption">Step</p>
+            <article class="info-card info-card--step"><p class="info-card__kicker">Moment 1 · Offer box</p><h3><a class="info-card__title" href="#info-card">Two prices, one clear choice</a></h3><p class="info-card__text">Why one big button hid the cheaper option.</p><span class="chip chip--success info-card__chip">Conversion ↑</span></article></div>
+          <div><p class="state__name text-caption">Facts</p>
+            <dl class="info-card info-card--facts"><div><dt>Role</dt><dd>UX/UI designer, end to end</dd></div><div><dt>Tools</dt><dd>Figma, Figma MCP, Claude, GitHub</dd></div><div><dt>Scope</dt><dd>229 tokens, 10 text styles</dd></div></dl></div>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="card__header">
+          <h2 class="text-heading-s">When to use what</h2>
+          <p class="text-body-s">Same surface, different job.</p>
+        </div>
+        <div class="tokens-scroll"><table class="tokens text-body-s">
+          <thead><tr><th>Variant</th><th>Use for</th><th>Content</th></tr></thead>
+          <tbody>
+            <tr><td>Default</td><td>Results, takeaways, learnings</td><td>Title (Heading S) + one or two lines</td></tr>
+            <tr><td>Step</td><td>The key moments of a case study, often linked</td><td>Kicker, title (Heading M), text, optional result chip</td></tr>
+            <tr><td>Facts</td><td>"At a glance" next to the hero</td><td>A definition list: label (Overline) and value</td></tr>
+          </tbody>
+        </table></div>
+      </section>
+
+      <section class="card" data-code="info-card"></section>
+
+      <section class="card">
+        <div class="card__header">
+          <h2 class="text-heading-s">Tokens</h2>
+          <p class="text-body-s">Same surface tokens as the Case Card.</p>
+        </div>
+        <div class="tokens-scroll" data-tokens-list="--color-bg-default,--color-border-default,--color-fg-default,--color-fg-muted,--color-action-ghost-fg,--radius-card,--shadow-card,--shadow-lift,--space-20,--motion-duration-slow,--motion-easing-standard"></div>
+      </section>
+    </section>
+
+    <!-- ============ Work Row ============ -->
+    <section class="view" id="view-work-row" hidden>
+      <p class="eyebrow text-heading-s">Molecule</p>
+      <h1 class="text-heading-l" tabindex="-1">Work Row</h1>
+      <p class="lead text-body-m">A compact list for smaller projects: name, one line on what it was, a status tag. Lighter than a card, so the big cases stay in front.</p>
+      <div class="links"><a class="btn btn--ghost" href="https://concept2design.de/#work">See it on concept2design.de</a></div>
+
+      <section class="card">
+        <div class="card__header">
+          <h2 class="text-heading-s">Try it</h2>
+          <p class="text-body-s">Hover a row. "Soon" rows stay still. Under 960px the description moves to its own line.</p>
+        </div>
+        <div class="preview-canvas">
+          <ul class="work-rows" role="list">
+            <li class="work-row"><span class="work-row__name">Enterprise design system</span><span class="work-row__what">Icon system, move from Adobe XD to Figma, rebuilt components</span><span class="work-row__tag">Foundation</span></li>
+            <li class="work-row"><span class="work-row__name">Team profiles</span><span class="work-row__what">Performance history across seasons for 1,500+ esports teams</span><span class="work-row__tag">Shipped</span></li>
+            <li class="work-row work-row--soon"><span class="work-row__name">More coming soon</span><span class="work-row__what">New projects are on the way.</span><span class="work-row__tag">Soon</span></li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="card" data-code="work-row"></section>
+
+      <section class="card">
+        <div class="card__header">
+          <h2 class="text-heading-s">Tokens</h2>
+          <p class="text-body-s">Semantic tokens used by the row.</p>
+        </div>
+        <div class="tokens-scroll" data-tokens-list="--color-fg-default,--color-fg-muted,--color-fg-subtle,--color-action-ghost-fg,--color-border-default,--color-bg-default,--space-20,--space-24,--motion-duration-base,--motion-duration-slow,--motion-easing-standard"></div>
+      </section>
+    </section>
+
+    <!-- ============ Note ============ -->
+    <section class="view" id="view-note" hidden>
+      <p class="eyebrow text-heading-s">Molecule</p>
+      <h1 class="text-heading-l" tabindex="-1">Note</h1>
+      <p class="lead text-body-m">A pinned paper note for a guestbook or feedback wall. Three papers: a visitor's note, the owner's note, and a plain one that holds a form. The only component with a playful easing (<code>motion/easing/playful</code>).</p>
+      <div class="links"><a class="btn btn--ghost" href="https://concept2design.de/#notes">See the notes wall</a></div>
+
+      <section class="card">
+        <div class="card__header">
+          <h2 class="text-heading-s">All variants</h2>
+          <p class="text-body-s">Hover a note: it straightens up. The Plain note holds Form Field, Input and Button.</p>
+        </div>
+        <div class="demo-grid demo-grid--3 preview-canvas note-wall">
+          <form class="note note--plain" onsubmit="return false">
+            <div class="form-field">
+              <div class="form-field__header"><label class="form-field__label" for="nt-msg">Your note</label></div>
+              <textarea class="input note-demo__textarea" id="nt-msg" rows="3"></textarea>
+            </div>
+            <div class="note-demo__actions"><span class="text-caption">0 / 280</span><button class="btn btn--primary" type="submit">Pin it</button></div>
+          </form>
+          <article class="note"><p class="note__text">Loved the token workflow, especially the QA loop!</p><p class="note__by">Anna</p></article>
+          <article class="note note--accent"><p class="note__text">Hi! I read every note. Honest feedback is the best kind.</p><p class="note__by">Tobias</p></article>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="card__header">
+          <h2 class="text-heading-s">When to use what</h2>
+          <p class="text-body-s">The paper tells who wrote it.</p>
+        </div>
+        <div class="tokens-scroll"><table class="tokens text-body-s">
+          <thead><tr><th>Paper</th><th>Use for</th></tr></thead>
+          <tbody>
+            <tr><td>Default</td><td>Notes from visitors</td></tr>
+            <tr><td>Accent</td><td>The owner's own note, at most one per wall</td></tr>
+            <tr><td>Plain</td><td>The form to write a note. Stays straight, so typing feels stable</td></tr>
+          </tbody>
+        </table></div>
+      </section>
+
+      <section class="card" data-code="note"></section>
+
+      <section class="card">
+        <div class="card__header">
+          <h2 class="text-heading-s">Tokens</h2>
+          <p class="text-body-s">Decor colors for paper and pin, plus the card shadow.</p>
+        </div>
+        <div class="tokens-scroll" data-tokens-list="--color-decor-paper,--color-decor-pin,--color-decor-paper-accent,--color-decor-pin-accent,--color-bg-default,--color-feedback-success-accent,--color-border-default,--radius-indicator,--shadow-card,--motion-duration-slow,--motion-duration-slower,--motion-easing-playful"></div>
+      </section>
+    </section>
+
+    <!-- ============ Site Header ============ -->
+    <section class="view" id="view-site-header" hidden>
+      <p class="eyebrow text-heading-s">Organism</p>
+      <h1 class="text-heading-l" tabindex="-1">Site Header</h1>
+      <p class="lead text-body-m">Sticky navigation for a one-page site with case studies. Brand, section links and the Status Badge. It blurs the page behind it and gets a hairline once you scroll. Case studies add a reading progress bar.</p>
+      <div class="links"><a class="btn btn--ghost" href="https://concept2design.de/invia/">See it on a case study</a></div>
+
+      <section class="card">
+        <div class="card__header">
+          <h2 class="text-heading-s">All states</h2>
+          <p class="text-body-s">Static previews. Under 640px the status badge hides and the links move closer.</p>
+        </div>
+        <div class="states states--wide">
+          <div><p class="state__name text-caption">Top</p>
+            <div class="header-demo"><header class="site-header"><div class="site-header__inner"><a class="site-header__brand" href="#site-header">Tobias Stoll</a>
+              <nav class="site-header__nav" aria-label="Demo"><a href="#site-header" aria-current="page">Work</a><a href="#site-header">How</a><a href="#site-header">About</a><a href="#site-header">Notes</a></nav>
+              <span class="status"><span class="status__dot" aria-hidden="true"></span>Open to work</span></div></header></div></div>
+          <div><p class="state__name text-caption">Scrolled, with reading progress</p>
+            <div class="header-demo"><header class="site-header is-scrolled" style="--site-header-progress: .4"><div class="site-header__inner"><a class="site-header__brand" href="#site-header">Tobias Stoll</a>
+              <nav class="site-header__nav" aria-label="Demo"><a href="#site-header" aria-current="page">Work</a><a href="#site-header">How</a><a href="#site-header">About</a><a href="#site-header">Notes</a></nav>
+              <span class="status"><span class="status__dot" aria-hidden="true"></span>Open to work</span></div>
+              <div class="site-header__progress" aria-hidden="true"><span></span></div></header></div></div>
+        </div>
+      </section>
+
+      <section class="card" data-code="site-header"></section>
+
+      <section class="card">
+        <div class="card__header">
+          <h2 class="text-heading-s">Tokens</h2>
+          <p class="text-body-s">Semantic tokens used by the header.</p>
+        </div>
+        <div class="tokens-scroll" data-tokens-list="--color-bg-canvas,--color-border-default,--color-fg-default,--color-fg-muted,--color-bg-muted,--color-action-ghost-bg-hover,--color-action-ghost-fg,--color-action-primary-bg-default,--radius-control,--motion-duration-fast,--motion-duration-base"></div>
+      </section>
+    </section>
+
+    <!-- ============ Contact Block ============ -->
+    <section class="view" id="view-contact-block" hidden>
+      <p class="eyebrow text-heading-s">Organism</p>
+      <h1 class="text-heading-l" tabindex="-1">Contact Block</h1>
+      <p class="lead text-body-m">The end of a page. A big headline with the call to action in the primary color, the email as selectable text, one primary action and quiet links. Built from Kicker and Button.</p>
+      <div class="links"><a class="btn btn--ghost" href="https://concept2design.de/#contact">See it on concept2design.de</a></div>
+
+      <section class="card">
+        <div class="card__header">
+          <h2 class="text-heading-s">Try it</h2>
+          <p class="text-body-s">Copy the email. The headline scales with the window (36 to 64px).</p>
+        </div>
+        <div class="preview-canvas">
+          <section class="contact-block" aria-labelledby="cb-title">
+            <p class="kicker">Finish</p>
+            <h3 id="cb-title" class="contact-block__title"><span class="contact-block__line">Congrats! You made it to the end.</span> <span class="contact-block__line contact-block__line--cta">Let's talk!</span></h3>
+            <div class="contact-block__row">
+              <span class="contact-block__mail" id="cb-mail">hello@example.com</span>
+              <button class="btn btn--primary" type="button" id="cb-copy">Copy email</button>
+              <a class="btn btn--ghost" href="#contact-block">LinkedIn</a>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <section class="card" data-code="contact-block"></section>
+
+      <section class="card">
+        <div class="card__header">
+          <h2 class="text-heading-s">Tokens</h2>
+          <p class="text-body-s">Semantic tokens used by the block. Buttons bring their own component tokens.</p>
+        </div>
+        <div class="tokens-scroll" data-tokens-list="--font-family-display,--font-size-800,--color-fg-default,--color-action-primary-bg-default,--font-family-mono,--font-size-500,--space-48,--space-16,--space-gap-sm,--space-gap-md"></div>
+      </section>
+    </section>
+
+    <!-- ============ Site Footer ============ -->
+    <section class="view" id="view-site-footer" hidden>
+      <p class="eyebrow text-heading-s">Organism</p>
+      <h1 class="text-heading-l" tabindex="-1">Site Footer</h1>
+      <p class="lead text-body-m">Two short lines: copyright, version and legal links on one side, credits on the other. One footer for every page: the portfolio used two slightly different ones before.</p>
+      <div class="links"><a class="btn btn--ghost" href="https://concept2design.de/">See it on concept2design.de</a></div>
+
+      <section class="card">
+        <div class="card__header">
+          <h2 class="text-heading-s">Preview</h2>
+          <p class="text-body-s">Wraps to two lines on small screens.</p>
+        </div>
+        <div class="preview-canvas preview-canvas--flush">
+          <footer class="site-footer"><div class="site-footer__inner">
+            <p>© 2026 Tobias Stoll · v1.0 · <a href="#site-footer">Impressum</a> · <a href="#site-footer">Datenschutz</a></p>
+            <p>Built with AI <svg class="site-footer__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l1.9 5.6 5.6 1.9-5.6 1.9L12 17.5l-1.9-5.6L4.5 10l5.6-1.9z"/><path d="M19 15.5l.8 2.2 2.2.8-2.2.8-.8 2.2-.8-2.2-2.2-.8 2.2-.8z"/></svg><span class="sr-only">(AI)</span> and love <svg class="site-footer__icon site-footer__icon--love" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-9.3-9.2C1.4 7.9 3.6 4.5 7 4.5c2 0 3.6 1.1 5 3 1.4-1.9 3-3 5-3 3.4 0 5.6 3.4 4.3 6.8-1.8 4.6-9.3 9.2-9.3 9.2z"/></svg><span class="sr-only">(love)</span></p>
+          </div></footer>
+        </div>
+      </section>
+
+      <section class="card" data-code="site-footer"></section>
+
+      <section class="card">
+        <div class="card__header">
+          <h2 class="text-heading-s">Tokens</h2>
+          <p class="text-body-s">Semantic tokens used by the footer.</p>
+        </div>
+        <div class="tokens-scroll" data-tokens-list="--color-border-default,--color-fg-muted,--color-action-primary-bg-default,--color-decor-pin,--space-24,--font-size-200"></div>
+      </section>
+    </section>
+
+    <footer class="page-footer text-caption">
       <p>© 2026 Tobias Stoll</p>
       <p>Built with Figma Variables · Token Bridge · Style Dictionary · GitHub Actions</p>
     </footer>
@@ -980,8 +1453,22 @@
         return `<div class="tk-type__row"><p class="text-${t.path.join('-')}">The quick brown fox</p>` +
           `<code><b>${t.path.map(cap).join('/')}</b>${spec}<br>.text-${t.path.join('-')}</code></div>`;
       }).join('');
+      // Motion primitives: a dot travels the track with each duration
+      document.getElementById('tk-motion').innerHTML = P.filter((t) => t.path[0] === 'motion' && t.path[1] === 'duration').map((t) => {
+        const v = resolved(cssVar(t));
+        return `<div class="tk-motion__row text-body-s"><code>${figName(t)}</code><code>${v}</code>` +
+          `<span class="tk-motion__track"><span class="tk-motion__dot" style="transition: left ${v} var(--motion-easing-standard)"></span></span></div>`;
+      }).join('') + P.filter((t) => t.path[0] === 'motion' && t.path[1] === 'easing').map((t) =>
+        `<div class="tk-motion__row text-body-s"><code>${figName(t)}</code><code></code><code>${resolved(cssVar(t))}</code></div>`).join('');
       requestAnimationFrame(markScrollable);
     });
+
+  // Shadows from Figma effect styles
+  fetch('tokens/effects.json').then((r) => r.json()).then((fx) => {
+    document.getElementById('tk-shadows').innerHTML = flat(fx).map((t) =>
+      `<div class="tk-shadow"><span class="tk-shadow__box" style="box-shadow: var(${cssVar(t)})"></span>` +
+      `<code><b>${t.path.map((p) => p[0].toUpperCase() + p.slice(1)).join('/')}</b>${cssVar(t)}</code></div>`).join('');
+  });
 
   // In-page jumps on the tokens page (the hash is used for routing)
   document.querySelectorAll('[data-jump]').forEach((a) => a.addEventListener('click', (e) => {
@@ -1198,6 +1685,168 @@
       note: 'Markup and styles only. Validation and sending the form are up to your app: set the error classes and aria-invalid, swap in the alert.',
       items: [['Default state', null]],
     },
+    chip: {
+      css: ['components/chip.css'],
+      note: 'A plain span. Chips are labels, not buttons: no hover, no focus.',
+      items: [
+        ['Neutral', '<span class="chip">B2B</span>'],
+        ['Success', '<span class="chip chip--success">−30% drop-off</span>'],
+        ['Info', '<span class="chip chip--info">Live demo</span>'],
+      ],
+    },
+    status: {
+      css: ['components/status.css'],
+      note: 'The dot is hidden from screen readers, the label says it all.',
+      items: [
+        ['Default', '<span class="status"><span class="status__dot" aria-hidden="true"></span>Open to work</span>'],
+      ],
+    },
+    kicker: {
+      css: ['components/kicker.css'],
+      note: 'Or use the text style class .text-overline from typography.css with your own color.',
+      items: [
+        ['Above a heading', `<p class="kicker">Selected work</p>
+<h2 class="text-heading-l">Smaller projects, same care</h2>`],
+        ['Inside the h1', `<h1>
+  <span class="kicker">Product Designer (UX/UI) · Berlin</span>
+  Product design, from the first data point to the final pixel.
+</h1>`],
+      ],
+    },
+    'case-card': {
+      css: ['components/chip.css', 'components/case-card.css'],
+      note: 'Needs the Chip stylesheet too. Tone: case-card--dark, --purple or --blue. The stage takes an image or your own animation.',
+      items: [
+        ['Default', `<article class="case-card case-card--purple">
+  <a class="case-card__link" href="design-to-code/">
+    <div class="case-card__stage">
+      <img src="cover.webp" alt="Describe what the screenshot shows" width="1200" height="750">
+    </div>
+    <div class="case-card__body">
+      <p class="case-card__pillar">Design systems 0→1</p>
+      <h3 class="case-card__title">60 legacy components, one source of truth</h3>
+      <p class="case-card__meta">
+        <span class="chip chip--success">229 tokens</span>
+        <span class="chip chip--info">Live demo</span>
+        <span class="chip">B2B</span>
+      </p>
+    </div>
+  </a>
+</article>`],
+      ],
+    },
+    'info-card': {
+      css: ['components/chip.css', 'components/info-card.css'],
+      note: 'A link on the title makes the whole card clickable, the hover lift comes with it.',
+      items: [
+        ['Default', `<article class="info-card">
+  <h3 class="info-card__title">Faster handoff</h3>
+  <p class="info-card__text">Developers read the same names as designers.</p>
+</article>`],
+        ['Step', `<article class="info-card info-card--step">
+  <p class="info-card__kicker">Moment 1 · Offer box</p>
+  <h3><a class="info-card__title" href="#offer-box">Two prices, one clear choice</a></h3>
+  <p class="info-card__text">Why one big button hid the cheaper option.</p>
+  <span class="chip chip--success info-card__chip">Conversion ↑</span>
+</article>`],
+        ['Facts', `<dl class="info-card info-card--facts">
+  <div><dt>Role</dt><dd>UX/UI designer, end to end</dd></div>
+  <div><dt>Tools</dt><dd>Figma, Figma MCP, Claude, GitHub</dd></div>
+</dl>`],
+      ],
+    },
+    'work-row': {
+      css: ['components/work-row.css'],
+      note: 'A list, so screen readers announce how many projects there are.',
+      items: [
+        ['List', `<ul class="work-rows" role="list">
+  <li class="work-row">
+    <span class="work-row__name">Team profiles</span>
+    <span class="work-row__what">Performance history for 1,500+ esports teams</span>
+    <span class="work-row__tag">Shipped</span>
+  </li>
+  <li class="work-row work-row--soon">
+    <span class="work-row__name">More coming soon</span>
+    <span class="work-row__what">New projects are on the way.</span>
+    <span class="work-row__tag">Soon</span>
+  </li>
+</ul>`],
+      ],
+    },
+    note: {
+      css: ['components/note.css'],
+      note: 'Set your own angle with --note-tilt. Add .is-new to a note you just inserted and it drops in once.',
+      items: [
+        ['Default', `<article class="note" style="--note-tilt: -1deg">
+  <p class="note__text">Loved the token workflow!</p>
+  <p class="note__by">Anna</p>
+</article>`],
+        ['Accent', `<article class="note note--accent">
+  <p class="note__text">Hi! I read every note.</p>
+  <p class="note__by">Tobias</p>
+</article>`],
+        ['Plain, with a form', `<form class="note note--plain">
+  <div class="form-field">
+    <div class="form-field__header"><label class="form-field__label" for="msg">Your note</label></div>
+    <textarea class="input" id="msg" rows="3" maxlength="280"></textarea>
+  </div>
+  <button class="btn btn--primary" type="submit">Pin it</button>
+</form>`],
+      ],
+    },
+    'site-header': {
+      css: ['components/status.css', 'components/site-header.css'],
+      note: 'A few lines of JavaScript add the hairline on scroll and the reading progress. Mark the current link with aria-current="page".',
+      items: [
+        ['Markup', `<header class="site-header">
+  <div class="site-header__inner">
+    <a class="site-header__brand" href="/">Tobias Stoll</a>
+    <nav class="site-header__nav" aria-label="Sections">
+      <a href="#work" aria-current="page">Work</a>
+      <a href="#about">About</a>
+    </nav>
+    <span class="status"><span class="status__dot" aria-hidden="true"></span>Open to work</span>
+  </div>
+  <div class="site-header__progress" aria-hidden="true"><span></span></div>
+</header>`],
+        ['Behavior', `const header = document.querySelector('.site-header');
+addEventListener('scroll', () => {
+  header.classList.toggle('is-scrolled', scrollY > 8);
+  const max = document.documentElement.scrollHeight - innerHeight;
+  header.style.setProperty('--site-header-progress', max > 0 ? scrollY / max : 0);
+}, { passive: true });`],
+      ],
+    },
+    'contact-block': {
+      css: ['components/button.css', 'components/kicker.css', 'components/contact-block.css'],
+      note: 'The email stays text you can select. Copy is a convenience, not the only way.',
+      items: [
+        ['Default', `<section class="contact-block" aria-labelledby="contact-title">
+  <p class="kicker">Finish</p>
+  <h2 id="contact-title" class="contact-block__title">
+    <span class="contact-block__line">Congrats! You made it to the end.</span>
+    <span class="contact-block__line contact-block__line--cta">Let's talk!</span>
+  </h2>
+  <div class="contact-block__row">
+    <span class="contact-block__mail">hello@example.com</span>
+    <button class="btn btn--primary" type="button">Copy email</button>
+    <a class="btn btn--ghost" href="https://www.linkedin.com/">LinkedIn</a>
+  </div>
+</section>`],
+      ],
+    },
+    'site-footer': {
+      css: ['components/site-footer.css'],
+      note: 'Icons are decorative (aria-hidden), the words next to them carry the meaning.',
+      items: [
+        ['Default', `<footer class="site-footer">
+  <div class="site-footer__inner">
+    <p>© 2026 Tobias Stoll · <a href="impressum/">Impressum</a> · <a href="datenschutz/">Datenschutz</a></p>
+    <p>Built with AI <svg class="site-footer__icon" viewBox="0 0 24 24" aria-hidden="true">…</svg> and love</p>
+  </div>
+</footer>`],
+      ],
+    },
   };
 
   // Readable, indented HTML for the generated Sign-up Card snippet
@@ -1259,8 +1908,16 @@
       `<div class="alert alert--${v}" role="${v === 'danger' ? 'alert' : 'status'}">${alertMessages[v]}</div>`;
   }));
 
+  /* ---------- Contact Block demo ---------- */
+  document.getElementById('cb-copy').addEventListener('click', async (e) => {
+    const btn = e.currentTarget;
+    try { await navigator.clipboard.writeText(document.getElementById('cb-mail').textContent); btn.textContent = 'Copied'; }
+    catch { btn.textContent = 'Copy failed'; }
+    setTimeout(() => (btn.textContent = 'Copy email'), 1500);
+  });
+
   /* ---------- Hash navigation ---------- */
-  const views = ['overview', 'tokens', 'button', 'input', 'checkbox', 'alert', 'form-field', 'signup-card'];
+  const views = ['overview', 'tokens', 'button', 'input', 'checkbox', 'alert', 'chip', 'status', 'kicker', 'form-field', 'case-card', 'info-card', 'work-row', 'note', 'signup-card', 'site-header', 'contact-block', 'site-footer'];
   function route() {
     const id = views.includes(location.hash.slice(1)) ? location.hash.slice(1) : 'overview';
     views.forEach((v) => (document.getElementById('view-' + v).hidden = v !== id));

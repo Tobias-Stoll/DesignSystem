@@ -16,7 +16,7 @@ Components  Figma component ──Figma MCP──▶ design QA ──▶ compone
 |---|---|
 | `tokens/` | Design tokens exported from Figma (generated, do not edit) |
 | `dist/` | CSS built from the tokens by the GitHub Action (generated) |
-| `components/` | Component styles: Button, Input, Checkbox, Alert, Form Field, Sign-up Card |
+| `components/` | Component styles. Atoms: Button, Input, Checkbox, Alert, Chip, Status Badge, Kicker · Molecules: Form Field, Case Card, Info Card, Work Row, Note · Organisms: Sign-up Card, Site Header, Contact Block, Site Footer |
 | `token-bridge/` | The Figma plugin that syncs Figma Variables with this repo ([README](token-bridge/README.md)) |
 | `index.html` | The live documentation site |
 
@@ -28,6 +28,7 @@ Components  Figma component ──Figma MCP──▶ design QA ──▶ compone
 | Semantic | `tokens/semantic.json` | `color.action.primary.bg.default → {color.purple.600}` |
 | Component | `tokens/component.json` | `button.primary.bg.default → {color.action.primary.bg.default}` |
 | Typography | `tokens/typography.json` | Figma text styles, bound to font tokens |
+| Effects | `tokens/effects.json` | Figma effect styles (shadows), `shadow.card` |
 
 Aliases stay intact all the way into CSS:
 
