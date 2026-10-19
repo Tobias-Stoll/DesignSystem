@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Design System Test · Tobias Stoll</title>
+  <title>Portfolio Design System · Tobias Stoll</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Roboto:wght@400;500&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -52,6 +52,7 @@
     .brand { padding: 0 var(--space-12) var(--space-24); }
     .brand__name { margin: 0; }
     .brand__sub { margin: var(--space-4) 0 0; color: var(--color-fg-muted); }
+    .brand__version { margin: var(--space-8) 0 0; }
     /* Group titles: text style Label */
     .nav__group { margin: var(--space-16) var(--space-12) var(--space-8); color: var(--color-fg-muted); }
     .nav { list-style: none; margin: 0; padding: 0; }
@@ -219,6 +220,33 @@
     .tk-motion__row code { font-size: 12px; }
     @media (max-width: 900px) { .demo-grid--3 { grid-template-columns: minmax(0, 1fr); } }
 
+    /* Typography page */
+    .ty-fams { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-gap-md); }
+    .ty-fam { display: flex; flex-direction: column; gap: var(--space-8); padding: var(--space-inset-md); border-radius: var(--radius-control); background: var(--color-bg-subtle); min-width: 0; }
+    .ty-fam__aa { font-size: 56px; line-height: 1; color: var(--color-fg-default); }
+    .ty-fam code { font-size: 12px; color: var(--color-fg-muted); }
+    .ty-fam p { margin: 0; }
+    .ty-fam p:last-child { color: var(--color-fg-muted); }
+    .ty-styles { display: grid; }
+    .ty-style { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 300px); gap: var(--space-8) var(--space-24); align-items: start; padding: var(--space-16) 0; border-top: var(--border-width-default) solid var(--color-border-default); }
+    .ty-style:first-child { border-top: none; padding-top: 0; }
+    .ty-style__sample { margin: 0; overflow-wrap: anywhere; }
+    .ty-style__meta { display: flex; flex-direction: column; gap: var(--space-4); }
+    .ty-style__meta b { font-weight: var(--font-weight-medium); }
+    .ty-style__meta code { font-size: 12px; color: var(--color-fg-muted); }
+    .ty-style__use { margin: 0; color: var(--color-fg-muted); }
+    .ty-scale { display: grid; gap: var(--space-4); }
+    .ty-scale__row { display: grid; grid-template-columns: 56px 110px minmax(0, 1fr); gap: var(--space-12); align-items: baseline; }
+    .ty-scale__row code { font-size: 12px; color: var(--color-fg-muted); }
+    .ty-scale__row span:last-child { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .ty-hierarchy { display: grid; gap: var(--space-12); padding: var(--space-24); border-radius: var(--radius-container); background: var(--color-bg-canvas); }
+    .ty-hierarchy > * { margin: 0; }
+    .ty-hierarchy p:last-child { color: var(--color-fg-muted); max-width: 62ch; }
+    @media (max-width: 760px) {
+      .ty-fams { grid-template-columns: minmax(0, 1fr); }
+      .ty-style { grid-template-columns: minmax(0, 1fr); }
+    }
+
     /* Tokens page */
     .tk-layers { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--space-gap-md); }
     .tk-layer {
@@ -296,7 +324,8 @@
   <aside class="sidebar">
     <div class="brand">
       <p class="brand__name text-heading-s">Tobias Stoll</p>
-      <p class="brand__sub text-body-s">Design System Test</p>
+      <p class="brand__sub text-body-s">Portfolio Design System</p>
+      <p class="brand__version"><span class="chip" title="Version of this design system">v0.3</span></p>
     </div>
     <nav aria-label="Design system">
       <ul class="nav text-body-s">
@@ -305,6 +334,7 @@
       <p class="nav__group text-label">Foundations</p>
       <ul class="nav text-body-s">
         <li><a href="#tokens">Tokens</a></li>
+        <li><a href="#typography">Typography</a></li>
       </ul>
       <p class="nav__group text-label">Atoms</p>
       <ul class="nav text-body-s">
@@ -505,6 +535,88 @@
       </section>
     </section>
 
+    <!-- ============ Typography ============ -->
+    <section class="view" id="view-typography" hidden>
+      <p class="eyebrow text-heading-s">Foundations</p>
+      <h1 class="text-display" tabindex="-1">Typography</h1>
+      <p class="lead text-body-l">Three families, one job each. Oswald speaks up, Roboto explains, Roboto Mono labels. Every text style is a Figma text style bound to the font primitives, and a class in <code>typography.css</code>.</p>
+      <div class="links">
+        <a class="btn btn--secondary" href="https://www.figma.com/design/NvYNqHYZlROxpwRCq7yy3p/Design-System?node-id=46-693">Open in Figma</a>
+        <a class="btn btn--ghost" href="https://github.com/Tobias-Stoll/DesignSystem/blob/main/dist/typography.css">typography.css on GitHub</a>
+      </div>
+
+      <section class="card" aria-labelledby="ty-fam-title">
+        <div class="card__header">
+          <h2 id="ty-fam-title" class="text-heading-s">Font families</h2>
+          <p class="text-body-s">Only the weights in the table are loaded. More weights mean slower pages, not better ones.</p>
+        </div>
+        <div class="ty-fams">
+          <div class="ty-fam"><span class="ty-fam__aa" style="font-family: var(--font-family-display); font-weight: var(--font-weight-medium)">Aa</span>
+            <p class="text-label">Oswald · Display</p><p class="text-body-s">Display and headings. Medium 500, Bold 700 for Display. Condensed, so big headlines stay short.</p><code>font/family/display</code></div>
+          <div class="ty-fam"><span class="ty-fam__aa" style="font-family: var(--font-family-sans)">Aa</span>
+            <p class="text-label">Roboto · Sans</p><p class="text-body-s">Body, labels, captions, UI. Regular 400, Medium 500. Built for reading on screens.</p><code>font/family/sans</code></div>
+          <div class="ty-fam"><span class="ty-fam__aa" style="font-family: var(--font-family-mono); font-weight: var(--font-weight-medium)">Aa</span>
+            <p class="text-label">Roboto Mono · Mono</p><p class="text-body-s">Overline labels, counters, email addresses. Regular 400, Medium 500. Never for sentences.</p><code>font/family/mono</code></div>
+        </div>
+      </section>
+
+      <section class="card" aria-labelledby="ty-styles-title">
+        <div class="card__header">
+          <h2 id="ty-styles-title" class="text-heading-s">Text styles</h2>
+          <p class="text-body-s">From big to small. Names, values and classes are read from the exported tokens, so this list always matches Figma.</p>
+        </div>
+        <div class="ty-styles" id="ty-styles"></div>
+      </section>
+
+      <section class="card" aria-labelledby="ty-hier-title">
+        <div class="card__header">
+          <h2 id="ty-hier-title" class="text-heading-s">Hierarchy in use</h2>
+          <p class="text-body-s">A typical section head: Kicker names the section, the heading says what it means, the body explains.</p>
+        </div>
+        <div class="ty-hierarchy">
+          <p class="text-overline" style="color: var(--color-action-ghost-fg)">More work</p>
+          <p class="text-heading-l">Smaller projects, same care</p>
+          <p class="text-body-l">Body L for intros and leads. Body M for everything else. Keep lines around 60 to 75 characters, so the eye finds the next line easily.</p>
+        </div>
+      </section>
+
+      <section class="card" aria-labelledby="ty-rules-title">
+        <div class="card__header">
+          <h2 id="ty-rules-title" class="text-heading-s">Rules</h2>
+          <p class="text-body-s">Few rules, kept every time.</p>
+        </div>
+        <div class="tokens-scroll"><table class="tokens text-body-s">
+          <thead><tr><th>Rule</th><th>Why</th></tr></thead>
+          <tbody>
+            <tr><td>One Display per page</td><td>The page title is the loudest thing. Two loud things cancel out</td></tr>
+            <tr><td>Body M is the default</td><td>16/24 reads well on every screen. Body L only for leads, Body S for dense UI</td></tr>
+            <tr><td>Overline only for short labels</td><td>Uppercase mono is hard to read in sentences. One to four words</td></tr>
+            <tr><td>Skip no heading level</td><td>Screen readers navigate by headings. The look comes from the class, the level from the structure</td></tr>
+            <tr><td>Line length 60 to 75 characters</td><td>Set <code>max-width</code> around 62ch on long text</td></tr>
+            <tr><td>Muted text stays above 4.5:1</td><td><code>color/fg/muted</code> on white is 5.1:1, <code>color/fg/subtle</code> only for hints and disabled</td></tr>
+          </tbody>
+        </table></div>
+      </section>
+
+      <section class="card" aria-labelledby="ty-scale-title">
+        <div class="card__header">
+          <h2 id="ty-scale-title" class="text-heading-s">Type scale</h2>
+          <p class="text-body-s">Size and line height primitives. Text styles pick from this scale, nothing in between.</p>
+        </div>
+        <div class="ty-scale" id="ty-scale"></div>
+      </section>
+
+      <section class="card" data-code="typography"></section>
+
+      <section class="card">
+        <div class="card__header">
+          <h2 class="text-heading-s">Tokens</h2>
+          <p class="text-body-s">Font primitives used by the text styles.</p>
+        </div>
+        <div class="tokens-scroll" data-tokens-list="--font-family-display,--font-family-sans,--font-family-mono,--font-weight-regular,--font-weight-medium,--font-weight-bold"></div>
+      </section>
+    </section>
+
     <!-- ============ Button ============ -->
     <!-- ============ Tokens ============ -->
     <section class="view" id="view-tokens" hidden>
@@ -571,7 +683,7 @@
       <section class="card" aria-labelledby="tk-type-title">
         <div class="card__header">
           <h2 id="tk-type-title" class="text-heading-s" tabindex="-1">Text styles</h2>
-          <p class="text-body-s">Figma text styles, bound to the font primitives. In code each one is a class from <code>typography.css</code>.</p>
+          <p class="text-body-s">Figma text styles, bound to the font primitives. In code each one is a class from <code>typography.css</code>. When to use which: <a href="#typography">Typography</a>.</p>
         </div>
         <div id="tk-type" class="tk-type"></div>
       </section>
@@ -1463,6 +1575,44 @@
       requestAnimationFrame(markScrollable);
     });
 
+  // Typography page: text styles with usage, and the size scale
+  const TY_USE = {
+    'display': 'The page title. Once per page.',
+    'heading-l': 'Section headings (h2).',
+    'heading-m': 'Card titles and sub-sections (h3).',
+    'heading-s': 'Small headings, list titles, brand in the header.',
+    'body-l': 'Leads and intros, notes on the wall.',
+    'body-m': 'Default for running text.',
+    'body-s': 'Dense UI: descriptions, alerts, footer.',
+    'label': 'Form labels, nav links, buttons.',
+    'caption': 'Hints, meta and small print.',
+    'overline': 'Kicker above a heading, card pillar, short tags. Uppercase, 8% tracking.',
+  };
+  fetch('tokens/typography.json').then((r) => r.json()).then((typo) => {
+    const list = flat(typo.typography || typo);
+    const r = (t, k) => resolved('--' + refName(t.value[k]).split('/').join('-'));
+    const weight = { 400: 'Regular', 500: 'Medium', 700: 'Bold' };
+    const title = (p) => p.map((s) => (s.length <= 2 ? s.toUpperCase() : s[0].toUpperCase() + s.slice(1))).join('/');
+    document.getElementById('ty-styles').innerHTML = [...list].sort((a, b) => parseInt(r(b, 'fontSize')) - parseInt(r(a, 'fontSize'))).map((t) => {
+      const cls = 'text-' + t.path.join('-');
+      const fam = r(t, 'fontFamily').split(',')[0].replace(/['"]/g, '');
+      const extra = [t.value.letterSpacing ? 'tracking ' + t.value.letterSpacing : '', t.value.textTransform || ''].filter(Boolean).join(', ');
+      return `<div class="ty-style"><p class="ty-style__sample ${cls}">${t.path.includes('overline') ? 'Selected work' : 'Product design, from the first data point'}</p>` +
+        `<div class="ty-style__meta text-body-s"><b>${title(t.path)}</b><code>${fam} ${weight[r(t, 'fontWeight')] || r(t, 'fontWeight')} · ${parseInt(r(t, 'fontSize'))}/${parseInt(r(t, 'lineHeight'))}${extra ? ' · ' + extra : ''}</code>` +
+        `<code>.${cls}</code><p class="ty-style__use">${TY_USE[t.path.join('-')] || ''}</p></div></div>`;
+    }).join('');
+  });
+  fetch('tokens/primitives.json').then((r) => r.json()).then((pri) => {
+    const P = flat(pri);
+    const sizes = P.filter((t) => t.path[0] === 'font' && t.path[1] === 'size');
+    document.getElementById('ty-scale').innerHTML = sizes.map((t) => {
+      const step = t.path[2];
+      const size = resolved(`--font-size-${step}`), lh = resolved(`--font-line-height-${step}`);
+      return `<div class="ty-scale__row"><code>${step}</code><code>${parseInt(size)} / ${parseInt(lh)}</code>` +
+        `<span style="font-size: var(--font-size-${step}); line-height: var(--font-line-height-${step})">The quick brown fox</span></div>`;
+    }).join('');
+  });
+
   // Shadows from Figma effect styles
   fetch('tokens/effects.json').then((r) => r.json()).then((fx) => {
     document.getElementById('tk-shadows').innerHTML = flat(fx).map((t) =>
@@ -1684,6 +1834,16 @@
       css: ['components/button.css', 'components/input.css', 'components/checkbox.css', 'components/alert.css', 'components/form-field.css', 'components/signup-card.css'],
       note: 'Markup and styles only. Validation and sending the form are up to your app: set the error classes and aria-invalid, swap in the alert.',
       items: [['Default state', null]],
+    },
+    typography: {
+      css: ['dist/typography.css'],
+      note: 'Load the fonts, then use a class. The class sets family, weight, size and line height from the tokens.',
+      items: [
+        ['Fonts (Google Fonts)', `<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Roboto:wght@400;500&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">`],
+        ['Classes', `<p class="text-overline">More work</p>
+<h2 class="text-heading-l">Smaller projects, same care</h2>
+<p class="text-body-m">One line on what it was.</p>`],
+      ],
     },
     chip: {
       css: ['components/chip.css'],
@@ -1917,7 +2077,7 @@ addEventListener('scroll', () => {
   });
 
   /* ---------- Hash navigation ---------- */
-  const views = ['overview', 'tokens', 'button', 'input', 'checkbox', 'alert', 'chip', 'status', 'kicker', 'form-field', 'case-card', 'info-card', 'work-row', 'note', 'signup-card', 'site-header', 'contact-block', 'site-footer'];
+  const views = ['overview', 'tokens', 'typography', 'button', 'input', 'checkbox', 'alert', 'chip', 'status', 'kicker', 'form-field', 'case-card', 'info-card', 'work-row', 'note', 'signup-card', 'site-header', 'contact-block', 'site-footer'];
   function route() {
     const id = views.includes(location.hash.slice(1)) ? location.hash.slice(1) : 'overview';
     views.forEach((v) => (document.getElementById('view-' + v).hidden = v !== id));
