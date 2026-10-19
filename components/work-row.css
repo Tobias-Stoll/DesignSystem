@@ -1,0 +1,75 @@
+/**
+ * Work Row (Molecule)
+ * Figma: Component "Work Row" · State = Default | Hover | Soon · Text: Name, Description, Tag
+ * Uses semantic tokens directly.
+ *
+ * A compact list of smaller projects: name, one line of what it was, a status tag.
+ * Put rows in a .work-rows list. "Soon" greys out name and text, the tag stays in color.
+ * On hover the row gets a white ground and nudges right.
+ *
+ * Markup:
+ * <ul class="work-rows" role="list">
+ *   <li class="work-row">
+ *     <span class="work-row__name">Team profiles</span>
+ *     <span class="work-row__what">Performance history for 1,500+ esports teams</span>
+ *     <span class="work-row__tag">Shipped</span>
+ *   </li>
+ *   <li class="work-row work-row--soon">…</li>
+ * </ul>
+ */
+
+.work-rows {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: var(--border-width-default) solid var(--color-border-default);
+}
+
+.work-row {
+  display: grid;
+  grid-template-columns: minmax(0, 240px) minmax(0, 1fr) auto;
+  gap: var(--space-8) var(--space-24);
+  align-items: baseline;
+  padding: var(--space-20) var(--space-8);
+  border-bottom: var(--border-width-default) solid var(--color-border-default);
+  transition: background-color var(--motion-duration-base),
+              padding var(--motion-duration-slow) var(--motion-easing-standard);
+}
+
+.work-row__name {
+  color: var(--color-fg-default);
+  /* Text style: Heading S */
+  font-family: var(--font-family-display);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-500);
+  line-height: var(--font-line-height-500);
+}
+
+.work-row__what { min-width: 0; color: var(--color-fg-muted); }
+
+.work-row__tag {
+  color: var(--color-fg-subtle);
+  /* Text style: Overline (regular weight) */
+  font-family: var(--font-family-mono);
+  font-weight: var(--font-weight-regular);
+  font-size: var(--font-size-100);
+  line-height: var(--font-line-height-100);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.work-row--soon .work-row__name,
+.work-row--soon .work-row__what { color: var(--color-fg-subtle); }
+.work-row--soon .work-row__tag { color: var(--color-action-ghost-fg); }
+
+@media (hover: hover) {
+  .work-row:not(.work-row--soon):hover { background: var(--color-bg-default); padding-left: var(--space-16); }
+}
+
+/* Small screens: description moves under name and tag */
+@media (max-width: 960px) {
+  .work-row { grid-template-columns: minmax(0, 1fr) auto; }
+  .work-row__what { grid-column: 1 / -1; grid-row: 2; }
+}
+
+@media (prefers-reduced-motion: reduce) { .work-row { transition: none; } }

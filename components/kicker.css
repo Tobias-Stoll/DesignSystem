@@ -1,0 +1,28 @@
+/**
+ * Kicker (Atom)
+ * Figma: Component "Kicker" · Text style "Overline" · Text property "Label"
+ * Uses semantic tokens directly.
+ *
+ * The small mono label above a headline. It names the section, the headline says what it means.
+ * Can be part of the h1 (keywords for search) without changing the look.
+ *
+ * Markup:
+ * <p class="kicker">Selected work</p>
+ */
+
+.kicker {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-4) var(--space-8);
+  margin: 0;
+  color: var(--color-action-ghost-fg);
+
+  /* Text style: Overline */
+  font-family: var(--font-family-mono);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-100);
+  line-height: var(--font-line-height-100);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}

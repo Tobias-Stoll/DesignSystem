@@ -1,0 +1,105 @@
+/**
+ * Info Card (Molecule)
+ * Figma: Component "Info Card" · Variant = Default | Step | Facts · Boolean: Link
+ *        Text: Kicker, Title, Text · Chip (optional)
+ * Built from the Chip atom + semantic tokens. Same surface as the Case Card, without a stage.
+ *
+ * Default  a result or takeaway: title and one or two lines of text
+ * Step     a numbered moment of a case study: kicker, bigger title, text, optional result chip.
+ *          With a link the whole card is clickable and lifts on hover.
+ * Facts    a definition list ("At a glance"): label on top, value below
+ *
+ * Markup:
+ * <article class="info-card">
+ *   <h3 class="info-card__title">Faster handoff</h3>
+ *   <p class="info-card__text">Developers read the same names as designers.</p>
+ * </article>
+ *
+ * <article class="info-card info-card--step">
+ *   <p class="info-card__kicker">Moment 1 · Offer box</p>
+ *   <h3><a class="info-card__title" href="#offer-box">Two prices, one clear choice</a></h3>
+ *   <p class="info-card__text">Why one big button hid the cheaper option.</p>
+ *   <span class="chip chip--success info-card__chip">Conversion ↑</span>
+ * </article>
+ *
+ * <dl class="info-card info-card--facts">
+ *   <div><dt>Role</dt><dd>Product designer, end to end</dd></div>
+ * </dl>
+ */
+
+.info-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-gap-sm);
+  min-width: 0;
+  margin: 0;
+  padding: var(--space-20);
+  border: var(--border-width-default) solid var(--color-border-default);
+  border-radius: var(--radius-card);
+  background: var(--color-bg-default);
+  box-shadow: var(--shadow-card);
+  color: var(--color-fg-default);
+  transition: transform var(--motion-duration-slow) var(--motion-easing-standard),
+              box-shadow var(--motion-duration-slow) var(--motion-easing-standard);
+}
+
+.info-card > * { margin: 0; }
+.info-card :is(h2, h3, h4) { margin: 0; }
+
+.info-card__kicker,
+.info-card--facts dt {
+  color: var(--color-action-ghost-fg);
+  /* Text style: Overline (regular weight) */
+  font-family: var(--font-family-mono);
+  font-weight: var(--font-weight-regular);
+  font-size: var(--font-size-100);
+  line-height: var(--font-line-height-100);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.info-card__title {
+  display: block;
+  color: var(--color-fg-default);
+  text-decoration: none;
+  text-wrap: balance;
+  /* Text style: Heading S */
+  font-family: var(--font-family-display);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-500);
+  line-height: var(--font-line-height-500);
+}
+
+.info-card__text { color: var(--color-fg-muted); }
+
+/* Result chip sits at the bottom, so chips line up across a row of cards */
+.info-card__chip { align-self: flex-start; margin-top: auto; }
+.info-card__text + .info-card__chip { margin-top: auto; }
+.info-card:has(.info-card__chip) .info-card__text { margin-bottom: var(--space-8); }
+
+/* Step: bigger title */
+.info-card--step .info-card__title {
+  /* Text style: Heading M */
+  font-size: var(--font-size-600);
+  line-height: var(--font-line-height-600);
+}
+
+/* A link in the title makes the whole card clickable */
+a.info-card__title::after { content: ""; position: absolute; inset: 0; border-radius: inherit; }
+a.info-card__title:focus-visible { outline: none; }
+a.info-card__title:focus-visible::after { outline: var(--border-width-focus) solid var(--color-border-focus); outline-offset: 3px; }
+
+@media (hover: hover) {
+  .info-card:has(a.info-card__title):hover { transform: translateY(-6px) rotate(-.6deg); box-shadow: var(--shadow-lift); }
+}
+
+/* Facts: definition list */
+.info-card--facts { gap: var(--space-16); padding: var(--space-20) var(--space-24); }
+.info-card--facts > div { display: grid; gap: var(--space-4); }
+.info-card--facts dd { margin: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  .info-card { transition: none; }
+  .info-card:hover { transform: none !important; }
+}

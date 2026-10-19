@@ -1,0 +1,124 @@
+/**
+ * Case Card (Molecule)
+ * Figma: Component "Case Card" · Tone = Dark | Purple | Blue · State = Default | Hover
+ *        Slot "Stage" (image or animation) · Text: Pillar, Title · Chips
+ * Built from the Chip atom + semantic tokens. Surface: radius/card, Shadow/Card.
+ *
+ * One project as a teaser: a visual on a tinted stage, the pillar it shows,
+ * a result-first title and up to six chips. The whole card is one link.
+ * Hover lifts and tilts the card a little; the stage image drifts toward the reader.
+ *
+ * Markup:
+ * <article class="case-card case-card--purple">
+ *   <a class="case-card__link" href="design-to-code/">
+ *     <div class="case-card__stage"><img src="…" alt="…"></div>
+ *     <div class="case-card__body">
+ *       <p class="case-card__pillar">Design systems 0→1</p>
+ *       <h3 class="case-card__title">60 legacy components, one source of truth</h3>
+ *       <p class="case-card__meta"><span class="chip chip--success">440+ tokens</span><span class="chip">B2B</span></p>
+ *     </div>
+ *   </a>
+ * </article>
+ */
+
+.case-card {
+  --_stage-start: var(--color-decor-stage-purple-start);
+  --_stage-end: var(--color-decor-stage-purple-end);
+  --_tilt: 1deg;
+  min-width: 0;
+}
+
+.case-card--dark   { --_stage-start: var(--color-decor-stage-dark-start);   --_stage-end: var(--color-decor-stage-dark-end);   --_tilt: -1.2deg; }
+.case-card--purple { --_stage-start: var(--color-decor-stage-purple-start); --_stage-end: var(--color-decor-stage-purple-end); --_tilt: 1deg; }
+.case-card--blue   { --_stage-start: var(--color-decor-stage-blue-start);   --_stage-end: var(--color-decor-stage-blue-end);   --_tilt: -.8deg; }
+
+.case-card__link {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  border: var(--border-width-default) solid var(--color-border-default);
+  border-radius: var(--radius-card);
+  background: var(--color-bg-default);
+  box-shadow: var(--shadow-card);
+  color: inherit;
+  text-decoration: none;
+  transition: transform var(--motion-duration-slow) var(--motion-easing-standard),
+              box-shadow var(--motion-duration-slow) var(--motion-easing-standard);
+}
+
+.case-card__link:focus-visible {
+  outline: var(--border-width-focus) solid var(--color-border-focus);
+  outline-offset: 3px;
+}
+
+.case-card__stage {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  max-width: 100%;
+  overflow: hidden;
+  padding: var(--space-16) 0 0 var(--space-16);
+  background: linear-gradient(140deg, var(--_stage-start), var(--_stage-end));
+}
+
+/* The screenshot bleeds out of the stage on the right and bottom */
+.case-card__stage img {
+  display: block;
+  width: 118%;
+  max-width: none;
+  height: auto;
+  border: 0;
+  border-radius: var(--radius-control) 0 0 0;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, .06), 0 12px 32px -12px rgba(0, 0, 0, .35);   /* image frame, independent of the surface */
+  transform-origin: 0 0;
+  transition: transform var(--motion-duration-slower) var(--motion-easing-standard);
+}
+
+.case-card__body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--space-gap-sm);
+  padding: var(--space-16) var(--space-20) var(--space-20);
+}
+
+.case-card__pillar {
+  margin: 0;
+  color: var(--color-action-ghost-fg);
+  /* Text style: Overline */
+  font-family: var(--font-family-mono);
+  font-weight: var(--font-weight-regular);
+  font-size: var(--font-size-100);
+  line-height: var(--font-line-height-100);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.case-card__title {
+  margin: 0;
+  color: var(--color-fg-default);
+  text-wrap: balance;
+  /* Text style: Heading M */
+  font-family: var(--font-family-display);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-600);
+  line-height: var(--font-line-height-600);
+}
+
+.case-card__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-gap-xs) var(--space-gap-sm);
+  margin: auto 0 0;
+  padding-top: var(--space-4);
+}
+
+@media (hover: hover) {
+  .case-card__link:hover { transform: translateY(-6px) rotate(var(--_tilt)); box-shadow: var(--shadow-lift); }
+  .case-card__link:hover .case-card__stage img { transform: translate(-3%, -3%) scale(1.04); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .case-card__link, .case-card__stage img { transition: none; }
+  .case-card__link:hover, .case-card__link:hover .case-card__stage img { transform: none; }
+}

@@ -1,0 +1,70 @@
+/**
+ * Contact Block (Organism)
+ * Figma: Component "Contact Block" · Breakpoint = Desktop | Mobile
+ *        Text: Kicker, Headline, Call to action, Email
+ * Composition: Kicker (Atom) + Button Primary and Ghost (Atom) + semantic tokens.
+ *
+ * The end of a page: a big headline with the call to action in the primary color,
+ * the email as text you can select, and one primary action (copy) plus quiet links.
+ * The headline is the Display style, scaled with the viewport (36 to 64px).
+ *
+ * Markup:
+ * <section class="contact-block" aria-labelledby="contact-title">
+ *   <p class="kicker">Finish</p>
+ *   <h2 id="contact-title" class="contact-block__title">
+ *     <span class="contact-block__line">Congrats! You made it to the end.</span>
+ *     <span class="contact-block__line contact-block__line--cta">Let's talk!</span>
+ *   </h2>
+ *   <div class="contact-block__row">
+ *     <span class="contact-block__mail">hello@example.com</span>
+ *     <button class="btn btn--primary" type="button">Copy email</button>
+ *     <a class="btn btn--ghost" href="…">LinkedIn</a>
+ *   </div>
+ * </section>
+ */
+
+.contact-block {
+  display: grid;
+  gap: var(--space-16);
+  padding-block: var(--space-48);
+}
+
+.contact-block__title {
+  margin: 0;
+  max-width: none;
+  color: var(--color-fg-default);
+  text-transform: uppercase;
+  text-wrap: balance;
+  /* Text style: Display, fluid */
+  font-family: var(--font-family-display);
+  font-weight: var(--font-weight-bold);
+  font-size: clamp(var(--font-size-800), 5vw, 64px);
+  line-height: 1.02;
+}
+
+.contact-block__line { display: block; }
+.contact-block__line--cta { margin-top: var(--space-16); color: var(--color-action-primary-bg-default); }
+
+.contact-block__row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-gap-sm) var(--space-gap-md);
+  margin-top: var(--space-8);
+}
+
+.contact-block__row .btn { text-decoration: none; }
+
+.contact-block__mail {
+  margin-right: var(--space-8);
+  overflow-wrap: anywhere;
+  user-select: all;
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-500);
+  line-height: var(--font-line-height-500);
+}
+
+@media (min-width: 900px) {
+  .contact-block__title { font-size: clamp(var(--font-size-800), 4.4vw, 64px); }
+  .contact-block__line:first-child { white-space: nowrap; }   /* one row on desktop */
+}

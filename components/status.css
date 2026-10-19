@@ -1,0 +1,61 @@
+/**
+ * Status Badge (Atom)
+ * Figma: Component "Status Badge" · Text property "Label"
+ * Uses semantic tokens directly.
+ *
+ * A live status with a pulsing dot, for example "Open to work".
+ * The pulse runs 3 times (about 5 s), then rests (WCAG 2.2.2). Hover restarts it.
+ * The dot is decorative: the label carries the meaning.
+ *
+ * Markup:
+ * <span class="status"><span class="status__dot" aria-hidden="true"></span>Open to work</span>
+ */
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-gap-sm);
+  padding: var(--space-4) var(--space-12);
+  border: var(--border-width-default) solid var(--color-feedback-success-border);
+  border-radius: var(--radius-pill);
+  background: var(--color-feedback-success-bg);
+  color: var(--color-feedback-success-fg);
+  white-space: nowrap;
+
+  /* Text style: Caption, medium */
+  font-family: var(--font-family-sans);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-100);
+  line-height: var(--font-line-height-100);
+}
+
+.status__dot {
+  position: relative;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-feedback-success-accent);
+  animation: status-breathe 1.7s ease-in-out 3;
+}
+
+.status__dot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: var(--color-feedback-success-accent);
+  animation: status-ping 1.7s var(--motion-easing-standard) 3 both;
+}
+
+.status:hover .status__dot,
+.status:hover .status__dot::after { animation-iteration-count: infinite; }
+
+@keyframes status-breathe { 50% { opacity: .45; } }
+@keyframes status-ping {
+  0% { transform: scale(1); opacity: .6; }
+  80%, 100% { transform: scale(2.6); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .status__dot, .status__dot::after { animation: none; }
+}

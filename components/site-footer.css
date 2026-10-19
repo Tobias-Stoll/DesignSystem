@@ -1,0 +1,51 @@
+/**
+ * Site Footer (Organism)
+ * Figma: Component "Site Footer" · Breakpoint = Desktop | Mobile
+ *        Text: Legal line, Credits
+ * Uses semantic tokens directly.
+ *
+ * Two short lines: copyright, version and legal links on the left, credits on the right.
+ * Wraps to two rows on small screens. Icons inherit the text size.
+ *
+ * Markup:
+ * <footer class="site-footer">
+ *   <div class="site-footer__inner">
+ *     <p>© 2026 Tobias Stoll · <a href="impressum/">Impressum</a> · <a href="datenschutz/">Datenschutz</a></p>
+ *     <p>Built with AI <svg class="site-footer__icon" …></svg> and love <svg class="site-footer__icon site-footer__icon--love" …></svg></p>
+ *   </div>
+ * </footer>
+ */
+
+.site-footer { border-top: var(--border-width-default) solid var(--color-border-default); }
+
+.site-footer__inner {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--space-12);
+  max-width: var(--site-footer-max, 1120px);
+  margin: 0 auto;
+  padding: var(--space-24);
+  color: var(--color-fg-muted);
+  /* Text style: Body S */
+  font-family: var(--font-family-sans);
+  font-size: var(--font-size-200);
+  line-height: var(--font-line-height-200);
+}
+
+.site-footer p { margin: 0; }
+.site-footer a { color: inherit; }
+.site-footer a:focus-visible { outline: var(--border-width-focus) solid var(--color-border-focus); outline-offset: 2px; }
+
+.site-footer__icon {
+  display: inline-block;
+  width: 1.05em;
+  height: 1.05em;
+  vertical-align: -0.15em;
+  fill: var(--color-action-primary-bg-default);
+}
+.site-footer__icon--love { fill: var(--color-decor-pin); }
+
+@media (max-width: 560px) {
+  .site-footer__inner { padding-inline: var(--space-16); }
+}

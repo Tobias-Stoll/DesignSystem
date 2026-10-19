@@ -1,0 +1,46 @@
+/**
+ * Chip (Atom)
+ * Figma: Component "Chip" · Variant = Neutral | Success | Info · Text property "Label"
+ * Uses semantic tokens directly.
+ *
+ * A short, non-interactive fact: platform, industry, a result.
+ * Success is for a measured outcome, Info for a pointer (for example "Live demo").
+ *
+ * Markup:
+ * <span class="chip">B2B</span>
+ * <span class="chip chip--success">−30% drop-off</span>
+ * <span class="chip chip--info">Live demo</span>
+ */
+
+.chip {
+  --_bg: var(--color-bg-muted);
+  --_fg: var(--color-fg-muted);
+  --_ring: transparent;
+
+  display: inline-flex;
+  align-items: center;
+  padding: 2px var(--space-8);              /* 2px: optical, keeps the chip at 20px */
+  border-radius: var(--radius-pill);
+  box-shadow: inset 0 0 0 var(--border-width-default) var(--_ring);
+  background: var(--_bg);
+  color: var(--_fg);
+  white-space: nowrap;
+
+  /* Text style: Caption, medium */
+  font-family: var(--font-family-sans);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-100);
+  line-height: var(--font-line-height-100);
+}
+
+.chip--success {
+  --_bg: var(--color-feedback-success-bg);
+  --_fg: var(--color-feedback-success-fg);
+  font-variant-numeric: tabular-nums;
+}
+
+.chip--info {
+  --_bg: var(--color-feedback-info-bg);
+  --_fg: var(--color-feedback-info-fg);
+  --_ring: var(--color-feedback-info-border);
+}

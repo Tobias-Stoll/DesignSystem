@@ -1,0 +1,105 @@
+/**
+ * Site Header (Organism)
+ * Figma: Component "Site Header" · Breakpoint = Desktop | Mobile · State = Top | Scrolled
+ *        Boolean: Show status, Show progress
+ * Composition: Status Badge (Atom) + nav links + semantic tokens.
+ *
+ * Sticky navigation for a one-page site with case studies.
+ * Top: no border. Scrolled (add .is-scrolled via JS): hairline border.
+ * The current section link gets aria-current="page" (or .is-active from a scroll spy).
+ * Case studies can show a reading progress bar: set --site-header-progress (0 to 1) via JS.
+ * Under 640px the status badge hides and the nav tightens.
+ *
+ * Markup:
+ * <header class="site-header">
+ *   <div class="site-header__inner">
+ *     <a class="site-header__brand" href="/">Tobias Stoll</a>
+ *     <nav class="site-header__nav" aria-label="Sections">
+ *       <a href="#work" aria-current="page">Work</a>
+ *       <a href="#about">About</a>
+ *     </nav>
+ *     <span class="status"><span class="status__dot" aria-hidden="true"></span>Open to work</span>
+ *   </div>
+ *   <div class="site-header__progress" aria-hidden="true"><span></span></div>
+ * </header>
+ */
+
+.site-header {
+  position: sticky;
+  top: env(safe-area-inset-top, 0px);
+  z-index: 20;
+  border-bottom: var(--border-width-default) solid transparent;
+  background: color-mix(in srgb, var(--color-bg-canvas) 86%, transparent);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  transition: border-color var(--motion-duration-base);
+}
+
+.site-header.is-scrolled { border-bottom-color: var(--color-border-default); }
+
+.site-header__inner {
+  display: flex;
+  align-items: center;
+  gap: var(--space-24);
+  max-width: var(--site-header-max, 1120px);
+  margin: 0 auto;
+  padding: var(--space-12) var(--space-24);
+}
+
+.site-header__brand {
+  color: var(--color-fg-default);
+  text-decoration: none;
+  letter-spacing: .01em;
+  /* Text style: Heading S, bold */
+  font-family: var(--font-family-display);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-500);
+  line-height: var(--font-line-height-500);
+}
+
+.site-header__nav { display: flex; gap: var(--space-4); margin-left: auto; }
+
+.site-header__nav a {
+  padding: var(--space-4) var(--space-8);
+  border-radius: var(--radius-control);
+  color: var(--color-fg-muted);
+  text-decoration: none;
+  transition: color var(--motion-duration-fast), background-color var(--motion-duration-fast);
+  /* Text style: Label */
+  font-family: var(--font-family-sans);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-200);
+  line-height: var(--font-line-height-200);
+}
+
+.site-header__nav a:hover { background: var(--color-bg-muted); color: var(--color-fg-default); }
+
+.site-header__nav a.is-active,
+.site-header__nav a[aria-current] { background: var(--color-action-ghost-bg-hover); color: var(--color-action-ghost-fg); }
+
+.site-header :focus-visible { outline: var(--border-width-focus) solid var(--color-border-focus); outline-offset: 3px; }
+
+/* Reading progress (case studies) */
+.site-header__progress {
+  position: absolute;
+  right: 0;
+  bottom: calc(-1 * var(--border-width-default));
+  left: 0;
+  height: 3px;
+  pointer-events: none;
+}
+
+.site-header__progress span {
+  display: block;
+  height: 100%;
+  border-radius: 0 2px 2px 0;
+  background: var(--color-action-primary-bg-default);
+  transform: scaleX(var(--site-header-progress, 0));
+  transform-origin: left;
+}
+
+@media (max-width: 640px) {
+  .site-header__inner { gap: var(--space-8); padding-inline: var(--space-16); }
+  .site-header .status { display: none; }
+  .site-header__nav a { padding: var(--space-4) 6px; }
+}

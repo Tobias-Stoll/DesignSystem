@@ -1,0 +1,92 @@
+/**
+ * Note (Molecule)
+ * Figma: Component "Note" · Paper = Default | Accent | Plain · Text: Text, Author
+ * Uses semantic tokens directly (color/decor/… for paper and pin).
+ *
+ * A pinned paper note, for a guestbook or feedback wall.
+ * Default  a visitor's note (warm paper, red pin)
+ * Accent   the owner's note (purple paper and pin)
+ * Plain    white paper with a border, holds a form (for example Form Field + Button)
+ * Each note sits at a slight angle (--note-tilt) and straightens on hover.
+ *
+ * Markup:
+ * <article class="note">
+ *   <p class="note__text">Loved the token workflow!</p>
+ *   <p class="note__by">Anna</p>
+ * </article>
+ * <article class="note note--accent" style="--note-tilt: 1.5deg">…</article>
+ * <form class="note note--plain">…form fields…</form>
+ */
+
+.note {
+  --_paper: var(--color-decor-paper);
+  --_pin: var(--color-decor-pin);
+
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+  min-height: 180px;
+  padding: var(--space-20);
+  border-radius: var(--radius-indicator);
+  background: var(--_paper);
+  box-shadow: var(--shadow-card);
+  color: var(--color-fg-default);
+  transform: rotate(var(--note-tilt, 0deg));
+  transition: transform var(--motion-duration-slow) var(--motion-easing-playful);
+}
+
+/* The pin */
+.note::before {
+  content: "";
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  width: 12px;
+  height: 12px;
+  margin-left: -6px;
+  border-radius: 50%;
+  background: var(--_pin);
+  box-shadow: 0 2px 3px rgba(0, 0, 0, .25);   /* the pin's own shadow, decorative */
+}
+
+.note__text {
+  margin: var(--space-8) 0 0;
+  overflow-wrap: anywhere;
+  /* Text style: Body L */
+  font-family: var(--font-family-sans);
+  font-size: var(--font-size-400);
+  line-height: var(--font-line-height-400);
+}
+
+.note__by {
+  margin: auto 0 0;
+  color: var(--color-fg-muted);
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-100);
+  line-height: var(--font-line-height-100);
+  letter-spacing: 0.06em;
+}
+.note__by::before { content: "– "; }
+
+.note--accent { --_paper: var(--color-decor-paper-accent); --_pin: var(--color-decor-pin-accent); --note-tilt: 1.5deg; }
+
+.note--plain {
+  --_paper: var(--color-bg-default);
+  --_pin: var(--color-feedback-success-accent);
+  padding-top: var(--space-32);
+  border: var(--border-width-default) solid var(--color-border-default);
+}
+
+@media (hover: hover) {
+  .note:not(.note--plain):hover { transform: rotate(0deg) scale(1.03); }
+}
+
+/* New notes drop in once */
+.note.is-new { animation: note-pin-in var(--motion-duration-slower) var(--motion-easing-playful) both; }
+@keyframes note-pin-in { from { transform: translateY(-24px) rotate(-8deg) scale(.9); opacity: 0; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .note { transition: none; }
+  .note.is-new { animation: none; }
+}
