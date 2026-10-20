@@ -1,0 +1,41 @@
+/**
+ * External Link (Atom)
+ * Figma: Component "External Link" · Context = Text | Button · Icon "Link out"
+ * Uses no own colors: the icon takes the link or button color (currentColor).
+ *
+ * Every link to another site opens in a new tab and says so before the click:
+ * - visually, with the link-out icon after the last word
+ * - for screen readers, with a hidden hint "(opens in a new tab)"
+ * Works on text links, buttons and whole cards. Mail and phone links are not external.
+ * WCAG: Technique G201 (warn before opening a new window), supports 3.2.5 Change on Request.
+ *
+ * Markup:
+ * <a href="https://github.com/…" target="_blank" rel="noopener">Repository<svg class="link-external__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="…"/></svg><span class="link-external__hint"> (opens in a new tab)</span></a>
+ * Icon path: M14 3h7v7h-2V6.41l-8.29 8.3-1.42-1.42L17.59 5H14V3zM5 5h6v2H5v12h12v-6h2v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z
+ */
+
+.link-external__icon {
+  display: inline-block;
+  flex: none;
+  width: .8em;
+  height: .8em;
+  margin-left: .25em;
+  vertical-align: -0.05em;
+  fill: currentColor;
+}
+
+/* In a button the label and icon are flex items: a fixed gap reads better than the text-relative margin */
+.btn .link-external__icon { margin-left: var(--space-gap-xs); }
+
+/* Visually hidden, read by screen readers */
+.link-external__hint {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}

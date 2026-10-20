@@ -6,14 +6,14 @@
  *
  * Two short lines: copyright, version and legal links on the left, credits on the right.
  * Wraps to two rows on small screens. Icons inherit the text size.
- * Links to other sites open in a new tab and end with a link-out icon, so people know before they click.
+ * Links to other sites use the External Link atom (link-external.css): new tab, link-out icon, hidden hint.
  *
  * Markup:
  * <footer class="site-footer">
  *   <div class="site-footer__inner">
  *     <p>© 2026 Tobias Stoll · <a href="impressum/">Impressum</a> · <a href="datenschutz/">Datenschutz</a></p>
  *     <p>Built with AI <svg class="site-footer__icon" …></svg> and love <svg class="site-footer__icon site-footer__icon--love" …></svg>,
- *       based on <a href="https://…" target="_blank" rel="noopener">my design system<svg class="site-footer__icon site-footer__icon--external" …></svg><span class="sr-only"> (opens in a new tab)</span></a></p>
+ *       based on <a href="https://…" target="_blank" rel="noopener">my design system<svg class="link-external__icon" …></svg><span class="link-external__hint"> (opens in a new tab)</span></a></p>
  *   </div>
  * </footer>
  */
@@ -48,14 +48,6 @@
 }
 .site-footer__icon--love { fill: var(--color-decor-pin); }
 
-/* Link-out: smaller, in the link color, sits right after the last word */
-.site-footer__icon--external {
-  width: .8em;
-  height: .8em;
-  margin-left: .2em;
-  vertical-align: -0.05em;
-  fill: currentColor;
-}
 
 @media (max-width: 560px) {
   .site-footer__inner { padding-inline: var(--space-inset-md); }

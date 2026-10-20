@@ -28,6 +28,7 @@
   <link rel="stylesheet" href="components/site-header.css">
   <link rel="stylesheet" href="components/contact-block.css">
   <link rel="stylesheet" href="components/site-footer.css">
+  <link rel="stylesheet" href="components/link-external.css">
 
   <style>
     /* Page shell. Built from tokens only, no hard-coded colors. */
@@ -347,6 +348,7 @@
         <li><a href="#chip">Chip</a></li>
         <li><a href="#status">Status Badge</a></li>
         <li><a href="#kicker">Kicker</a></li>
+        <li><a href="#link-external">External Link</a></li>
       </ul>
       <p class="nav__group text-label">Molecules</p>
       <ul class="nav text-body-s">
@@ -377,8 +379,8 @@
         components are read straight from Figma via the Figma MCP, and everything here is built from those tokens only.
       </p>
       <div class="links">
-        <a class="btn btn--primary" href="https://github.com/Tobias-Stoll/DesignSystem">View repository</a>
-        <a class="btn btn--secondary" href="https://www.figma.com/design/NvYNqHYZlROxpwRCq7yy3p/Design-System?node-id=46-693">Open in Figma</a>
+        <a class="btn btn--primary" href="https://github.com/Tobias-Stoll/DesignSystem" target="_blank" rel="noopener">View repository<svg class="link-external__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3h7v7h-2V6.41l-8.29 8.3-1.42-1.42L17.59 5H14V3zM5 5h6v2H5v12h12v-6h2v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/></svg><span class="link-external__hint"> (opens in a new tab)</span></a>
+        <a class="btn btn--secondary" href="https://www.figma.com/design/NvYNqHYZlROxpwRCq7yy3p/Design-System?node-id=46-693" target="_blank" rel="noopener">Open in Figma<svg class="link-external__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3h7v7h-2V6.41l-8.29 8.3-1.42-1.42L17.59 5H14V3zM5 5h6v2H5v12h12v-6h2v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/></svg><span class="link-external__hint"> (opens in a new tab)</span></a>
         <a class="btn btn--ghost" href="#tokens">Browse all tokens</a>
       </div>
 
@@ -490,7 +492,7 @@
           </li>
           <li>
             <h3 class="text-heading-s">2. Use the components</h3>
-            <p class="text-body-s">Plain HTML with a class. All variants and states are on the component pages: <a href="#button">Button</a>, <a href="#input">Input</a>, <a href="#checkbox">Checkbox</a>, <a href="#alert">Alert</a>, <a href="#chip">Chip</a>, <a href="#status">Status Badge</a>, <a href="#kicker">Kicker</a>, <a href="#form-field">Form Field</a>, <a href="#case-card">Case Card</a>, <a href="#info-card">Info Card</a>, <a href="#work-row">Work Row</a>, <a href="#note">Note</a>, <a href="#signup-card">Sign-up Card</a>, <a href="#site-header">Site Header</a>, <a href="#contact-block">Contact Block</a>, <a href="#site-footer">Site Footer</a>.</p>
+            <p class="text-body-s">Plain HTML with a class. All variants and states are on the component pages: <a href="#button">Button</a>, <a href="#input">Input</a>, <a href="#checkbox">Checkbox</a>, <a href="#alert">Alert</a>, <a href="#chip">Chip</a>, <a href="#status">Status Badge</a>, <a href="#kicker">Kicker</a>, <a href="#link-external">External Link</a>, <a href="#form-field">Form Field</a>, <a href="#case-card">Case Card</a>, <a href="#info-card">Info Card</a>, <a href="#work-row">Work Row</a>, <a href="#note">Note</a>, <a href="#signup-card">Sign-up Card</a>, <a href="#site-header">Site Header</a>, <a href="#contact-block">Contact Block</a>, <a href="#site-footer">Site Footer</a>.</p>
             <div class="code">
               <div class="code__bar"><span class="text-caption">HTML · body</span><button class="btn btn--primary copy" type="button">Copy</button></div>
 <pre>&lt;button class="btn btn--primary"&gt;Subscribe&lt;/button&gt;
@@ -543,8 +545,8 @@
       <h1 class="text-display" tabindex="-1">Typography</h1>
       <p class="lead text-body-l">Three families, one job each. Oswald speaks up, Roboto explains, Roboto Mono labels. Every text style is a Figma text style bound to the font primitives, and a class in <code>typography.css</code>.</p>
       <div class="links">
-        <a class="btn btn--secondary" href="https://www.figma.com/design/NvYNqHYZlROxpwRCq7yy3p/Design-System?node-id=46-693">Open in Figma</a>
-        <a class="btn btn--ghost" href="https://github.com/Tobias-Stoll/DesignSystem/blob/main/dist/typography.css">typography.css on GitHub</a>
+        <a class="btn btn--secondary" href="https://www.figma.com/design/NvYNqHYZlROxpwRCq7yy3p/Design-System?node-id=46-693" target="_blank" rel="noopener">Open in Figma<svg class="link-external__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3h7v7h-2V6.41l-8.29 8.3-1.42-1.42L17.59 5H14V3zM5 5h6v2H5v12h12v-6h2v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/></svg><span class="link-external__hint"> (opens in a new tab)</span></a>
+        <a class="btn btn--ghost" href="https://github.com/Tobias-Stoll/DesignSystem/blob/main/dist/typography.css" target="_blank" rel="noopener">typography.css on GitHub<svg class="link-external__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3h7v7h-2V6.41l-8.29 8.3-1.42-1.42L17.59 5H14V3zM5 5h6v2H5v12h12v-6h2v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/></svg><span class="link-external__hint"> (opens in a new tab)</span></a>
       </div>
 
       <section class="card" aria-labelledby="ty-fam-title">
@@ -629,8 +631,8 @@
         values are read live from <code>tokens.css</code>, so this page always shows what ships.
       </p>
       <div class="links">
-        <a class="btn btn--secondary" href="https://www.figma.com/design/NvYNqHYZlROxpwRCq7yy3p/Design-System?node-id=46-693">Open in Figma</a>
-        <a class="btn btn--ghost" href="https://github.com/Tobias-Stoll/DesignSystem/blob/main/dist/tokens.css">tokens.css on GitHub</a>
+        <a class="btn btn--secondary" href="https://www.figma.com/design/NvYNqHYZlROxpwRCq7yy3p/Design-System?node-id=46-693" target="_blank" rel="noopener">Open in Figma<svg class="link-external__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3h7v7h-2V6.41l-8.29 8.3-1.42-1.42L17.59 5H14V3zM5 5h6v2H5v12h12v-6h2v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/></svg><span class="link-external__hint"> (opens in a new tab)</span></a>
+        <a class="btn btn--ghost" href="https://github.com/Tobias-Stoll/DesignSystem/blob/main/dist/tokens.css" target="_blank" rel="noopener">tokens.css on GitHub<svg class="link-external__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3h7v7h-2V6.41l-8.29 8.3-1.42-1.42L17.59 5H14V3zM5 5h6v2H5v12h12v-6h2v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/></svg><span class="link-external__hint"> (opens in a new tab)</span></a>
       </div>
 
       <section class="card" aria-labelledby="tk-layers-title">
@@ -1022,7 +1024,7 @@
       <p class="eyebrow text-heading-s">Atom</p>
       <h1 class="text-heading-l" tabindex="-1">Chip</h1>
       <p class="lead text-body-m">A short fact about a project: platform, industry, a measured result. Chips are labels, not buttons, so they have no hover or focus. 3 variants, uses semantic tokens directly (<code>color/feedback/…</code>).</p>
-      <div class="links"><a class="btn btn--ghost" href="https://concept2design.de/#work">See it on concept2design.de</a></div>
+      <div class="links"><a class="btn btn--ghost" href="https://concept2design.de/#work" target="_blank" rel="noopener">See it on concept2design.de<svg class="link-external__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3h7v7h-2V6.41l-8.29 8.3-1.42-1.42L17.59 5H14V3zM5 5h6v2H5v12h12v-6h2v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/></svg><span class="link-external__hint"> (opens in a new tab)</span></a></div>
 
       <section class="card">
         <div class="card__header">
@@ -1067,7 +1069,7 @@
       <p class="eyebrow text-heading-s">Atom</p>
       <h1 class="text-heading-l" tabindex="-1">Status Badge</h1>
       <p class="lead text-body-m">A live status with a pulsing dot, for example "Open to work". It sits in the Site Header. The dot is decoration, the label carries the meaning, so it also works without color.</p>
-      <div class="links"><a class="btn btn--ghost" href="https://concept2design.de/">See it on concept2design.de</a></div>
+      <div class="links"><a class="btn btn--ghost" href="https://concept2design.de/" target="_blank" rel="noopener">See it on concept2design.de<svg class="link-external__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3h7v7h-2V6.41l-8.29 8.3-1.42-1.42L17.59 5H14V3zM5 5h6v2H5v12h12v-6h2v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/></svg><span class="link-external__hint"> (opens in a new tab)</span></a></div>
 
       <section class="card">
         <div class="card__header">
@@ -1108,7 +1110,7 @@
       <p class="eyebrow text-heading-s">Atom</p>
       <h1 class="text-heading-l" tabindex="-1">Kicker</h1>
       <p class="lead text-body-m">The small mono label above a headline. The kicker names the section, the headline says what it means. Built on the new text style <code>Overline</code>: Roboto Mono, uppercase, 8% tracking.</p>
-      <div class="links"><a class="btn btn--ghost" href="https://concept2design.de/#work">See it on concept2design.de</a></div>
+      <div class="links"><a class="btn btn--ghost" href="https://concept2design.de/#work" target="_blank" rel="noopener">See it on concept2design.de<svg class="link-external__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3h7v7h-2V6.41l-8.29 8.3-1.42-1.42L17.59 5H14V3zM5 5h6v2H5v12h12v-6h2v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/></svg><span class="link-external__hint"> (opens in a new tab)</span></a></div>
 
       <section class="card">
         <div class="card__header">
@@ -1142,12 +1144,66 @@
       </section>
     </section>
 
+    <!-- ============ External Link ============ -->
+    <section class="view" id="view-link-external" hidden>
+      <p class="eyebrow text-heading-s">Atom</p>
+      <h1 class="text-heading-l" tabindex="-1">External Link</h1>
+      <p class="lead text-body-m">Every link to another site opens in a new tab and says so before the click: with the link-out icon after the last word, and with a hidden hint for screen readers. Works on text links, buttons and whole cards. No own colors, the icon takes the color of the link.</p>
+
+      <section class="card">
+        <div class="card__header">
+          <h2 class="text-heading-s">Try it</h2>
+          <p class="text-body-s">Each one opens a new tab. Your page stays where it was.</p>
+        </div>
+        <p class="text-body-m">Read the <a href="https://github.com/Tobias-Stoll/DesignSystem" target="_blank" rel="noopener">repository<svg class="link-external__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3h7v7h-2V6.41l-8.29 8.3-1.42-1.42L17.59 5H14V3zM5 5h6v2H5v12h12v-6h2v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/></svg><span class="link-external__hint"> (opens in a new tab)</span></a> or open the <a href="https://www.figma.com/design/NvYNqHYZlROxpwRCq7yy3p/Design-System?node-id=46-693" target="_blank" rel="noopener">Figma file<svg class="link-external__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3h7v7h-2V6.41l-8.29 8.3-1.42-1.42L17.59 5H14V3zM5 5h6v2H5v12h12v-6h2v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/></svg><span class="link-external__hint"> (opens in a new tab)</span></a>.</p>
+        <div class="row">
+          <a class="btn btn--primary" href="https://github.com/Tobias-Stoll/DesignSystem" target="_blank" rel="noopener">Primary<svg class="link-external__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3h7v7h-2V6.41l-8.29 8.3-1.42-1.42L17.59 5H14V3zM5 5h6v2H5v12h12v-6h2v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/></svg><span class="link-external__hint"> (opens in a new tab)</span></a>
+          <a class="btn btn--secondary" href="https://github.com/Tobias-Stoll/DesignSystem" target="_blank" rel="noopener">Secondary<svg class="link-external__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3h7v7h-2V6.41l-8.29 8.3-1.42-1.42L17.59 5H14V3zM5 5h6v2H5v12h12v-6h2v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/></svg><span class="link-external__hint"> (opens in a new tab)</span></a>
+          <a class="btn btn--ghost" href="https://github.com/Tobias-Stoll/DesignSystem" target="_blank" rel="noopener">Ghost<svg class="link-external__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3h7v7h-2V6.41l-8.29 8.3-1.42-1.42L17.59 5H14V3zM5 5h6v2H5v12h12v-6h2v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/></svg><span class="link-external__hint"> (opens in a new tab)</span></a>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="card__header">
+          <h2 class="text-heading-s">When to use what</h2>
+          <p class="text-body-s">The rule is about where the link goes, not how it looks.</p>
+        </div>
+        <div class="tokens-scroll"><table class="tokens text-body-s">
+          <thead><tr><th>Link goes to</th><th>Behavior</th></tr></thead>
+          <tbody>
+            <tr><td>Another site (GitHub, Figma, LinkedIn, the live demo)</td><td>New tab, link-out icon, hidden hint</td></tr>
+            <tr><td>A page or section of the same site</td><td>Same tab, no icon. Arrows (→) only for these</td></tr>
+            <tr><td>A file of the same site (PDF)</td><td>New tab, the hint names the file type: "(PDF, opens in a new tab)"</td></tr>
+            <tr><td>E-mail or phone</td><td>Same tab, no icon. The mail app opens, nothing to warn about</td></tr>
+          </tbody>
+        </table></div>
+      </section>
+
+      <section class="card">
+        <div class="card__header">
+          <h2 class="text-heading-s">Accessibility</h2>
+          <p class="text-body-s">Why the icon alone is not enough.</p>
+        </div>
+        <div class="tokens-scroll"><table class="tokens text-body-s">
+          <thead><tr><th>Part</th><th>Why</th></tr></thead>
+          <tbody>
+            <tr><td>Icon, <code>aria-hidden="true"</code></td><td>Sighted users see it before they click. Screen readers skip it, so it is not read twice</td></tr>
+            <tr><td>Hidden hint "(opens in a new tab)"</td><td>Screen readers hear it as part of the link name. WCAG technique G201, supports 3.2.5 Change on Request</td></tr>
+            <tr><td><code>rel="noopener"</code></td><td>The new tab cannot control this page (security)</td></tr>
+            <tr><td>Icon in currentColor</td><td>Same contrast as the link text, in every state</td></tr>
+          </tbody>
+        </table></div>
+      </section>
+
+      <section class="card" data-code="link-external"></section>
+    </section>
+
     <!-- ============ Case Card ============ -->
     <section class="view" id="view-case-card" hidden>
       <p class="eyebrow text-heading-s">Molecule</p>
       <h1 class="text-heading-l" tabindex="-1">Case Card</h1>
       <p class="lead text-body-m">One project as a teaser. A visual on a tinted stage, the pillar it proves, a result-first title and a few chips. The whole card is one link. Built from the Chip atom, surface tokens <code>radius/card</code> and <code>Shadow/Card</code>.</p>
-      <div class="links"><a class="btn btn--ghost" href="https://concept2design.de/#work">See it on concept2design.de</a></div>
+      <div class="links"><a class="btn btn--ghost" href="https://concept2design.de/#work" target="_blank" rel="noopener">See it on concept2design.de<svg class="link-external__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3h7v7h-2V6.41l-8.29 8.3-1.42-1.42L17.59 5H14V3zM5 5h6v2H5v12h12v-6h2v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/></svg><span class="link-external__hint"> (opens in a new tab)</span></a></div>
 
       <section class="card">
         <div class="card__header">
@@ -1202,7 +1258,7 @@
       <p class="eyebrow text-heading-s">Molecule</p>
       <h1 class="text-heading-l" tabindex="-1">Info Card</h1>
       <p class="lead text-body-m">The Case Card surface without a stage. Three variants for case study content: a result, a step, the facts. They used to be three separate cards in the portfolio with the same surface, now it is one component.</p>
-      <div class="links"><a class="btn btn--ghost" href="https://concept2design.de/invia/">See it in a case study</a></div>
+      <div class="links"><a class="btn btn--ghost" href="https://concept2design.de/invia/" target="_blank" rel="noopener">See it in a case study<svg class="link-external__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3h7v7h-2V6.41l-8.29 8.3-1.42-1.42L17.59 5H14V3zM5 5h6v2H5v12h12v-6h2v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/></svg><span class="link-external__hint"> (opens in a new tab)</span></a></div>
 
       <section class="card">
         <div class="card__header">
@@ -1250,7 +1306,7 @@
       <p class="eyebrow text-heading-s">Molecule</p>
       <h1 class="text-heading-l" tabindex="-1">Work Row</h1>
       <p class="lead text-body-m">A compact list for smaller projects: name, one line on what it was, a status tag. Lighter than a card, so the big cases stay in front.</p>
-      <div class="links"><a class="btn btn--ghost" href="https://concept2design.de/#work">See it on concept2design.de</a></div>
+      <div class="links"><a class="btn btn--ghost" href="https://concept2design.de/#work" target="_blank" rel="noopener">See it on concept2design.de<svg class="link-external__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3h7v7h-2V6.41l-8.29 8.3-1.42-1.42L17.59 5H14V3zM5 5h6v2H5v12h12v-6h2v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/></svg><span class="link-external__hint"> (opens in a new tab)</span></a></div>
 
       <section class="card">
         <div class="card__header">
@@ -1282,7 +1338,7 @@
       <p class="eyebrow text-heading-s">Molecule</p>
       <h1 class="text-heading-l" tabindex="-1">Note</h1>
       <p class="lead text-body-m">A pinned paper note for a guestbook or feedback wall. Three papers: a visitor's note, the owner's note, and a plain one that holds a form. The only component with a playful easing (<code>motion/easing/playful</code>).</p>
-      <div class="links"><a class="btn btn--ghost" href="https://concept2design.de/#notes">See the notes wall</a></div>
+      <div class="links"><a class="btn btn--ghost" href="https://concept2design.de/#notes" target="_blank" rel="noopener">See the notes wall<svg class="link-external__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3h7v7h-2V6.41l-8.29 8.3-1.42-1.42L17.59 5H14V3zM5 5h6v2H5v12h12v-6h2v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/></svg><span class="link-external__hint"> (opens in a new tab)</span></a></div>
 
       <section class="card">
         <div class="card__header">
@@ -1333,7 +1389,7 @@
       <p class="eyebrow text-heading-s">Organism</p>
       <h1 class="text-heading-l" tabindex="-1">Site Header</h1>
       <p class="lead text-body-m">Sticky navigation for a one-page site with case studies. Brand, section links and the Status Badge. It blurs the page behind it and gets a hairline once you scroll. Case studies add a reading progress bar.</p>
-      <div class="links"><a class="btn btn--ghost" href="https://concept2design.de/invia/">See it on a case study</a></div>
+      <div class="links"><a class="btn btn--ghost" href="https://concept2design.de/invia/" target="_blank" rel="noopener">See it on a case study<svg class="link-external__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3h7v7h-2V6.41l-8.29 8.3-1.42-1.42L17.59 5H14V3zM5 5h6v2H5v12h12v-6h2v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/></svg><span class="link-external__hint"> (opens in a new tab)</span></a></div>
 
       <section class="card">
         <div class="card__header">
@@ -1369,7 +1425,7 @@
       <p class="eyebrow text-heading-s">Organism</p>
       <h1 class="text-heading-l" tabindex="-1">Contact Block</h1>
       <p class="lead text-body-m">The end of a page. A big headline with the call to action in the primary color, the email as selectable text, one primary action and quiet links. Built from Kicker and Button.</p>
-      <div class="links"><a class="btn btn--ghost" href="https://concept2design.de/#contact">See it on concept2design.de</a></div>
+      <div class="links"><a class="btn btn--ghost" href="https://concept2design.de/#contact" target="_blank" rel="noopener">See it on concept2design.de<svg class="link-external__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3h7v7h-2V6.41l-8.29 8.3-1.42-1.42L17.59 5H14V3zM5 5h6v2H5v12h12v-6h2v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/></svg><span class="link-external__hint"> (opens in a new tab)</span></a></div>
 
       <section class="card">
         <div class="card__header">
@@ -1405,7 +1461,7 @@
       <p class="eyebrow text-heading-s">Organism</p>
       <h1 class="text-heading-l" tabindex="-1">Site Footer</h1>
       <p class="lead text-body-m">Two short lines: copyright, version and legal links on one side, credits on the other. One footer for every page: the portfolio used two slightly different ones before.</p>
-      <div class="links"><a class="btn btn--ghost" href="https://concept2design.de/">See it on concept2design.de</a></div>
+      <div class="links"><a class="btn btn--ghost" href="https://concept2design.de/" target="_blank" rel="noopener">See it on concept2design.de<svg class="link-external__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3h7v7h-2V6.41l-8.29 8.3-1.42-1.42L17.59 5H14V3zM5 5h6v2H5v12h12v-6h2v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/></svg><span class="link-external__hint"> (opens in a new tab)</span></a></div>
 
       <section class="card">
         <div class="card__header">
@@ -1415,7 +1471,7 @@
         <div class="preview-canvas preview-canvas--flush">
           <footer class="site-footer"><div class="site-footer__inner">
             <p>© 2026 Tobias Stoll · v1.0 · <a href="#site-footer">Impressum</a> · <a href="#site-footer">Datenschutz</a></p>
-            <p>Built with AI <svg class="site-footer__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l1.9 5.6 5.6 1.9-5.6 1.9L12 17.5l-1.9-5.6L4.5 10l5.6-1.9z"/><path d="M19 15.5l.8 2.2 2.2.8-2.2.8-.8 2.2-.8-2.2-2.2-.8 2.2-.8z"/></svg><span class="sr-only">(AI)</span> and love <svg class="site-footer__icon site-footer__icon--love" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-9.3-9.2C1.4 7.9 3.6 4.5 7 4.5c2 0 3.6 1.1 5 3 1.4-1.9 3-3 5-3 3.4 0 5.6 3.4 4.3 6.8-1.8 4.6-9.3 9.2-9.3 9.2z"/></svg><span class="sr-only">(love)</span>, based on <a href="https://tobias-stoll.github.io/DesignSystem/" target="_blank" rel="noopener">my own design system<svg class="site-footer__icon site-footer__icon--external" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3h7v7h-2V6.41l-8.29 8.3-1.42-1.42L17.59 5H14V3zM5 5h6v2H5v12h12v-6h2v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/></svg><span class="sr-only"> (opens in a new tab)</span></a></p>
+            <p>Built with AI <svg class="site-footer__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l1.9 5.6 5.6 1.9-5.6 1.9L12 17.5l-1.9-5.6L4.5 10l5.6-1.9z"/><path d="M19 15.5l.8 2.2 2.2.8-2.2.8-.8 2.2-.8-2.2-2.2-.8 2.2-.8z"/></svg><span class="sr-only">(AI)</span> and love <svg class="site-footer__icon site-footer__icon--love" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-9.3-9.2C1.4 7.9 3.6 4.5 7 4.5c2 0 3.6 1.1 5 3 1.4-1.9 3-3 5-3 3.4 0 5.6 3.4 4.3 6.8-1.8 4.6-9.3 9.2-9.3 9.2z"/></svg><span class="sr-only">(love)</span>, based on <a href="https://tobias-stoll.github.io/DesignSystem/" target="_blank" rel="noopener">my own design system<svg class="link-external__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3h7v7h-2V6.41l-8.29 8.3-1.42-1.42L17.59 5H14V3zM5 5h6v2H5v12h12v-6h2v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/></svg><span class="link-external__hint"> (opens in a new tab)</span></a></p>
           </div></footer>
         </div>
       </section>
@@ -1875,6 +1931,16 @@
 </h1>`],
       ],
     },
+    'link-external': {
+      css: ['components/link-external.css'],
+      note: 'Add target, rel, the icon and the hint to any link that leaves the site. The same markup works inside a button.',
+      items: [
+        ['Text link', `<a href="https://github.com/Tobias-Stoll/DesignSystem" target="_blank" rel="noopener">Repository<svg class="link-external__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3h7v7h-2V6.41l-8.29 8.3-1.42-1.42L17.59 5H14V3zM5 5h6v2H5v12h12v-6h2v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/></svg><span class="link-external__hint"> (opens in a new tab)</span></a>`],
+        ['Button', `<a class="btn btn--ghost" href="https://www.linkedin.com/" target="_blank" rel="noopener">
+  LinkedIn<svg class="link-external__icon" viewBox="0 0 24 24" aria-hidden="true">…</svg><span class="link-external__hint"> (opens in a new tab)</span>
+</a>`],
+      ],
+    },
     'case-card': {
       css: ['components/chip.css', 'components/case-card.css'],
       note: 'Needs the Chip stylesheet too. Tone: case-card--dark, --purple or --blue. The stage takes an image or your own animation.',
@@ -1980,7 +2046,7 @@ addEventListener('scroll', () => {
       ],
     },
     'contact-block': {
-      css: ['components/button.css', 'components/kicker.css', 'components/contact-block.css'],
+      css: ['components/button.css', 'components/kicker.css', 'components/link-external.css', 'components/contact-block.css'],
       note: 'The email stays text you can select. Copy is a convenience, not the only way.',
       items: [
         ['Default', `<section class="contact-block" aria-labelledby="contact-title">
@@ -1992,20 +2058,20 @@ addEventListener('scroll', () => {
   <div class="contact-block__row">
     <span class="contact-block__mail">hello@example.com</span>
     <button class="btn btn--primary" type="button">Copy email</button>
-    <a class="btn btn--ghost" href="https://www.linkedin.com/">LinkedIn</a>
+    <a class="btn btn--ghost" href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn<svg class="link-external__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3h7v7h-2V6.41l-8.29 8.3-1.42-1.42L17.59 5H14V3zM5 5h6v2H5v12h12v-6h2v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/></svg><span class="link-external__hint"> (opens in a new tab)</span></a>
   </div>
 </section>`],
       ],
     },
     'site-footer': {
-      css: ['components/site-footer.css'],
+      css: ['components/link-external.css', 'components/site-footer.css'],
       note: 'Icons are decorative (aria-hidden), the words next to them carry the meaning. Links to other sites open in a new tab and end with the link-out icon.',
       items: [
         ['Default', `<footer class="site-footer">
   <div class="site-footer__inner">
     <p>© 2026 Tobias Stoll · <a href="impressum/">Impressum</a> · <a href="datenschutz/">Datenschutz</a></p>
     <p>Built with AI <svg class="site-footer__icon" viewBox="0 0 24 24" aria-hidden="true">…</svg> and love,
-      based on <a href="https://tobias-stoll.github.io/DesignSystem/" target="_blank" rel="noopener">my own design system<svg class="site-footer__icon site-footer__icon--external" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3h7v7h-2V6.41l-8.29 8.3-1.42-1.42L17.59 5H14V3zM5 5h6v2H5v12h12v-6h2v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/></svg><span class="sr-only"> (opens in a new tab)</span></a></p>
+      based on <a href="https://tobias-stoll.github.io/DesignSystem/" target="_blank" rel="noopener">my own design system<svg class="link-external__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3h7v7h-2V6.41l-8.29 8.3-1.42-1.42L17.59 5H14V3zM5 5h6v2H5v12h12v-6h2v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/></svg><span class="link-external__hint"> (opens in a new tab)</span></a></p>
   </div>
 </footer>`],
       ],
@@ -2046,7 +2112,7 @@ addEventListener('scroll', () => {
     el.innerHTML =
       `<div class="card__header"><h2 class="text-heading-s">Code</h2>` +
       `<p class="text-body-s">${def.note}</p></div>` +
-      `<div class="code-files">${def.css.map((f) => `<a class="btn btn--ghost" href="${REPO}${f}">${f.split('/').pop()} on GitHub</a>`).join('')}</div>` +
+      `<div class="code-files">${def.css.map((f) => `<a class="btn btn--ghost" href="${REPO}${f}" target="_blank" rel="noopener">${f.split('/').pop()} on GitHub<svg class="link-external__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3h7v7h-2V6.41l-8.29 8.3-1.42-1.42L17.59 5H14V3zM5 5h6v2H5v12h12v-6h2v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/></svg><span class="link-external__hint"> (opens in a new tab)</span></a>`).join('')}</div>` +
       `<div class="code-list">${codeBlock('Stylesheets · needs tokens.css first', links)}${items}</div>`;
   });
 
@@ -2080,7 +2146,7 @@ addEventListener('scroll', () => {
   });
 
   /* ---------- Hash navigation ---------- */
-  const views = ['overview', 'tokens', 'typography', 'button', 'input', 'checkbox', 'alert', 'chip', 'status', 'kicker', 'form-field', 'case-card', 'info-card', 'work-row', 'note', 'signup-card', 'site-header', 'contact-block', 'site-footer'];
+  const views = ['overview', 'tokens', 'typography', 'button', 'input', 'checkbox', 'alert', 'chip', 'status', 'kicker', 'link-external', 'form-field', 'case-card', 'info-card', 'work-row', 'note', 'signup-card', 'site-header', 'contact-block', 'site-footer'];
   function route() {
     const id = views.includes(location.hash.slice(1)) ? location.hash.slice(1) : 'overview';
     views.forEach((v) => (document.getElementById('view-' + v).hidden = v !== id));
