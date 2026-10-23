@@ -1,7 +1,11 @@
 /**
  * Button
- * Figma: Component Set "Button" · Variant × State
+ * Figma: Component Set "Button" · Variant × State × Size
  * Uses component tokens only (button/…), never primitives.
+ *
+ * Size: Medium (default, 36 px) for dense UI · Large (.btn--lg, 44 px) for main calls to action and touch targets.
+ * Secondary is an outline: transparent fill, 1 px border in the primary color.
+ * The border is an inset box-shadow, so it does not change the button's size (Figma: inside stroke).
  */
 
 .btn {
@@ -11,6 +15,7 @@
   --_bg-pressed: var(--button-primary-bg-pressed);
   --_bg-disabled: var(--button-primary-bg-disabled);
   --_fg: var(--button-primary-fg);
+  --_border: transparent;
 
   display: inline-flex;
   align-items: center;
@@ -19,6 +24,7 @@
   border: 0;
   border-radius: var(--button-radius);
   background: var(--_bg);
+  box-shadow: inset 0 0 0 var(--button-border-width) var(--_border);
   color: var(--_fg);
   text-decoration: none;   /* also used on <a> */
 
@@ -41,7 +47,13 @@
   --_bg-pressed: var(--button-secondary-bg-pressed);
   --_bg-disabled: var(--button-secondary-bg-disabled);
   --_fg: var(--button-secondary-fg);
+  --_border: var(--button-secondary-border);
 }
+.btn--secondary:disabled,
+.btn--secondary.is-disabled { --_border: var(--button-secondary-border-disabled); }
+
+/* Sizes */
+.btn--lg { padding: var(--button-large-padding-y) var(--button-large-padding-x); }
 .btn--ghost {
   --_bg: var(--button-ghost-bg-default);
   --_bg-hover: var(--button-ghost-bg-hover);

@@ -61,6 +61,7 @@
 .site-header__nav { display: flex; gap: var(--space-inset-xs); margin-left: auto; }
 
 .site-header__nav a {
+  position: relative;
   padding: var(--space-inset-xs) var(--space-inset-sm);
   border-radius: var(--radius-control);
   color: var(--color-fg-muted);
@@ -97,6 +98,12 @@
   background: var(--color-action-primary-bg-default);
   transform: scaleX(var(--site-header-progress, 0));
   transform-origin: left;
+}
+
+/* Touch: the link looks the same, but its tap area grows to 44 px (Fitts's law).
+   28 px link + 8 px above and below. */
+@media (pointer: coarse) {
+  .site-header__nav a::after { content: ""; position: absolute; inset: calc(-1 * var(--space-inset-sm)) 0; }
 }
 
 @media (max-width: 640px) {

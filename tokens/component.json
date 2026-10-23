@@ -28,24 +28,32 @@
       "bg": {
         "default": {
           "$type": "color",
-          "$value": "{color.action.secondary.bg.default}"
+          "$value": "{color.action.ghost.bg.default}"
         },
         "hover": {
           "$type": "color",
-          "$value": "{color.action.secondary.bg.hover}"
+          "$value": "{color.action.ghost.bg.hover}"
         },
         "pressed": {
           "$type": "color",
-          "$value": "{color.action.secondary.bg.pressed}"
+          "$value": "{color.action.ghost.bg.pressed}"
         },
         "disabled": {
           "$type": "color",
-          "$value": "{color.action.secondary.bg.disabled}"
+          "$value": "{color.action.ghost.bg.default}"
         }
       },
       "fg": {
         "$type": "color",
-        "$value": "{color.action.secondary.fg}"
+        "$value": "{color.action.ghost.fg}"
+      },
+      "border": {
+        "$type": "color",
+        "$value": "{color.action.primary.bg.default}"
+      },
+      "border-disabled": {
+        "$type": "color",
+        "$value": "{color.border.default}"
       }
     },
     "ghost": {
@@ -98,6 +106,20 @@
       "width": {
         "$type": "dimension",
         "$value": "{border-width.focus}"
+      }
+    },
+    "border-width": {
+      "$type": "dimension",
+      "$value": "{border-width.default}"
+    },
+    "large": {
+      "padding-x": {
+        "$type": "dimension",
+        "$value": "{space.inset.md-lg}"
+      },
+      "padding-y": {
+        "$type": "dimension",
+        "$value": "{space.inset.sm-md}"
       }
     }
   },

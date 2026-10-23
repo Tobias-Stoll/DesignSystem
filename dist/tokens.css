@@ -184,6 +184,8 @@
   --space-inset-card: var(--space-20);
   --space-inset-xl: var(--space-32);
   --space-inset-2xl: var(--space-48);
+  --space-inset-sm-md: var(--space-12);
+  --space-inset-md-lg: var(--space-20);
   --space-gap-lg: var(--space-16);
   --space-gap-xs: var(--space-4);
   --space-gap-sm: var(--space-8);
@@ -207,11 +209,13 @@
   --button-primary-bg-pressed: var(--color-action-primary-bg-pressed);
   --button-primary-bg-disabled: var(--color-action-primary-bg-disabled);
   --button-primary-fg: var(--color-action-primary-fg);
-  --button-secondary-bg-default: var(--color-action-secondary-bg-default);
-  --button-secondary-bg-hover: var(--color-action-secondary-bg-hover);
-  --button-secondary-bg-pressed: var(--color-action-secondary-bg-pressed);
-  --button-secondary-bg-disabled: var(--color-action-secondary-bg-disabled);
-  --button-secondary-fg: var(--color-action-secondary-fg);
+  --button-secondary-bg-default: var(--color-action-ghost-bg-default);
+  --button-secondary-bg-hover: var(--color-action-ghost-bg-hover);
+  --button-secondary-bg-pressed: var(--color-action-ghost-bg-pressed);
+  --button-secondary-bg-disabled: var(--color-action-ghost-bg-default);
+  --button-secondary-fg: var(--color-action-ghost-fg);
+  --button-secondary-border: var(--color-action-primary-bg-default);
+  --button-secondary-border-disabled: var(--color-border-default);
   --button-ghost-bg-hover: var(--color-action-ghost-bg-hover);
   --button-ghost-bg-pressed: var(--color-action-ghost-bg-pressed);
   --button-ghost-bg-default: var(--color-action-ghost-bg-default);
@@ -223,6 +227,9 @@
   --button-radius: var(--radius-control);
   --button-focus-ring-color: var(--color-border-focus);
   --button-focus-ring-width: var(--border-width-focus);
+  --button-border-width: var(--border-width-default);
+  --button-large-padding-x: var(--space-inset-md-lg);
+  --button-large-padding-y: var(--space-inset-sm-md);
   --input-bg-default: var(--color-bg-default);
   --input-bg-disabled: var(--color-bg-muted);
   --input-border-default: var(--color-border-default);

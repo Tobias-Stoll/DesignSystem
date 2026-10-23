@@ -37,6 +37,11 @@
 
 .site-footer p { margin: 0; }
 .site-footer a { color: inherit; }
+
+/* Touch: tap area of 44 px (20 px line + 12 px above and below), the layout does not move */
+@media (pointer: coarse) {
+  .site-footer a { display: inline-block; padding-block: var(--space-inset-sm-md); margin-block: calc(-1 * var(--space-inset-sm-md)); }
+}
 .site-footer a:focus-visible { outline: var(--border-width-focus) solid var(--color-border-focus); outline-offset: 2px; }
 
 .site-footer__icon {

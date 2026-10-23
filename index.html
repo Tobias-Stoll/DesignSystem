@@ -704,7 +704,7 @@
     <section class="view" id="view-button" hidden>
       <p class="eyebrow text-heading-s">Atom</p>
       <h1 class="text-heading-l" tabindex="-1">Button</h1>
-      <p class="lead text-body-m">3 variants × 5 states. One Figma component set, one CSS class. Uses component tokens (<code>button/…</code>).</p>
+      <p class="lead text-body-m">3 variants × 5 states × 2 sizes. One Figma component set, one CSS class. Uses component tokens (<code>button/…</code>). Secondary is an outline, Large (<code>.btn--lg</code>, 44 px) is for main calls to action and touch targets.</p>
 
       <section class="card">
         <div class="card__header">
@@ -716,6 +716,11 @@
           <button class="btn btn--secondary">Secondary</button>
           <button class="btn btn--ghost">Ghost</button>
           <button class="btn btn--primary" disabled>Disabled</button>
+        </div>
+        <div class="row">
+          <button class="btn btn--primary btn--lg">Primary large</button>
+          <button class="btn btn--secondary btn--lg">Secondary large</button>
+          <button class="btn btn--ghost btn--lg">Ghost large</button>
         </div>
       </section>
 
@@ -1812,6 +1817,7 @@
         ['Secondary', '<button class="btn btn--secondary" type="button">Learn more</button>'],
         ['Ghost', '<button class="btn btn--ghost" type="button">Cancel</button>'],
         ['Disabled', '<button class="btn btn--primary" type="button" disabled>Subscribe</button>'],
+        ['Large (44 px)', '<button class="btn btn--primary btn--lg" type="button">Let\'s talk</button>'],
       ],
     },
     input: {

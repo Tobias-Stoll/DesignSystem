@@ -266,6 +266,14 @@
       "2xl": {
         "$type": "dimension",
         "$value": "{space.48}"
+      },
+      "sm-md": {
+        "$type": "dimension",
+        "$value": "{space.12}"
+      },
+      "md-lg": {
+        "$type": "dimension",
+        "$value": "{space.20}"
       }
     },
     "gap": {
