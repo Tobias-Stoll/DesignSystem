@@ -19,18 +19,18 @@
 
   display: inline-flex;
   align-items: center;
-  padding: 2px var(--space-inset-sm);              /* 2px: optical, keeps the chip at 20px */
+  padding: 2px var(--space-inset-sm);              /* 2px: optical, keeps the chip at 24px */
   border-radius: var(--radius-pill);
   box-shadow: inset 0 0 0 var(--border-width-default) var(--_ring);
   background: var(--_bg);
   color: var(--_fg);
   white-space: nowrap;
 
-  /* Text style: Caption, medium */
+  /* Text style: Label (14 px, was Caption medium 12 px) */
   font-family: var(--font-family-sans);
   font-weight: var(--font-weight-medium);
-  font-size: var(--font-size-100);
-  line-height: var(--font-line-height-100);
+  font-size: var(--font-size-200);
+  line-height: var(--font-line-height-200);
 }
 
 .chip--success {

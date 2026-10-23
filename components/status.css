@@ -22,11 +22,11 @@
   color: var(--color-feedback-success-fg);
   white-space: nowrap;
 
-  /* Text style: Caption, medium */
+  /* Text style: Label (14 px, was Caption medium 12 px) */
   font-family: var(--font-family-sans);
   font-weight: var(--font-weight-medium);
-  font-size: var(--font-size-100);
-  line-height: var(--font-line-height-100);
+  font-size: var(--font-size-200);
+  line-height: var(--font-line-height-200);
 }
 
 .status__dot {

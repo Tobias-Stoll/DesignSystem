@@ -43,10 +43,10 @@
 .form-field__description,
 .form-field__message {
   color: var(--color-fg-muted);
-  /* Text style: Caption */
+  /* Text style: Body/S (14 px, was Caption 12 px: easier to read) */
   font-weight: var(--font-weight-regular);
-  font-size: var(--font-size-100);
-  line-height: var(--font-line-height-100);
+  font-size: var(--font-size-200);
+  line-height: var(--font-line-height-200);
 }
 
 /* State = Error */
