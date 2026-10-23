@@ -594,7 +594,7 @@
           <tbody>
             <tr><td>One Display per page</td><td>The page title is the loudest thing. Two loud things cancel out</td></tr>
             <tr><td>Body M is the default</td><td>16/24 reads well on every screen. Body L only for leads, Body S for dense UI</td></tr>
-            <tr><td>Overline only for short labels</td><td>Uppercase mono is hard to read in sentences. One to four words</td></tr>
+            <tr><td>Overline only for short labels</td><td>Mono is hard to read in sentences. One to four words</td></tr>
             <tr><td>Skip no heading level</td><td>Screen readers navigate by headings. The look comes from the class, the level from the structure</td></tr>
             <tr><td>Line length 60 to 75 characters</td><td>Set <code>max-width</code> around 62ch on long text</td></tr>
             <tr><td>Muted text stays above 4.5:1</td><td><code>color/fg/muted</code> on white is 5.1:1, <code>color/fg/subtle</code> only for hints and disabled</td></tr>
@@ -1109,7 +1109,7 @@
     <section class="view" id="view-kicker" hidden>
       <p class="eyebrow text-heading-s">Atom</p>
       <h1 class="text-heading-l" tabindex="-1">Kicker</h1>
-      <p class="lead text-body-m">The small mono label above a headline. The kicker names the section, the headline says what it means. Built on the new text style <code>Overline</code>: Roboto Mono, uppercase, 8% tracking.</p>
+      <p class="lead text-body-m">The small mono label above a headline. The kicker names the section, the headline says what it means. Built on the text style <code>Overline</code>: Roboto Mono, 14 px, sentence case, 2% tracking.</p>
       <div class="links"><a class="btn btn--ghost" href="https://concept2design.de/#work" target="_blank" rel="noopener">See it on concept2design.de<svg class="link-external__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3h7v7h-2V6.41l-8.29 8.3-1.42-1.42L17.59 5H14V3zM5 5h6v2H5v12h12v-6h2v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/></svg><span class="link-external__hint"> (opens in a new tab)</span></a></div>
 
       <section class="card">
@@ -1645,7 +1645,7 @@
     'body-s': 'Dense UI: descriptions, alerts, footer.',
     'label': 'Form labels, nav links, buttons.',
     'caption': 'Hints, meta and small print.',
-    'overline': 'Kicker above a heading, card pillar, short tags. Uppercase, 8% tracking.',
+    'overline': 'Kicker above a heading, card pillar, short tags. Sentence case, 2% tracking.',
   };
   fetch('tokens/typography.json').then((r) => r.json()).then((typo) => {
     const list = flat(typo.typography || typo);

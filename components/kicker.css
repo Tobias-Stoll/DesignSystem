@@ -21,8 +21,7 @@
   /* Text style: Overline */
   font-family: var(--font-family-mono);
   font-weight: var(--font-weight-medium);
-  font-size: var(--font-size-100);
-  line-height: var(--font-line-height-100);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-size: var(--font-size-200);
+  line-height: var(--font-line-height-200);
+  letter-spacing: 0.02em;
 }
