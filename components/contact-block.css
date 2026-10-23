@@ -33,13 +33,12 @@
   margin: 0;
   max-width: none;
   color: var(--color-fg-default);
-  text-transform: uppercase;
   text-wrap: balance;
   /* Text style: Display, fluid */
   font-family: var(--font-family-display);
   font-weight: var(--font-weight-bold);
   font-size: clamp(var(--font-size-800), 5vw, 64px);
-  line-height: 1.02;
+  line-height: 1.08;
 }
 
 .contact-block__line { display: block; }
