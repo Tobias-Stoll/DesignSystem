@@ -34,11 +34,11 @@
   max-width: none;
   color: var(--color-fg-default);
   text-wrap: balance;
-  /* Text style: Display, fluid */
+  /* Same size as a section title (30 to 44 px): the end of the page, not a second hero */
   font-family: var(--font-family-display);
   font-weight: var(--font-weight-bold);
-  font-size: clamp(var(--font-size-800), 5vw, 64px);
-  line-height: 1.08;
+  font-size: clamp(var(--font-size-700), 3.6vw, 44px);
+  line-height: 1.1;
 }
 
 .contact-block__line { display: block; }
