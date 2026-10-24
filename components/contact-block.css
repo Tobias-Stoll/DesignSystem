@@ -13,7 +13,7 @@
  *   <p class="kicker">Finish</p>
  *   <h2 id="contact-title" class="contact-block__title">
  *     <span class="contact-block__line">Congrats! You made it to the end.</span>
- *     <span class="contact-block__line contact-block__line--cta">Let's talk!</span>
+ *     <span class="contact-block__line contact-block__line--cta">Let's talk.</span>
  *   </h2>
  *   <div class="contact-block__row">
  *     <span class="contact-block__mail">hello@example.com</span>
@@ -42,7 +42,8 @@
 }
 
 .contact-block__line { display: block; }
-.contact-block__line--cta { margin-top: var(--space-inset-md); color: var(--color-action-primary-bg-default); }
+.contact-block__line--cta { color: var(--color-action-primary-bg-default); }
+.contact-block__line + .contact-block__line--cta { margin-top: var(--space-inset-md); }   /* gap only when the optional first line is there */
 
 .contact-block__row {
   display: flex;
@@ -61,9 +62,4 @@
   font-family: var(--font-family-mono);
   font-size: var(--font-size-500);
   line-height: var(--font-line-height-500);
-}
-
-@media (min-width: 900px) {
-  .contact-block__title { font-size: clamp(var(--font-size-800), 4.4vw, 64px); }
-  .contact-block__line:first-child { white-space: nowrap; }   /* one row on desktop */
 }
