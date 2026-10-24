@@ -90,6 +90,8 @@
   --space-40: 40px;
   --space-48: 48px;
   --space-64: 64px;
+  --space-72: 72px;
+  --space-96: 96px;
   --space-128: 128px;
   --radius-sm: 4px;
   --radius-md: 8px;
@@ -190,6 +192,10 @@
   --space-gap-xs: var(--space-4);
   --space-gap-sm: var(--space-8);
   --space-gap-md: var(--space-12);
+  --space-section-lg-min: var(--space-72);
+  --space-section-lg-max: var(--space-128);
+  --space-section-md-min: var(--space-64);
+  --space-section-md-max: var(--space-96);
   --radius-control: var(--radius-md);
   --radius-container: var(--radius-lg);
   --radius-pill: var(--radius-full);

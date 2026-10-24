@@ -293,6 +293,24 @@
         "$type": "dimension",
         "$value": "{space.12}"
       }
+    },
+    "section": {
+      "lg-min": {
+        "$type": "dimension",
+        "$value": "{space.72}"
+      },
+      "lg-max": {
+        "$type": "dimension",
+        "$value": "{space.128}"
+      },
+      "md-min": {
+        "$type": "dimension",
+        "$value": "{space.64}"
+      },
+      "md-max": {
+        "$type": "dimension",
+        "$value": "{space.96}"
+      }
     }
   },
   "radius": {
